@@ -1,34 +1,41 @@
 # The Catholic Experiment
 
-A small static website offering a guided field guide to Catholicism.
+A static prototype for a modern Catholic field guide: part guided route, part textbook and part author’s notebook.
 
 ## Public proposition
 
-The site begins with the visitor rather than the author. It assumes that many people meet Catholicism through fragments: family, school, history, scandal, beauty, resentment or silence. It then offers a calm route through belief, Christianity, the Catholic Church, worship and Catholic life.
+The site begins with the reader’s inherited questions and uses a repeated six-sign method:
+
+1. Look
+2. Ask
+3. Understand
+4. Check
+5. Weigh
+6. Try
+
+Developed pages guide readers towards official Catholic sources while distinguishing Church teaching, Canon Law, official communication, scholarship and personal reflection.
 
 ## Structure
 
-- `index.html` — quiet public front door
-- `formation.html` — the guided route
-- `chapter-01-belief.html` — first completed chapter
-- `chapter-02-god.html` — second completed chapter
-- `chapter-03-science.html` — third completed chapter
-- `questions.html` — subject map and official Church links
+- `index.html` — public front door and field-guide key
+- `formation.html` — guided route
+- `chapter-01-belief.html` to `chapter-03-science.html` — first developed chapters
+- `questions.html` — subject map with official starting points
+- `latin.html` — first author-learning strand
+- `notebook.html` — Augustine, saints and future original materials
 - `story.html` — origin and editorial promise
-- `sources.html` — authority and source policy
-- `latin.html` — first specialist path
-- `notebook.html` — developing reading notes
+- `sources.html` — source hierarchy and free-source-first policy
+- `assets/guide-icons.svg` — reusable textbook-style icon system
 
 ## Editorial rules
 
-- distinguish doctrine, canon law, official news, scholarship and personal reflection;
-- link to official Church sources where appropriate;
-- include serious criticism and institutional failure without minimising or sensationalising;
-- avoid factionalism, culture-war framing and apologetic ambushes;
-- use British English and allow British and Irish context to emerge naturally;
-- keep the homepage simple and mobile-first;
-- use real, licensed photography sparingly and with precise credits.
+- link directly to official Church texts where appropriate;
+- identify the kind of authority each source carries;
+- keep criticism, scandal and institutional failure visible;
+- distinguish personal work from Church teaching;
+- never hide official Church sources behind paid original material;
+- avoid factionalism, controversy farming and professional/employment connections.
 
 ## Deployment
 
-GitHub Pages deploys the static site from `main` through `.github/workflows/pages.yml`.
+GitHub Pages deploys from `main` through `.github/workflows/pages.yml`.

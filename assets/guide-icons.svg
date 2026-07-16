@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="look" viewBox="0 0 24 24">
+    <path d="M2.5 12s3.6-6 9.5-6 9.5 6 9.5 6-3.6 6-9.5 6S2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    <circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+  </symbol>
+  <symbol id="ask" viewBox="0 0 24 24">
+    <path d="M8.4 8.3a3.8 3.8 0 0 1 7.2 1.7c0 2.8-3.6 3.1-3.6 5.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="18.2" r="1" fill="currentColor"/>
+    <circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <symbol id="understand" viewBox="0 0 24 24">
+    <path d="M3.5 5.2c3.3-.8 6-.4 8.5 1.4v12c-2.5-1.8-5.2-2.2-8.5-1.4v-12Zm17 0c-3.3-.8-6-.4-8.5 1.4v12c2.5-1.8 5.2-2.2 8.5-1.4v-12Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24">
+    <path d="M6 3.5h8.5l3.5 3.5v13.5H6V3.5Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/>
+    <path d="M14.5 3.5V7H18M8.8 13l2.1 2.1 4.5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="weigh" viewBox="0 0 24 24">
+    <path d="M12 3.5v17M7 6h10M4.5 9l-2 4.2h4L4.5 9Zm15 0-2 4.2h4L19.5 9ZM8.2 20.5h7.6" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="try" viewBox="0 0 24 24">
+    <path d="M8.5 3.5h7M10 3.5v5l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9v-5" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.5 15h9" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="personal" viewBox="0 0 24 24">
+    <path d="M5 19.5h14M7 17l8.8-8.8 2 2L9 19H7v-2Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m14.7 9.3 2 2" fill="none" stroke="currentColor" stroke-width="1.55"/>
+  </symbol>
+</svg>

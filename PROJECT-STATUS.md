@@ -6,26 +6,26 @@
 
 ## Current purpose
 
-Build a guided field guide to Catholicism that can take a curious, doubtful, wary or returning reader from first questions into progressively deeper formation.
+Build a modern Catholic field guide for Catholics and non-Catholics: a guided route into the whole shape of the faith, a trustworthy map to official Church resources, and a clearly labelled notebook of the author’s continuing formation.
 
 ## Current live scope
 
-- one restrained homepage;
-- a twenty-step route grouped into five stages;
-- three completed opening chapters;
-- an Explore subject map;
-- an About page;
-- a transparent sources and authority policy;
-- first Latin and notebook material;
-- links to official Church sources and current Church news.
+- a six-sign learning grammar: Look, Ask, Understand, Check, Weigh, Try;
+- one audience-first homepage;
+- a twenty-step guided route;
+- three developed opening chapters;
+- subject pages that point to official Catholic starting sources;
+- source and authority labels;
+- author-learning strands in Latin, Augustine and saints;
+- a future-original-work policy that keeps official sources free and visible.
 
 ## Boundaries
 
-- no professional, employment or party-political connection;
 - no claim to ecclesiastical teaching authority;
+- no professional, employment or party-political connection;
 - no factional recruitment or controversy farming;
 - no minimising abuse, corruption or institutional failure;
-- no presentation of personal opinion as doctrine;
+- no presentation of personal opinion or paid work as doctrine;
 - no confidential or sensitive personal information.
 
 ## Archive

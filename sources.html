@@ -11,55 +11,73 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="shell header-inner">
-      <a class="wordmark" href="index.html"><span>The Catholic</span><strong>Experiment</strong></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" class="site-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="formation.html">Start here</a><a href="questions.html">Explore</a><a href="story.html">About</a></nav>
-    </div>
-  </header>
-
+  <div class="shell header-inner">
+    <a class="wordmark" href="index.html" aria-label="The Catholic Experiment home"><span>The Catholic</span><strong>Experiment</strong></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="formation.html">Start here</a>
+      <a href="questions.html">Explore</a>
+      <a href="story.html">About</a>
+    </nav>
+  </div>
+</header>
   <main id="main" class="article-shell">
-    <header class="article-header">
-      <p class="eyebrow">Editorial policy</p>
-      <h1>Not every Catholic source says the same kind of thing.</h1>
-      <p class="standfirst">A council document, a canon, a news article and a personal reflection may all be useful. They do not carry the same authority.</p>
-    </header>
-
-    <article class="article">
-      <h2>Church teaching</h2>
-      <p>When a page explains Catholic doctrine, it should link to the Catechism, Scripture, an ecumenical council, papal teaching or another appropriate Magisterial source. The source must be represented accurately and in context.</p>
-
-      <h2>Canon and liturgical law</h2>
-      <p>Questions about governance, rights, obligations, sacraments and discipline may require the Code of Canon Law or official liturgical books. Law is not interchangeable with doctrine, and a universal rule may allow exceptions or depend on particular law.</p>
-
-      <h2>Official news and local Church sources</h2>
-      <p>Vatican News, bishops’ conferences and dioceses show what the living Church is doing and saying. A news story or press release is not automatically an act of the Magisterium. It should be labelled as news or official communication.</p>
-
-      <h2>History and scholarship</h2>
-      <p>Historical claims should use primary records and responsible scholarship, including non-Catholic work where it is strong. The project should not protect a comforting Catholic story from inconvenient evidence, nor repeat a hostile story without checking it.</p>
-
-      <h2>Personal reflection</h2>
-      <p>Experience can explain why a subject matters, but it cannot establish doctrine. Personal notes and developing interpretations should be recognisable as such.</p>
-
-      <blockquote>The reader should always be able to ask: “Who is claiming this, with what authority, and where can I check it?”</blockquote>
-    </article>
-
-    <section class="source-box" aria-labelledby="official-heading">
-      <h2 id="official-heading">Core official links</h2>
-      <ul class="source-list">
-        <li><a href="https://www.vatican.va/">The Holy See</a></li>
-        <li><a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM"><cite>Catechism of the Catholic Church</cite></a></li>
-        <li><a href="https://www.vatican.va/archive/cod-iuris-canonici/cic_index_en.html">Code of Canon Law</a></li>
-        <li><a href="https://www.vaticannews.va/en.html">Vatican News</a></li>
-        <li><a href="https://www.cbcew.org.uk/">Catholic Bishops’ Conference of England and Wales</a></li>
-        <li><a href="https://www.catholicbishops.ie/">Irish Catholic Bishops’ Conference</a></li>
-        <li><a href="https://www.bcos.org.uk/">Bishops’ Conference of Scotland</a></li>
-      </ul>
-    </section>
-
-    <nav class="page-turn"><a href="story.html"><span>Back</span>About the project</a><a href="formation.html"><span>Continue</span>Start at the beginning →</a></nav>
-  </main>
-
-  <footer class="site-footer"><div class="shell footer-inner"><p><strong>The Catholic Experiment</strong><br>Sources should be visible.</p><div class="footer-links"><a href="formation.html">Start here</a><a href="questions.html">Explore</a><a href="story.html">About</a></div><p>© <span data-year></span></p></div></footer>
+  <header class="article-header">
+    <p class="eyebrow">Editorial policy</p>
+    <h1>Not every Catholic source says the same kind of thing.</h1>
+    <p class="standfirst">A council document, a canon, a news report, a scholarly argument and a personal reflection may all be useful. They do not carry the same authority.</p>
+  </header>
+  <section class="source-key" aria-label="Source types">
+    <div><span class="source-swatch source-swatch--teaching"></span><strong>Church teaching</strong><p>Catechism, councils and appropriate papal teaching.</p></div>
+    <div><span class="source-swatch source-swatch--law"></span><strong>Church law</strong><p>Canon Law and official liturgical discipline.</p></div>
+    <div><span class="source-swatch source-swatch--official"></span><strong>Official communication</strong><p>Holy See, bishops’ conference and diocesan news.</p></div>
+    <div><span class="source-swatch source-swatch--scholarship"></span><strong>Scholarship</strong><p>Historical, philosophical and theological research.</p></div>
+    <div><span class="source-swatch source-swatch--personal"></span><strong>Personal note</strong><p>The author’s experience, questions and developing work.</p></div>
+  </section>
+  <div class="guide-sequence source-policy-sequence">
+    <section class="guide-step guide-step--understand ">
+  <div class="guide-marker"><svg class="guide-icon" aria-hidden="true"><use href="assets/guide-icons.svg#understand"></use></svg><span>Understand</span></div>
+  <div class="guide-content">
+    <h2>Authority must be named, not implied</h2>
+    <p>When a page explains Catholic doctrine, it should identify the appropriate Magisterial source. When it discusses law, history or news, it should use the source proper to that subject rather than borrowing authority from the word “Catholic”.</p>
+  </div>
+</section>
+    <section class="guide-step guide-step--check ">
+  <div class="guide-marker"><svg class="guide-icon" aria-hidden="true"><use href="assets/guide-icons.svg#check"></use></svg><span>Check</span></div>
+  <div class="guide-content">
+    <h2>Free official source first</h2>
+    <p>Where an official Catholic text is publicly available, the site should link to it directly. A commentary may help the reader, but it should not replace or obscure the original.</p><div class="source-rows"><a href="https://www.vatican.va/content/catechism/en.html"><span>Church teaching</span><strong>Catechism of the Catholic Church</strong><small>Current official English presentation →</small></a><a href="https://www.vatican.va/archive/cod-iuris-canonici/cic_index_en.html"><span>Church law</span><strong>Code of Canon Law</strong><small>Official text →</small></a><a href="https://www.vaticannews.va/en.html"><span>Official communication</span><strong>Vatican News</strong><small>News, not doctrine →</small></a></div>
+  </div>
+</section>
+    <section class="guide-step guide-step--weigh ">
+  <div class="guide-marker"><svg class="guide-icon" aria-hidden="true"><use href="assets/guide-icons.svg#weigh"></use></svg><span>Weigh</span></div>
+  <div class="guide-content">
+    <h2>Catholic sources still require judgement</h2>
+    <p>An official website does not make every sentence Magisterial. A press release is not a dogmatic constitution. A bishop’s prudential judgement is not automatically a universal doctrine. The page should say what kind of source is being used and what it can reasonably establish.</p>
+  </div>
+</section>
+    <section class="guide-step guide-step--try ">
+  <div class="guide-marker"><svg class="guide-icon" aria-hidden="true"><use href="assets/guide-icons.svg#try"></use></svg><span>Try</span></div>
+  <div class="guide-content">
+    <h2>Ask the source question every time</h2>
+    <p><strong>Who is claiming this, with what authority, in what context, and where can I check it?</strong></p><p>That question protects both the Church’s teaching and the reader’s freedom.</p>
+  </div>
+</section>
+  </div>
+  <nav class="page-turn"><a href="story.html"><span>Back</span>About the project</a><a href="formation.html"><span>Continue</span>Start at the beginning →</a></nav>
+</main>
+  <footer class="site-footer">
+  <div class="shell footer-inner">
+    <p><strong>The Catholic Experiment</strong><br>A modern Catholic field guide.</p>
+    <div class="footer-links" aria-label="Official and editorial links">
+      <a href="https://www.vatican.va/content/vatican/en.html">Holy See</a>
+      <a href="https://www.vaticannews.va/en.html">Vatican News</a>
+      <a href="https://www.vatican.va/content/catechism/en.html">Catechism</a>
+      <a href="sources.html">How sources are used</a>
+    </div>
+    <p>© <span data-year></span></p>
+  </div>
+</footer>
 </body>
 </html>
