@@ -6,30 +6,30 @@
 
 ## Purpose
 
-Rebuild The Catholic Experiment around one coherent story: a lay convert who moved from practical agnosticism to Catholic faith and now begins again with lifelong formation.
+Present Catholicism first from the reader's point of view: begin with inherited secular or cultural assumptions, examine them fairly, distinguish doctrine from history and custom, and invite deeper exploration only after trust has been earned.
 
 ## Current scope
 
-The prototype contains:
+- an audience-first homepage;
+- an Explore page using a repeated evidence-led method;
+- **A closer look**, a guided route through Catholic belief and life without course or curriculum language;
+- an About page containing the lay convert's story;
+- first prototypes for ecclesiastical Latin and notebook material;
+- real Creative Commons photography with visible credits.
 
-- a personal conversion narrative;
-- a twelve-part lay formation path;
-- a first ecclesiastical Latin lesson;
-- a notebook for Augustine, Mass, prayer and related learning.
+## Editorial boundaries
 
-## Current exclusions
-
-- no Catholic directory or gateway;
-- no employment or professional-work connection;
-- no party-political campaigning;
+- no claim to neutrality about Catholic doctrine; use fairness, accuracy and visible sources instead;
+- no apologetic ambush, sales funnel or factional recruitment;
+- no minimising scandal, abuse or institutional failure;
+- no professional, employment or party-political connection;
 - no claim to ecclesiastical teaching authority;
-- no large-scale content generation;
 - no AI-generated religious image library;
 - no confidential or sensitive personal information.
 
-## Editorial rule
+## Authority rule
 
-Personal reflection must be distinguished from authoritative Catholic teaching. Sources from Scripture, Tradition and the Magisterium should be used where doctrinal claims are made.
+Personal reflection must be distinguished from authoritative Catholic teaching. Scripture, Tradition, the Magisterium, canon law, civil law, official records and reliable scholarship should be used according to the subject.
 
 ## Archive
 
