@@ -1,5 +1,6 @@
 name: Deploy GitHub Pages
 
+# Deployment source is GitHub Actions. This commit retriggers publication after Pages was enabled.
 on:
   push:
     branches: [main]
