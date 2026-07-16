@@ -1,45 +1,45 @@
 # The Catholic Experiment
 
-The Catholic Experiment is a static HTML/CSS/JS website for Britain, Ireland, and the islands around them. Its current direction is not to act as a teaching authority or a scraped mega-directory, but as a Catholic gateway that points people toward trusted diocesan, parish, Vatican, pilgrimage, retreat, and practical Catholic resources.
+A small static prototype for a personal Catholic formation project.
 
-## Current state
-- Static site with shared JS/CSS and a large set of hand-maintained HTML pages.
-- Public rulebook and safeguarding pages are now part of the site structure.
-- The parish experience is outward-link-first: trusted diocesan routes rather than a fragile copied parish database.
-- The diocesan directory currently covers 55 territorial dioceses and archdioceses across England, Wales, Scotland, Ireland, and Northern Ireland.
-- Business, shrine, retreat, monastery, and religious-house listings are seeded through the directory import pipeline and compiled into JSON collections.
+## Core idea
 
-## Directory workflow
-The structured directory data lives under `assets/data/directory/`.
+The site follows a lay convert who moved from practical agnosticism, through reading and attendance at Mass, to Baptism and Confirmation. Reception into the Church is treated as a beginning rather than the end of formation.
 
-Seed files:
-- `assets/data/directory/imports/dioceses.seed.json`
-- `assets/data/directory/imports/businesses.seed.json`
-- `assets/data/directory/imports/places.seed.json`
-- other collection seed files in the same folder
+The central question is:
 
-Generated outputs:
-- `assets/data/directory/collections/*.json`
-- `assets/data/directory/derived/search-index.json`
-- `assets/data/directory/review/issues.json`
+> What happens when an ordinary person formed by a secular world decides to keep taking the Catholic faith seriously?
 
-Useful scripts:
+## Prototype structure
 
-```bash
-npm run import:directory
-npm run validate:directory
-npm run build:directory
-```
+- `index.html` — editorial homepage and project proposition
+- `story.html` — the conversion story and purpose of the project
+- `formation.html` — a first twelve-part lay formation curriculum
+- `latin.html` — an ecclesiastical Latin learning prototype
+- `notebook.html` — personal reading and formation notes
+- `styles.css` — shared responsive editorial design
+- `script.js` — minimal navigation behaviour and current year
 
-## Contact and moderation
-- The public build is email-first.
-- Browser form relays are disabled unless real endpoints are configured in `assets/data/site.json`.
-- The public build does not expose a browser admin PIN or moderation dashboard.
+## Design principles
 
-If a fuller moderation or submissions workflow is needed later, it should sit behind a real backend with authentication, audit logging, and proper data handling.
+- Reading-first editorial pages, not a dashboard or card grid
+- Warm paper, ink, Marian blue, oxblood and restrained brass accents
+- British English
+- No AI-generated religious imagery in the prototype
+- No political, employment or professional-project connection
+- Clear distinction between personal reflection and authoritative Catholic teaching
+- Contemporary explanations may sit alongside established traditional prayer wording
+- Real photography can be added later with precise captions and credits
+
+## Doctrinal and editorial boundaries
+
+This is a personal lay project, not an official teaching authority. Catholic doctrine should be grounded in Scripture, Tradition and the Magisterium, with authoritative sources identified. Personal opinions, developing notes and unresolved questions should be labelled clearly.
+
+Do not include confidential parish information, private third-party data, employment material, grievance material, health information, credentials, tokens or API keys.
 
 ## Local preview
-Open `index.html` in a browser. Some browsers restrict `fetch()` from disk, so a local server is safer:
+
+Open `index.html` directly, or run:
 
 ```bash
 python -m http.server 8000
@@ -47,12 +47,6 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000/`.
 
-## Governance notes
-- This repo should continue to behave like a directory and gateway first.
-- Official Catholic sources should be preferred wherever possible.
-- If a listing is doubtful, broken, or unsafe, it should be corrected or removed.
-- The public standards for inclusion and correction are now described on `content-model.html`.
-- Public boundaries and reporting guidance are described on `safeguarding.html`.
+## Status
 
-## Legacy materials
-Some older prototype-era files and generation scripts still exist in the repo. They should be treated as legacy scaffolding unless and until they are brought into line with the current directory-first governance model.
+Active prototype. Content and visual identity remain exploratory.
