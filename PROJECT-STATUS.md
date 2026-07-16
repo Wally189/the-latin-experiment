@@ -4,33 +4,30 @@
 
 **Active prototype**
 
-## Purpose
+## Current purpose
 
-Present Catholicism first from the reader's point of view: begin with inherited secular or cultural assumptions, examine them fairly, distinguish doctrine from history and custom, and invite deeper exploration only after trust has been earned.
+Build a guided field guide to Catholicism that can take a curious, doubtful, wary or returning reader from first questions into progressively deeper formation.
 
-## Current scope
+## Current live scope
 
-- an audience-first homepage;
-- an Explore page using a repeated evidence-led method;
-- **A closer look**, a guided route through Catholic belief and life without course or curriculum language;
-- an About page containing the lay convert's story;
-- first prototypes for ecclesiastical Latin and notebook material;
-- real Creative Commons photography with visible credits.
+- one restrained homepage;
+- a twenty-step route grouped into five stages;
+- three completed opening chapters;
+- an Explore subject map;
+- an About page;
+- a transparent sources and authority policy;
+- first Latin and notebook material;
+- links to official Church sources and current Church news.
 
-## Editorial boundaries
+## Boundaries
 
-- no claim to neutrality about Catholic doctrine; use fairness, accuracy and visible sources instead;
-- no apologetic ambush, sales funnel or factional recruitment;
-- no minimising scandal, abuse or institutional failure;
 - no professional, employment or party-political connection;
 - no claim to ecclesiastical teaching authority;
-- no AI-generated religious image library;
+- no factional recruitment or controversy farming;
+- no minimising abuse, corruption or institutional failure;
+- no presentation of personal opinion as doctrine;
 - no confidential or sensitive personal information.
-
-## Authority rule
-
-Personal reflection must be distinguished from authoritative Catholic teaching. Scripture, Tradition, the Magisterium, canon law, civil law, official records and reliable scholarship should be used according to the subject.
 
 ## Archive
 
-The pre-rebuild repository remains recoverable in Git history and on branch `archive/pre-rebuild-2026-07-16`.
+The pre-rebuild directory concept remains recoverable in Git history and on branch `archive/pre-rebuild-2026-07-16`.

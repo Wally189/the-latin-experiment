@@ -1,50 +1,34 @@
 # The Catholic Experiment
 
-A small static prototype that begins with the visitor's inherited assumptions about Catholicism and examines them through history, reason, evidence and the Church's own sources.
+A small static website offering a guided field guide to Catholicism.
 
-## Core proposition
+## Public proposition
 
-> Most of us inherit an idea of Catholicism before we examine it. The Catholic Experiment starts with that inherited version and looks again.
+The site begins with the visitor rather than the author. It assumes that many people meet Catholicism through fragments: family, school, history, scandal, beauty, resentment or silence. It then offers a calm route through belief, Christianity, the Catholic Church, worship and Catholic life.
 
-The public front door is audience-first rather than autobiographical. The conversion story explains the project under **About**; it is not the main proposition.
+## Structure
 
-## Prototype structure
+- `index.html` — quiet public front door
+- `formation.html` — the guided route
+- `chapter-01-belief.html` — first completed chapter
+- `chapter-02-god.html` — second completed chapter
+- `chapter-03-science.html` — third completed chapter
+- `questions.html` — subject map and official Church links
+- `story.html` — origin and editorial promise
+- `sources.html` — authority and source policy
+- `latin.html` — first specialist path
+- `notebook.html` — developing reading notes
 
-- `index.html` — audience-first editorial homepage
-- `questions.html` — familiar assumptions examined through a repeated method
-- `formation.html` — **A closer look**, a guided route rather than a named curriculum
-- `latin.html` — ecclesiastical Latin as one deeper exploration
-- `notebook.html` — short readings, objects and developing questions
-- `story.html` — About page and conversion story
-- `styles.css` — responsive editorial design
-- `script.js` — minimal navigation behaviour and current year
+## Editorial rules
 
-## Editorial method
+- distinguish doctrine, canon law, official news, scholarship and personal reflection;
+- link to official Church sources where appropriate;
+- include serious criticism and institutional failure without minimising or sensationalising;
+- avoid factionalism, culture-war framing and apologetic ambushes;
+- use British English and allow British and Irish context to emerge naturally;
+- keep the homepage simple and mobile-first;
+- use real, licensed photography sparingly and with precise credits.
 
-Each subject should normally distinguish:
+## Deployment
 
-1. the familiar claim;
-2. why it took hold;
-3. what Catholicism actually says;
-4. what complicates the picture;
-5. why the question matters;
-6. a visible source trail.
-
-The tone should be curious, plain, fair-minded and non-factional. The project is Catholic but does not hide difficult evidence, manufacture false balance or use culture-war framing.
-
-## Visual principles
-
-- reading-first editorial pages, not dashboard or card soup;
-- real documentary photography with precise captions and licence credits;
-- warm paper, ink, blue, oxblood and restrained brass;
-- British English;
-- no AI-generated religious image library;
-- no professional, employment or party-political connection.
-
-## Authority and sources
-
-This is a lay project, not an official teaching authority. Catholic doctrine should be grounded in Scripture, Tradition and the Magisterium. Historical, legal and safeguarding claims require appropriate primary evidence and reliable scholarship. Personal reflections and unresolved questions must be identifiable as such.
-
-## Status
-
-Active prototype, deployed through GitHub Pages.
+GitHub Pages deploys the static site from `main` through `.github/workflows/pages.yml`.
