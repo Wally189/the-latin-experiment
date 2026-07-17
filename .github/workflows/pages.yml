@@ -23,12 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build unchanged site shell and Course page
+      - name: Build existing site and Course page
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          course = Path('index.html').read_text(encoding='utf-8')
+          course = Path('course-source.html').read_text(encoding='utf-8')
           replacements = {
               '<a href="#">⌂ Home</a>': '<a href="index.html#home">⌂ Home</a>',
               '<a href="#" aria-current="page">▤ Course</a>': '<a href="course.html" aria-current="page">▤ Course</a>',
@@ -43,7 +43,7 @@ jobs:
               course = course.replace(old, new, 1)
           Path('course.html').write_text(course, encoding='utf-8')
 
-          html = Path('site-shell.html').read_text(encoding='utf-8')
+          html = Path('index.html').read_text(encoding='utf-8')
           old_cards = '<div class=cards><div class=card><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></div><div class=card style="--c:#1c3f8f"><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></div><div class=card style="--c:#d6a43a"><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></div></div>'
           new_cards = '<div class="cards home-links"><a class=card href=course.html><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></a><a class=card style="--c:#1c3f8f" href=#schedule><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></a><a class=card style="--c:#d6a43a" href=#materials><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></a><a class=card style="--c:#6b2d70" href=#certificates><h2>Certificates</h2><p>See learning milestones, badges and indicative ability stages.</p></a><a class=card style="--c:#2f6b50" href=#contact><h2>Contact</h2><p>Send a question, correction or thoughtful piece of feedback.</p></a></div>'
           if old_cards not in html:

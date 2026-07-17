@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Latin Experiment — Lesson I</title>
+<style>
+:root{
+  --ink:#1d0806;
+  --ink-2:#310d0d;
+  --paper:#fffdf9;
+  --cream:#f5eee4;
+  --line:#dfd5cc;
+  --muted:#766e69;
+  --burgundy:#8e1530;
+  --blue:#244b9b;
+  --gold:#dda937;
+  --purple:#71307b;
+  --green:#2e7051;
+  --shadow:0 12px 36px rgba(33,12,9,.10);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-width:320px;
+  color:var(--ink);
+  background:#efe3d6;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+.serif,h1,h2,h3{font-family:Georgia, "Times New Roman", serif}
+.shell{
+  min-height:100vh;
+  max-width:1680px;
+  margin:auto;
+  padding:14px;
+}
+.frame{
+  min-height:calc(100vh - 28px);
+  overflow:hidden;
+  border:7px solid var(--ink);
+  border-radius:30px;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.global-nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  min-height:82px;
+  padding:12px 22px;
+  color:#fff;
+  background:linear-gradient(100deg,#190604,#250707 62%,#130504);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:250px;
+}
+.brand-mark{
+  display:grid;
+  place-items:center;
+  width:44px;height:44px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  color:var(--gold);
+  font-size:24px;
+}
+.brand strong{display:block;font-family:Georgia,serif;font-size:18px;letter-spacing:.04em}
+.brand small{display:block;margin-top:2px;color:#dccfca;font-size:11px}
+.nav-links{display:flex;align-items:center;gap:8px;flex:1}
+.nav-links a{
+  padding:14px 18px;
+  color:#e7dcd7;
+  text-decoration:none;
+  border-radius:15px;
+}
+.nav-links a[aria-current="page"]{
+  color:#fff;
+  background:linear-gradient(135deg,#5b1417,#37100e);
+  box-shadow:inset 4px 0 var(--gold);
+}
+.progress-chip{
+  padding:11px 16px;
+  border:1px solid var(--gold);
+  border-radius:12px;
+  color:var(--gold);
+  background:transparent;
+  white-space:nowrap;
+}
+.app{
+  display:grid;
+  grid-template-columns:270px minmax(0,1fr);
+  min-height:calc(100vh - 96px);
+}
+.course-rail{
+  position:sticky;
+  top:82px;
+  align-self:start;
+  height:calc(100vh - 82px);
+  overflow:auto;
+  padding:24px 16px;
+  background:#fbf8f3;
+  border-right:1px solid var(--line);
+}
+.rail-heading{margin:0 0 6px;font-weight:800}
+.rail-meta{font-size:13px;color:var(--muted)}
+.progress-track{
+  height:7px;margin:12px 0 22px;border-radius:99px;background:#e6dfd8;overflow:hidden
+}
+.progress-track span{display:block;width:1.25%;height:100%;background:var(--burgundy)}
+.lesson-list{display:grid;gap:8px}
+.lesson-link{
+  position:relative;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:10px;
+  width:100%;
+  padding:12px;
+  text-align:left;
+  border:1px solid transparent;
+  border-radius:14px;
+  background:transparent;
+  color:var(--ink);
+}
+.lesson-link .icon{
+  display:grid;place-items:center;width:32px;height:32px;border-radius:10px;
+  color:#fff;background:var(--burgundy);font-weight:800;font-family:Georgia,serif
+}
+.lesson-link strong{display:block;font-size:14px}
+.lesson-link small{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}
+.lesson-link.active{
+  border-color:#e8d8bd;
+  background:#fff5df;
+  box-shadow:0 7px 18px rgba(57,23,10,.06);
+}
+.lesson-link.locked{
+  opacity:.52;
+  filter:grayscale(.55);
+}
+.lesson-link.locked .icon{background:#b7b1ac}
+.lesson-link.locked::after{
+  content:"🔒";
+  position:absolute;
+  right:10px;top:12px;
+  font-size:13px
+}
+.book-card{
+  margin-top:22px;padding:15px;border:1px solid #e6dccd;border-radius:16px;background:#fffaf0;
+  font-size:12px;line-height:1.55
+}
+.book-card strong{display:block;margin-bottom:5px;font-size:14px}
+.book-card a{display:inline-block;margin-top:10px;padding:9px 12px;border-radius:10px;background:#f5dfac;color:var(--ink);text-decoration:none;font-weight:800}
+.mobile-catalogue{display:none}
+.lesson-page{
+  background:var(--paper);
+  padding:28px clamp(20px,3.3vw,56px) 54px;
+}
+.breadcrumbs{display:flex;gap:9px;align-items:center;color:var(--muted);font-size:13px;margin-bottom:25px}
+.lesson-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 310px;
+  gap:28px;
+}
+.main-column{min-width:0}
+.side-column{display:grid;align-content:start;gap:16px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
+  gap:22px;
+  padding:34px;
+  border:1px solid #eadfd4;
+  border-radius:var(--radius);
+  background:
+    radial-gradient(circle at 78% 28%,rgba(221,169,55,.24),transparent 30%),
+    linear-gradient(135deg,#fff,#fffaf2);
+}
+.hero::after{
+  content:"✠";
+  position:absolute;
+  right:38px;top:20px;
+  color:rgba(142,21,48,.08);
+  font-size:210px;
+  font-family:Georgia,serif;
+  transform:rotate(-8deg)
+}
+.kicker{
+  margin:0 0 10px;
+  color:#a66c00;
+  font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase
+}
+h1{margin:0;font-size:clamp(58px,7vw,104px);line-height:.9;letter-spacing:-.035em}
+.subtitle{margin:16px 0 18px;font-family:Georgia,serif;font-style:italic;color:#8b4d10;font-size:25px}
+.lede{max-width:650px;margin:0;color:#514945;font-size:17px;line-height:1.65}
+.hero-facts{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px
+}
+.fact{padding:12px 0;border-top:1px solid #eadfd6}
+.fact strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.fact span{display:block;margin-top:5px;font-size:13px;line-height:1.4;color:#655b55}
+.hero-visual{
+  position:relative;
+  min-height:310px;
+  display:grid;
+  place-items:center;
+  border-radius:20px;
+  background:
+    linear-gradient(160deg,rgba(113,48,123,.88),rgba(142,21,48,.92) 48%,rgba(221,169,55,.95));
+}
+.hero-visual .latin{
+  color:rgba(255,255,255,.70);
+  font:700 clamp(48px,6vw,84px)/1 Georgia,serif;
+  letter-spacing:.06em
+}
+.day-note{
+  position:absolute;
+  right:18px;bottom:18px;
+  width:210px;
+  padding:18px;
+  transform:rotate(3deg);
+  border:1px solid #eadfbf;
+  border-radius:4px;
+  background:#fff8d9;
+  box-shadow:0 12px 24px rgba(50,20,10,.18);
+  color:#244b9b;
+  font:italic 16px/1.45 Georgia,serif
+}
+.section{margin-top:24px}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:12px
+}
+.section-head h2{margin:0;font-size:29px}
+.section-head p{margin:0;color:var(--muted);font-size:13px}
+.curiosity{
+  display:grid;
+  grid-template-columns:240px minmax(0,1fr);
+  gap:22px;
+  padding:25px;
+  border:1px solid #ead8cb;
+  border-radius:20px;
+  background:linear-gradient(130deg,#fff9f2,#fff);
+}
+.curiosity-label{color:#a66c00;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.curiosity h2{margin:7px 0 10px;font-size:29px;line-height:1.08}
+.curiosity-copy{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center
+}
+.sample-latin{font:700 18px/1.7 Georgia,serif}
+.reveal{color:#5d554f;line-height:1.55}
+.reveal strong{color:var(--ink)}
+.audio-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px
+}
+.audio-card{
+  min-width:0;padding:18px;border:1px solid #e8ded6;border-radius:18px;background:#fff
+}
+.audio-card h3{margin:0 0 4px;font-size:19px}
+.audio-card .tag{display:inline-block;margin:5px 0 12px;padding:4px 7px;border-radius:6px;background:#f5e6e6;color:var(--burgundy);font-size:10px;font-weight:800}
+.audio-card p,.audio-card li{font-size:13px;color:#5f5651;line-height:1.5}
+.audio-placeholder{
+  display:flex;align-items:center;gap:10px;margin:12px 0;padding:11px;border-radius:12px;background:#f5f2ee;color:#6f6761
+}
+.play{
+  display:grid;place-items:center;width:34px;height:34px;border:0;border-radius:50%;background:var(--ink);color:#fff
+}
+.audio-line{flex:1;height:5px;border-radius:99px;background:#d9d2cc}
+.reader-actions{display:grid;gap:9px;margin-top:12px}
+.reader-actions button{padding:10px 12px;text-align:left;border:1px solid #e4d9d1;border-radius:10px;background:#fff;font-weight:800}
+.path-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.path-card{
+  overflow:hidden;
+  padding:0;
+  border:1px solid #e5ddd7;
+  border-radius:18px;
+  background:#fff;
+  text-align:left;
+  box-shadow:0 6px 16px rgba(30,10,8,.04)
+}
+.path-card .colour{height:9px;background:var(--stage)}
+.path-card .inside{padding:17px}
+.path-number{
+  display:grid;place-items:center;width:30px;height:30px;margin-bottom:13px;border-radius:50%;
+  background:var(--stage);color:#fff;font-weight:900
+}
+.path-card h3{margin:0;font-size:17px}
+.path-card .eng{display:block;margin-top:4px;color:var(--stage);font-size:12px;font-weight:900}
+.path-card p{margin:12px 0 0;color:#605852;font-size:12px;line-height:1.5}
+.path-detail{
+  display:none;margin-top:10px;padding:15px;border-top:1px solid #eee5df;color:#4e4742;font-size:13px;line-height:1.6
+}
+.path-card[aria-expanded="true"] .path-detail{display:block}
+.lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.content-card{
+  padding:20px;border:1px solid #e6dcd4;border-radius:18px;background:#fff
+}
+.content-card h3{margin:0 0 5px;font-size:21px}
+.content-card .eyebrow{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.placeholder{
+  margin-top:14px;padding:18px;border:1px dashed #cfc3ba;border-radius:14px;background:#fbf8f4;color:#776f69;font-size:13px;line-height:1.55
+}
+.notebook{
+  min-height:265px;
+  background:
+    linear-gradient(rgba(36,75,155,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(36,75,155,.08) 1px,transparent 1px),
+    #fffdf2;
+  background-size:22px 22px;
+  transform:rotate(-.4deg);
+}
+.hand{
+  color:#244b9b;font:italic 16px/1.7 "Comic Sans MS", cursive
+}
+.quick-actions{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px
+}
+.quick-action{
+  display:flex;align-items:center;gap:10px;padding:13px;border:1px solid #e7ddd5;border-radius:14px;background:#fff;text-align:left
+}
+.quick-action i{
+  display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:50%;background:var(--c);color:#fff;font-style:normal
+}
+.quick-action strong{display:block;font-size:12px}
+.quick-action span{display:block;margin-top:2px;color:var(--muted);font-size:10px}
+.side-card{
+  padding:20px;border:1px solid #e6dcd4;border-radius:18px;background:#fff
+}
+.side-card h3{margin:0 0 10px;color:var(--accent,var(--ink));font-size:21px}
+.side-card p{margin:0;color:#5d554f;font-size:14px;line-height:1.65}
+.side-card a{display:inline-block;margin-top:13px;color:var(--accent,var(--burgundy));font-weight:900;text-decoration:none}
+.side-card.gold{background:#fff8e8;--accent:#9b6800}
+.side-card.blue{background:#f5f7ff;--accent:#244b9b}
+.side-card.purple{background:#faf4fb;--accent:#71307b}
+.manifesto{
+  position:relative;
+  overflow:hidden;
+  min-height:300px;
+  padding:26px;
+  color:#fff;
+  background:linear-gradient(160deg,#151515,#10201b);
+}
+.manifesto::before{content:"✠";position:absolute;right:-15px;bottom:-40px;font:180px Georgia,serif;color:rgba(221,169,55,.12)}
+.manifesto h3{color:#fff;font-size:30px}
+.manifesto p{color:#eee}
+.lesson-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:22px;padding:22px 26px;
+  border-radius:18px;color:#fff;background:linear-gradient(100deg,#5e1117,#7d171d,#4d0c10)
+}
+.lesson-footer blockquote{margin:0;font-family:Georgia,serif;font-size:17px}
+.complete-button{
+  padding:14px 20px;border:0;border-radius:12px;background:var(--gold);color:var(--ink);font-weight:900
+}
+.complete-button.done{background:var(--green);color:#fff}
+.lock-toast{
+  position:fixed;left:50%;bottom:25px;z-index:100;transform:translate(-50%,30px);
+  padding:13px 18px;border-radius:12px;background:#180706;color:#fff;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:.2s
+}
+.lock-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1180px){
+  .lesson-grid{grid-template-columns:1fr}
+  .side-column{grid-template-columns:repeat(3,1fr)}
+  .manifesto{grid-column:1/-1;min-height:220px}
+  .path-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .shell{padding:0}
+  .frame{border-width:0;border-radius:0}
+  .global-nav{overflow-x:auto;min-height:90px;padding:10px}
+  .brand{display:none}
+  .nav-links{min-width:max-content}
+  .nav-links a{padding:13px 16px}
+  .progress-chip{display:none}
+  .app{display:block}
+  .course-rail{display:none}
+  .mobile-catalogue{
+    position:sticky;top:90px;z-index:45;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 16px;background:var(--ink);color:#fff
+  }
+  .mobile-catalogue button{
+    min-height:44px;padding:10px 17px;border-radius:999px;font-weight:900
+  }
+  .mobile-catalogue .label{border:1px solid #fff;background:#fff;color:var(--ink)}
+  .mobile-catalogue .toggle{border:1px solid var(--gold);background:var(--gold);color:var(--ink)}
+  .mobile-list{
+    display:none;position:fixed;inset:146px 0 0;z-index:44;overflow:auto;padding:16px;background:#fbf8f3
+  }
+  .mobile-list.open{display:block}
+  .lesson-page{padding:20px 12px 42px}
+  .hero{grid-template-columns:1fr;padding:24px 20px}
+  .hero-visual{min-height:250px}
+  .hero-facts{grid-template-columns:1fr}
+  .curiosity{grid-template-columns:1fr}
+  .audio-grid{grid-template-columns:1fr}
+  .path-grid{grid-template-columns:1fr}
+  .lower-grid{grid-template-columns:1fr}
+  .quick-actions{grid-template-columns:1fr 1fr}
+  .side-column{grid-template-columns:1fr}
+  .lesson-footer{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:520px){
+  h1{font-size:58px}
+  .subtitle{font-size:22px}
+  .hero{border-radius:18px}
+  .curiosity-copy{grid-template-columns:1fr}
+  .quick-actions{grid-template-columns:1fr}
+  .day-note{width:180px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="frame">
+    <nav class="global-nav" aria-label="Primary">
+      <div class="brand">
+        <div class="brand-mark">✠</div>
+        <div><strong>The Latin Experiment</strong><small>Ecclesiastical Latin, one lesson at a time</small></div>
+      </div>
+      <div class="nav-links">
+        <a href="#">⌂ Home</a>
+        <a href="#" aria-current="page">▤ Course</a>
+        <a href="#">▣ Schedule</a>
+        <a href="#">▧ Materials</a>
+        <a href="#">✦ Certificates</a>
+        <a href="#">✉ Contact</a>
+      </div>
+      <button class="progress-chip">My progress · 0%</button>
+    </nav>
+
+    <div class="mobile-catalogue">
+      <button class="label" id="mobileLessons">☷ Lessons</button>
+      <button class="toggle" id="mobileToggle">Show lessons</button>
+    </div>
+    <div class="mobile-list" id="mobileList"></div>
+
+    <div class="app">
+      <aside class="course-rail">
+        <p class="rail-heading">Course progress</p>
+        <div class="rail-meta">1 of 81 lessons published</div>
+        <div class="progress-track"><span></span></div>
+        <div class="lesson-list" id="desktopLessons"></div>
+        <div class="book-card">
+          <strong>Use Father Most’s book</strong>
+          This website is a companion to <em>Latin by the Natural Method</em>, not a replacement. Read the original lesson, write by hand, then return here.
+          <a href="#">Find a copy →</a>
+        </div>
+      </aside>
+
+      <main class="lesson-page">
+        <div class="breadcrumbs">Course <span>›</span> First year <span>›</span> Lesson I</div>
+        <div class="lesson-grid">
+          <div class="main-column">
+            <section class="hero">
+              <div>
+                <p class="kicker">First year · learning module</p>
+                <h1>Lesson I</h1>
+                <p class="subtitle">The very first steps.</p>
+                <p class="lede">The experiment begins here: one ordinary Catholic, Father William Most’s course, a notebook, a microphone and a determination to discover whether the Church’s language can become something genuinely usable.</p>
+                <div class="hero-facts">
+                  <div class="fact"><strong>Based on</strong><span>Father William Most<br><em>Latin by the Natural Method</em></span></div>
+                  <div class="fact"><strong>Estimated time</strong><span>30–45 minutes<br>plus handwriting and speech</span></div>
+                  <div class="fact"><strong>Aim</strong><span>Meet the first Latin patterns and begin thinking beyond translation</span></div>
+                </div>
+              </div>
+              <div class="hero-visual" aria-label="Lesson artwork placeholder">
+                <div class="latin">LATINA ✠</div>
+                <div class="day-note">Day 1.<br><br>Excited. A little daunted. This is where my own account will appear after I complete the lesson.<br><br>— A.W.G.</div>
+              </div>
+            </section>
+
+            <section class="section curiosity">
+              <div>
+                <span class="curiosity-label">Curiosity hook</span>
+                <h2>How can a few tiny endings tell us who is doing what?</h2>
+                <p class="reveal">English leans heavily on word order. Latin can carry part of the same information inside the words themselves.</p>
+              </div>
+              <div class="curiosity-copy">
+                <div class="sample-latin">Ecclesia orat.<br>Populus respondet.<br>Verba manent.</div>
+                <div class="reveal">The words are simple, but the system underneath them is not. <strong>This is our first glimpse of how Latin organises meaning.</strong><br><br><small>Original supplementary examples; Father Most’s lesson remains in the book.</small></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head"><div><h2>Hear the experiment</h2><p>The audio slots are ready for Alan’s real recordings.</p></div></div>
+              <div class="audio-grid">
+                <article class="audio-card">
+                  <h3>My first reading</h3>
+                  <span class="tag">unedited · before study</span>
+                  <p>This will preserve the honest starting point rather than pretending to be an authoritative pronunciation guide.</p>
+                  <div class="audio-placeholder"><button class="play" disabled>▶</button><span>Recording to be added</span><span class="audio-line"></span></div>
+                  <strong>What I noticed</strong>
+                  <ul><li>Real observations will appear after recording.</li><li>Mistakes remain part of the experiment.</li></ul>
+                </article>
+                <article class="audio-card">
+                  <h3>After studying</h3>
+                  <span class="tag" style="background:#eaf0ff;color:#244b9b">after practice</span>
+                  <p>Recorded after reading, handwriting practice, repeated speech and comprehension work.</p>
+                  <div class="audio-placeholder"><button class="play" disabled>▶</button><span>Second recording to be added</span><span class="audio-line"></span></div>
+                  <strong>What changed</strong>
+                  <ul><li>Compare pace, confidence and phrasing.</li><li>Record what still needs work.</li></ul>
+                </article>
+                <article class="audio-card">
+                  <h3>Your turn</h3>
+                  <p>Open Father Most’s book. Attempt the lesson aloud before hearing Alan’s second recording.</p>
+                  <div class="reader-actions">
+                    <button>🎙 Read aloud</button>
+                    <button>✎ Write it by hand</button>
+                    <button>◉ Record yourself privately</button>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head"><div><h2>Your path through this lesson</h2><p>Five repeatable stages for every published lesson.</p></div></div>
+              <div class="path-grid" id="pathGrid">
+                <button class="path-card" style="--stage:#8e1530" aria-expanded="false"><div class="colour"></div><div class="inside"><span class="path-number">1</span><h3>Audi et lege</h3><span class="eng">Listen and read</span><p>Hear the Latin. Follow the text. Let the rhythm settle.</p><div class="path-detail">Use Father Most’s original lesson first. Alan’s audio accompanies the experience but does not replace the source.</div></div></button>
+                <button class="path-card" style="--stage:#244b9b" aria-expanded="false"><div class="colour"></div><div class="inside"><span class="path-number">2</span><h3>Observa</h3><span class="eng">Notice</span><p>Spot patterns, endings, repeated forms and word order.</p><div class="path-detail">The site will highlight what Alan genuinely noticed, including initial misunderstandings.</div></div></button>
+                <button class="path-card" style="--stage:#c78b13" aria-expanded="false"><div class="colour"></div><div class="inside"><span class="path-number">3</span><h3>Intellege</h3><span class="eng">Understand</span><p>A concise explanation in ordinary English.</p><div class="path-detail">Independent explanation and original examples will clarify the lesson without reproducing the textbook.</div></div></button>
+                <button class="path-card" style="--stage:#71307b" aria-expanded="false"><div class="colour"></div><div class="inside"><span class="path-number">4</span><h3>Exerce</h3><span class="eng">Practise</span><p>Say it aloud. Write it down. Use it.</p><div class="path-detail">Speaking, handwriting, sentence building and short comprehension prompts turn recognition into active knowledge.</div></div></button>
+                <button class="path-card" style="--stage:#2e7051" aria-expanded="false"><div class="colour"></div><div class="inside"><span class="path-number">5</span><h3>Recordare</h3><span class="eng">Recall</span><p>Close the book. Test memory. Rebuild the idea.</p><div class="path-detail">A short retrieval check helps the lesson survive beyond the moment it was read.</div></div></button>
+              </div>
+            </section>
+
+            <section class="section lower-grid">
+              <article class="content-card">
+                <span class="eyebrow">Today’s Latin</span>
+                <h3>What Lesson I reveals</h3>
+                <div class="placeholder"><strong>Publication boundary:</strong> after Alan completes the lesson, this area will contain his own summary, short attributed references where justified, original supplementary examples and the patterns he found. It will not reproduce Father Most’s lesson wholesale.</div>
+              </article>
+              <article class="content-card">
+                <span class="eyebrow">My notebook</span>
+                <h3>The evidence of learning</h3>
+                <div class="placeholder notebook hand">A photograph of the real handwritten page will appear here.<br><br>Mistakes will not be polished away.<br>Corrections and the moment something “clicked” are part of the story.</div>
+              </article>
+            </section>
+
+            <section class="section">
+              <div class="section-head"><div><h2>Quick actions</h2><p>Five-minute boosters</p></div></div>
+              <div class="quick-actions">
+                <button class="quick-action" style="--c:#8e1530"><i>◉</i><span><strong>Listen again</strong><span>Alan’s reading</span></span></button>
+                <button class="quick-action" style="--c:#244b9b"><i>✎</i><span><strong>Copy it out</strong><span>Handwriting practice</span></span></button>
+                <button class="quick-action" style="--c:#c78b13"><i>☵</i><span><strong>Say it aloud</strong><span>Speech practice</span></span></button>
+                <button class="quick-action" style="--c:#71307b"><i>✓</i><span><strong>Mini-quiz</strong><span>Recall check</span></span></button>
+                <button class="quick-action" style="--c:#2e7051"><i>▤</i><span><strong>My notes</strong><span>Private browser notes</span></span></button>
+              </div>
+            </section>
+
+            <footer class="lesson-footer">
+              <blockquote>“Latin is not a museum piece. Learn it, hear it, use it—and discover why it still belongs to the whole Church.”</blockquote>
+              <button class="complete-button" id="completeButton">Mark Lesson I complete</button>
+            </footer>
+          </div>
+
+          <aside class="side-column">
+            <article class="side-card blue"><h3>Why Latin?</h3><p>Not as an escape into the past, but as a shared inheritance: words that connect worship, prayer, scholarship and Catholics across countries and centuries.</p><a href="#">Explore the question →</a></article>
+            <article class="side-card gold"><h3>Have the book?</h3><p>This website accompanies Father Most. Purchase or borrow the book and use it as the primary text.</p><a href="#">Find your copy →</a></article>
+            <article class="side-card purple"><h3>My experiment</h3><p>Follow the real notes, hesitant recordings, errors, corrections and small victories as they happen.</p><a href="#">Read today’s journal →</a></article>
+            <article class="side-card"><h3>In the Church</h3><p>Each lesson will end with a proportionate connection to Scripture, worship, prayer, hymns or the Church’s intellectual life.</p><a href="#">Today’s connection →</a></article>
+            <article class="side-card manifesto"><h3>One language.<br>Many centuries.<br>One Church.</h3><p>The project quietly asks a simple question: what happens when ordinary Catholics begin recognising this language as something they can actually use?</p></article>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<div class="lock-toast" id="lockToast">That lesson will open when Alan completes and publishes it.</div>
+<script>
+const lessonTitles = [
+  "The very first steps","Nouns: first patterns","More about nouns","The verb “to be”",
+  "Present-tense verbs","Who does what?","Describing things","A second noun pattern",
+  "More verbs","A new case"
+];
+function buildLessons(target){
+  const wrap=document.getElementById(target);
+  for(let i=1;i<=81;i++){
+    const b=document.createElement("button");
+    b.className="lesson-link "+(i===1?"active":"locked");
+    b.innerHTML=`<span class="icon">${i===1?"I":"·"}</span><span><strong>Lesson ${i}</strong><small>${lessonTitles[i-1]||"Awaiting Alan’s progress"}</small></span>`;
+    if(i>1){
+      b.setAttribute("aria-disabled","true");
+      b.addEventListener("click",showLock);
+    }
+    wrap.appendChild(b);
+  }
+}
+buildLessons("desktopLessons");
+buildLessons("mobileList");
+
+const mobileList=document.getElementById("mobileList");
+const mobileToggle=document.getElementById("mobileToggle");
+function toggleMobile(){
+  const open=mobileList.classList.toggle("open");
+  mobileToggle.textContent=open?"Hide lessons":"Show lessons";
+  mobileToggle.setAttribute("aria-expanded",String(open));
+}
+document.getElementById("mobileLessons").addEventListener("click",toggleMobile);
+mobileToggle.addEventListener("click",toggleMobile);
+
+function showLock(){
+  const t=document.getElementById("lockToast");
+  t.classList.add("show");
+  clearTimeout(window.lockTimer);
+  window.lockTimer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+document.querySelectorAll(".path-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    const next=card.getAttribute("aria-expanded")!=="true";
+    card.setAttribute("aria-expanded",String(next));
+  });
+});
+const complete=document.getElementById("completeButton");
+const key="latin-experiment-lesson-1-complete";
+function syncComplete(){
+  const done=localStorage.getItem(key)==="yes";
+  complete.classList.toggle("done",done);
+  complete.textContent=done?"Lesson I completed ✓":"Mark Lesson I complete";
+  document.querySelector(".progress-chip").textContent=done?"My progress · Lesson I complete":"My progress · 0%";
+}
+complete.addEventListener("click",()=>{
+  localStorage.setItem(key,localStorage.getItem(key)==="yes"?"no":"yes");
+  syncComplete();
+});
+syncComplete();
+</script>
+</body>
+</html>
