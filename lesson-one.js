@@ -119,7 +119,7 @@
       card.setAttribute('aria-disabled', String(locked));
       if (locked) {
         const blurb = card.querySelector('small');
-        if (blurb) blurb.textContent = 'Awaiting Alan’s progress.';
+        if (blurb && blurb.textContent !== 'Awaiting Alan’s progress.') blurb.textContent = 'Awaiting Alan’s progress.';
         if (typeof filter !== 'undefined' && filter === 'active') card.hidden = true;
       }
     });
