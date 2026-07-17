@@ -44,7 +44,47 @@
 .course:not(.lesson-focus) .lesson-complete-button{
   display:none;
 }
+
+/* Mobile lesson catalogue accordion */
+.lesson-catalogue-toggle{
+  display:none;
+}
+
 @media(max-width:800px){
+  .lesson-catalogue-toggle{
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    border:0;
+    border-bottom:1px solid rgba(255,255,255,.2);
+    background:#170806;
+    color:#fff;
+    font:700 1rem/1.2 inherit;
+    text-align:left;
+    cursor:pointer;
+  }
+
+  .lesson-catalogue-toggle::after{
+    content:"▴";
+    font-size:1rem;
+    transition:transform .2s ease;
+  }
+
+  .course.mobile-catalogue-collapsed .lesson-catalogue-toggle::after{
+    transform:rotate(180deg);
+  }
+
+  .course.mobile-catalogue-collapsed .catalog{
+    display:none;
+  }
+
+  .course.lesson-focus .lesson-catalogue-toggle{
+    display:none;
+  }
+
   .lesson-focus-actions{
     top:62px;
     justify-content:stretch;

@@ -2,13 +2,24 @@
   const courseView = document.querySelector('[data-v="course"]');
   if (!courseView) return;
 
+  const catalogue = courseView.querySelector('.catalog');
   const detail = courseView.querySelector('.detail');
   const listElement = courseView.querySelector('#list');
   const titleElement = courseView.querySelector('#ct');
 
-  if (!detail || !listElement) return;
+  if (!catalogue || !detail || !listElement) return;
 
   detail.setAttribute('tabindex', '-1');
+
+  const catalogueToggle = document.createElement('button');
+  catalogueToggle.type = 'button';
+  catalogueToggle.className = 'lesson-catalogue-toggle';
+  catalogueToggle.setAttribute('aria-expanded', 'true');
+  catalogueToggle.setAttribute('aria-controls', 'list');
+  catalogueToggle.innerHTML = '<span>Lessons</span><span class="catalogue-state">Hide lessons</span>';
+  courseView.insertBefore(catalogueToggle, catalogue);
+
+  const catalogueState = catalogueToggle.querySelector('.catalogue-state');
 
   const actions = document.createElement('div');
   actions.className = 'lesson-focus-actions';
@@ -31,6 +42,22 @@
   const completeButton = actions.querySelector('.lesson-complete-button');
 
   let catalogueScrollPosition = 0;
+
+  function isMobile() {
+    return window.matchMedia('(max-width: 800px)').matches;
+  }
+
+  function setCatalogueCollapsed(collapsed, moveToLesson = false) {
+    courseView.classList.toggle('mobile-catalogue-collapsed', collapsed);
+    catalogueToggle.setAttribute('aria-expanded', String(!collapsed));
+    catalogueState.textContent = collapsed ? 'Show lessons' : 'Hide lessons';
+
+    if (collapsed && moveToLesson && isMobile()) {
+      requestAnimationFrame(() => {
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
 
   function updateControlLabels() {
     const current = typeof selected !== 'undefined' ? selected : null;
@@ -60,6 +87,11 @@
   function closeLesson() {
     courseView.classList.remove('lesson-focus');
     courseView.removeAttribute('data-focus-mode');
+
+    if (isMobile()) {
+      setCatalogueCollapsed(false);
+    }
+
     requestAnimationFrame(() => {
       listElement.scrollTop = catalogueScrollPosition;
       const selectedCard = listElement.querySelector('.lesson.sel');
@@ -79,6 +111,11 @@
     closeLesson();
   }
 
+  catalogueToggle.addEventListener('click', () => {
+    const collapsed = courseView.classList.contains('mobile-catalogue-collapsed');
+    setCatalogueCollapsed(!collapsed);
+  });
+
   openButton.addEventListener('click', openLesson);
   backButton.addEventListener('click', closeLesson);
   completeButton.addEventListener('click', completeAndReturn);
@@ -93,6 +130,10 @@
       requestAnimationFrame(() => {
         detail.scrollTop = 0;
         updateControlLabels();
+
+        if (isMobile()) {
+          setCatalogueCollapsed(true, true);
+        }
       });
     }
   });
@@ -105,6 +146,12 @@
       subtree: true,
     });
   }
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      setCatalogueCollapsed(false);
+    }
+  });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && courseView.classList.contains('lesson-focus')) {
