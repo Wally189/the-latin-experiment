@@ -3,336 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A visual pilot companion page for Father William Most's Latin by the Natural Method, Lesson 1.">
-  <meta name="theme-color" content="#a4472e">
-  <title>Lesson 1 Companion — The Latin Experiment</title>
+  <meta name="description" content="An ordinary Catholic beginner attempts to learn the language of the Western Church through Father William Most's natural method.">
+  <meta name="theme-color" content="#ad4a30">
+  <title>The Latin Experiment</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to lesson</a>
-
-  <header class="site-header" data-header>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="The Latin Experiment home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" role="img">
-            <path d="M24 5c7 5 12 12 12 20 0 9-5 15-12 18-7-3-12-9-12-18C12 17 17 10 24 5Z" fill="currentColor" opacity=".16"/>
-            <path d="M24 10v28M16 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M9 31c5-1 8 0 11 4M39 31c-5-1-8 0-11 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
+      <a class="brand" href="index.html" aria-label="The Latin Experiment home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5c7 5 12 12 12 20 0 9-5 15-12 18-7-3-12-9-12-18C12 17 17 10 24 5Z" fill="currentColor" opacity=".16"/><path d="M24 10v28M16 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M9 31c5-1 8 0 11 4M39 31c-5-1-8 0-11 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span class="brand-copy"><small>The Catholic Experiment</small><strong>The Latin Experiment</strong></span>
       </a>
-
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
-      </button>
-
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a class="active" href="#lesson">Course</a>
-        <a href="#experiment">Experiment</a>
-        <a href="#practice">Practice</a>
-        <a href="#sources">Sources</a>
+        <a aria-current="page" href="index.html">Home</a>
+        <a href="before-course.html">Begin</a>
+        <a href="course.html">The course</a>
+        <a href="lesson-01.html">Lesson 1</a>
+        <a href="about.html">About</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section id="top" class="hero">
-      <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-      <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+    <section class="hero">
       <div class="shell hero-grid">
         <div class="hero-copy reveal">
-          <div class="status-row">
-            <span class="eyebrow">Module 1 · Companion 01</span>
-            <span class="draft-pill">Visual pilot</span>
-          </div>
-          <h1>The first Latin sentence is already doing <em>real work.</em></h1>
-          <p class="standfirst">A friendly companion to Father William Most’s first lesson: read the source, notice who did what, then return here to make the pattern stick.</p>
+          <span class="eyebrow">A beginner's Catholic learning journey</span>
+          <h1>Can I learn the language of the Church?</h1>
+          <p class="standfirst">I am not a Latin scholar, a teacher or a liturgical campaigner. I am an ordinary British-Irish Catholic with a passion for the Church, wondering whether a supposedly “dead” language can become alive enough for me to understand, speak and pray.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://archive.org/details/Latin_method_Most_1stYear" target="_blank" rel="noopener noreferrer">
-              Open the source lesson <span aria-hidden="true">↗</span>
-            </a>
-            <a class="button button-ghost" href="#lesson">Start the companion <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="before-course.html">Begin with me <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="course.html">Meet the source course</a>
           </div>
-          <p class="source-note"><strong>Source first:</strong> TLE supports Father Most’s course; it does not replace or rebrand it.</p>
         </div>
-
-        <div class="hero-visual reveal" aria-label="Warm photograph of a monastery courtyard with a layered Latin learning card.">
+        <div class="hero-visual reveal">
           <figure class="photo-card">
             <img src="https://images.pexels.com/photos/36802399/pexels-photo-36802399.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="A sunlit historic monastery courtyard with stone arches and greenery.">
-            <figcaption>Monreale, Sicily · photograph by Antoaneta Mehandova / Pexels</figcaption>
+            <figcaption>Monreale, Sicily · Antoaneta Mehandova / Pexels</figcaption>
           </figure>
-          <div class="latin-card" aria-hidden="true">
-            <span class="latin-card-kicker">TLE example</span>
-            <strong>Maria rosam portāvit.</strong>
-            <span>Mary carried a rose.</span>
-            <div class="syntax-dots"><i></i><i></i><i></i></div>
-          </div>
-          <svg class="hero-sun" viewBox="0 0 180 180" aria-hidden="true">
-            <circle cx="90" cy="90" r="34" fill="currentColor"/>
-            <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
-              <path d="M90 10v26M90 144v26M10 90h26M144 90h26M33 33l19 19M128 128l19 19M147 33l-19 19M52 128l-19 19"/>
-            </g>
-          </svg>
+          <div class="floating-card"><small>The challenge</small><strong>Complete Father Most’s natural-method course</strong><span>—and leave an honest trail for the next beginner.</span></div>
         </div>
       </div>
-
-      <div class="shell quick-facts reveal" aria-label="Lesson at a glance">
-        <div><span>01</span><strong>Read first</strong><small>Father Most remains the course spine.</small></div>
-        <div><span>02</span><strong>Notice the pattern</strong><small>Who acted, what received the action.</small></div>
-        <div><span>03</span><strong>Try it yourself</strong><small>Short practice, then reveal guidance.</small></div>
+      <div class="shell route-strip reveal">
+        <a href="before-course.html"><span>01</span><strong>Prepare</strong><small>The few basics I needed before Lesson 1.</small></a>
+        <a href="lesson-01.html"><span>02</span><strong>Follow the course</strong><small>Study Father Most, then return for the companion.</small></a>
+        <a href="about.html"><span>03</span><strong>Follow the experiment</strong><small>Read what surprised me, where I stumbled and what helped.</small></a>
       </div>
     </section>
 
-    <section id="lesson" class="section lesson-intro">
-      <div class="shell two-column">
+    <section class="section">
+      <div class="shell intro-grid">
         <div class="section-heading reveal">
-          <span class="eyebrow">Before you begin</span>
-          <h2>Let the Latin arrive before the grammar does.</h2>
-          <p>Father Most’s natural method gets you reading from the beginning. This companion slows down only long enough to help you see the machinery beneath the sentence.</p>
+          <span class="eyebrow">Why this experiment?</span>
+          <h2>Latin is not merely an aesthetic.</h2>
+          <p>I encounter it in the Mass, sacred music, prayers, inscriptions, Church documents and the history of Western Christianity. I want to understand more than isolated phrases—and to see whether a busy adult can learn through steady, ordinary work.</p>
+          <p>This is deliberately not a traditionalist project. The Church has prayed in many languages from the beginning. My interest is simpler: Latin is part of our inheritance, and I would like to know it rather than admire it from a distance.</p>
         </div>
-        <div class="route-card reveal">
-          <div class="route-step"><span>1</span><div><strong>Prepare</strong><p>Have a notebook ready. Read aloud, even if your pronunciation is not yet perfect.</p></div></div>
-          <div class="route-line" aria-hidden="true"></div>
-          <div class="route-step"><span>2</span><div><strong>Study Father Most</strong><p>Work through Lesson 1 in the source book. Do not begin by translating every word mechanically.</p></div></div>
-          <div class="route-line" aria-hidden="true"></div>
-          <div class="route-step"><span>3</span><div><strong>Return here</strong><p>Use the explanation, experiment note and practice below to consolidate what you noticed.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section source-lesson-section">
-      <div class="shell">
-        <article class="source-lesson reveal">
-          <div class="source-lesson-art" aria-hidden="true">
-            <svg viewBox="0 0 420 320">
-              <path d="M54 62c52-23 105-16 156 20 51-36 104-43 156-20v202c-52-23-105-16-156 20-51-36-104-43-156-20V62Z" fill="#fff8e8" stroke="currentColor" stroke-width="4"/>
-              <path d="M210 82v202" stroke="currentColor" stroke-width="4"/>
-              <path d="M82 108h92M82 139h105M82 170h78M82 201h100M238 108h92M238 139h75M238 170h102M238 201h86" stroke="currentColor" stroke-width="9" stroke-linecap="round" opacity=".25"/>
-              <path d="M116 242c28-12 54-9 78 7M304 242c-28-12-54-9-78 7" fill="none" stroke="#d47a43" stroke-width="7" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="source-lesson-copy">
-            <span class="label label-source">Linked source lesson</span>
-            <h2>Father Most, <cite>Latin by the Natural Method</cite>, Lesson 1</h2>
-            <p>The first lesson introduces a compact but powerful sentence pattern: the third-person singular perfect active, with nominative and accusative singular forms from the first three declensions.</p>
-            <div class="source-actions">
-              <a class="text-link" href="https://archive.org/details/Latin_method_Most_1stYear" target="_blank" rel="noopener noreferrer">Read the public-domain scan <span aria-hidden="true">↗</span></a>
-              <a class="text-link" href="https://learnchurchlatin.com/2021/09/04/lnm-readings-some-recordings/" target="_blank" rel="noopener noreferrer">Hear a Lesson 1 recording <span aria-hidden="true">↗</span></a>
-            </div>
-            <p class="fine-print">This page uses original TLE explanations and examples. It does not reproduce Father Most’s lesson text.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section learning-map-section">
-      <div class="shell">
-        <div class="section-heading centred reveal">
-          <span class="eyebrow">The learning map</span>
-          <h2>Three things are happening at once.</h2>
-          <p>Do not try to memorise an entire grammar table yet. First, notice the jobs the words are doing.</p>
-        </div>
-
-        <div class="learning-grid">
-          <article class="learning-card terracotta reveal">
-            <span class="number">01</span>
-            <div class="mini-icon" aria-hidden="true">●</div>
-            <h3>The doer</h3>
-            <p>The nominative form tells you who or what performs the action.</p>
-            <div class="word-chip"><strong>Maria</strong><span>who acted?</span></div>
-          </article>
-          <article class="learning-card olive reveal">
-            <span class="number">02</span>
-            <div class="mini-icon" aria-hidden="true">→</div>
-            <h3>The action</h3>
-            <p>The perfect active verb reports a completed action: someone did something.</p>
-            <div class="word-chip"><strong>portāvit</strong><span>carried</span></div>
-          </article>
-          <article class="learning-card blue reveal">
-            <span class="number">03</span>
-            <div class="mini-icon" aria-hidden="true">◐</div>
-            <h3>The receiver</h3>
-            <p>The accusative form marks the person or thing directly affected by the action.</p>
-            <div class="word-chip"><strong>rosam</strong><span>carried what?</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section sentence-lab-section">
-      <div class="shell sentence-lab reveal">
-        <div class="sentence-copy">
-          <span class="label label-tle">TLE explanation</span>
-          <h2>Build the sentence by asking two ordinary questions.</h2>
-          <p>Latin endings carry information that English often communicates through word order. Begin with meaning, then notice the endings.</p>
-          <ul class="question-list">
-            <li><span>Who did it?</span> Look for the nominative.</li>
-            <li><span>What received the action?</span> Look for the accusative.</li>
-          </ul>
-        </div>
-        <div class="sentence-stage" aria-label="Interactive sentence diagram for Maria rosam portavit.">
-          <div class="sentence-token token-subject" tabindex="0"><small>nominative</small><strong>Maria</strong><span>the doer</span></div>
-          <div class="sentence-token token-object" tabindex="0"><small>accusative</small><strong>rosam</strong><span>the receiver</span></div>
-          <div class="sentence-token token-verb" tabindex="0"><small>perfect active</small><strong>portāvit</strong><span>completed action</span></div>
-          <div class="translation-strip"><span>Natural English:</span> Mary carried a rose.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experiment" class="section experiment-section">
-      <div class="shell experiment-grid">
-        <article class="experiment-card reveal">
-          <div class="experiment-heading">
-            <span class="label label-personal">From the experiment</span>
-            <span class="date-stamp">Founder draft</span>
-          </div>
-          <h2>Alan’s first encounter with the lesson</h2>
-          <p class="placeholder-intro">This panel is deliberately honest: the personal journal entry will be written after Alan studies Lesson 1. It will not be invented on his behalf.</p>
-          <div class="journal-prompts">
-            <div><span>What surprised me</span><p>Which part felt more intuitive than expected?</p></div>
-            <div><span>Where I stumbled</span><p>Which form or explanation needed a second look?</p></div>
-            <div><span>What helped</span><p>Which comparison, sound or visual made the idea click?</p></div>
-          </div>
-          <a class="text-link muted-link" href="#checkpoint">Continue without the journal entry for now <span aria-hidden="true">↓</span></a>
-        </article>
-
-        <aside class="notebook-visual reveal" aria-label="Illustration of an open learning notebook.">
-          <div class="notebook-page">
-            <div class="notebook-binding"></div>
-            <span class="hand-note">Lectio I</span>
-            <h3>Today I noticed…</h3>
-            <div class="writing-line long"></div><div class="writing-line"></div><div class="writing-line medium"></div>
-            <div class="sticky-note">The endings are clues, not decoration.</div>
-            <div class="little-flower" aria-hidden="true">✦</div>
-          </div>
+        <aside class="callout reveal">
+          <span class="eyebrow" style="color:#ffe0a9">The wider Catholic context</span>
+          <h3>The Church has called herself a custodian and promoter of Latin.</h3>
+          <p>TLE treats that inheritance as something to explore intelligently and generously—not as a weapon in arguments about identity or liturgy.</p>
+          <a class="button button-light" href="https://www.vatican.va/content/benedict-xvi/en/motu_proprio/documents/hf_ben-xvi_motu-proprio_20121110_latina-lingua.html" target="_blank" rel="noopener noreferrer">Read <cite>Latina Lingua</cite> ↗</a>
         </aside>
       </div>
     </section>
 
-    <section class="section closer-look-section">
+    <section class="section band">
       <div class="shell">
-        <div class="section-heading reveal">
-          <span class="eyebrow">A closer look</span>
-          <h2>Open only what helps.</h2>
-          <p>The main route is enough for a first pass. These notes are here when a question is getting in the way.</p>
-        </div>
-
-        <div class="accordion-list reveal">
-          <details>
-            <summary><span>Why begin with a completed action?</span><i aria-hidden="true">+</i></summary>
-            <div class="detail-body"><p>A completed action gives a beginner a concrete mini-story: somebody acted and something was affected. The verb ending can be recognised as a single unit before the full verb system is introduced.</p></div>
-          </details>
-          <details>
-            <summary><span>Do Latin sentences always follow this word order?</span><i aria-hidden="true">+</i></summary>
-            <div class="detail-body"><p>No. Latin word order is flexible because endings identify grammatical roles. TLE examples may use a clear beginner-friendly order, but the endings—not position alone—tell you what each noun is doing.</p></div>
-          </details>
-          <details>
-            <summary><span>What do “first, second and third declension” mean?</span><i aria-hidden="true">+</i></summary>
-            <div class="detail-body"><p>They are families of noun forms. Nouns in each family change their endings in recognisable patterns. Lesson 1 lets you meet singular forms from three families in actual sentences before asking you to master full tables.</p></div>
-          </details>
+        <div class="section-heading reveal"><span class="eyebrow">The Julie & Julia idea</span><h2>Father Most wrote the course. I am attempting the journey.</h2></div>
+        <div class="band-grid">
+          <article class="band-card reveal"><h3>The source remains the source</h3><p>Father William Most’s course keeps its name, sequence and authorship. TLE explains why I chose it, links to lawful ways of finding it, and never quietly republishes it as my own.</p></article>
+          <article class="band-card reveal"><h3>The experiment supplies the human trail</h3><p>I record what I understood, what frightened me, the terminology I had to look up and the connections I began to notice. The companion is built around real beginner needs rather than an imaginary perfect student.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="practice" class="section practice-section">
+    <section class="section">
       <div class="shell">
-        <div class="practice-heading reveal">
-          <div>
-            <span class="label label-practice">TLE practice</span>
-            <h2>Try first. Reveal second.</h2>
-          </div>
-          <p>These are original TLE examples, not sentences reproduced from Father Most.</p>
-        </div>
-
-        <div class="practice-grid">
-          <article class="practice-card reveal">
-            <span class="practice-number">01</span>
-            <h3>Petrus librum portāvit.</h3>
-            <p>Identify the doer and the receiver.</p>
-            <button class="reveal-answer" type="button" aria-expanded="false">Reveal guidance</button>
-            <div class="answer" hidden><strong>Doer:</strong> Petrus. <strong>Receiver:</strong> librum. The completed action is portāvit.</div>
-          </article>
-          <article class="practice-card reveal">
-            <span class="practice-number">02</span>
-            <h3>Rēx lēgem servāvit.</h3>
-            <p>Which word is nominative, and which is accusative?</p>
-            <button class="reveal-answer" type="button" aria-expanded="false">Reveal guidance</button>
-            <div class="answer" hidden><strong>Nominative:</strong> rēx. <strong>Accusative:</strong> lēgem. Both are third-declension forms.</div>
-          </article>
-          <article class="practice-card reveal">
-            <span class="practice-number">03</span>
-            <h3>Translate the shape, not just the words.</h3>
-            <p>“The girl praised the poet.” Who did what to whom?</p>
-            <button class="reveal-answer" type="button" aria-expanded="false">Reveal guidance</button>
-            <div class="answer" hidden>The girl is the doer; the poet receives the action; “praised” is a completed action. A later step is choosing the correct Latin forms.</div>
-          </article>
+        <div class="section-heading centred reveal"><span class="eyebrow">How a lesson works</span><h2>One source, one encounter, one useful bridge.</h2></div>
+        <div class="feature-grid">
+          <article class="feature-card reveal"><span>1</span><h3>Study Father Most</h3><p>Use the original course as the spine. TLE points to it and explains the learning task without reproducing the full lesson.</p></article>
+          <article class="feature-card reveal"><span>2</span><h3>Read my encounter</h3><p>I write in the first person about what surprised me, where I stumbled and what I still do not understand.</p></article>
+          <article class="feature-card reveal"><span>3</span><h3>Try the bridge</h3><p>Plain-language explanations and carefully labelled TLE practice help the beginner return to the source with greater confidence.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="checkpoint" class="section checkpoint-section">
-      <div class="shell checkpoint-grid">
-        <div class="checkpoint-copy reveal">
-          <span class="eyebrow">Lesson checkpoint</span>
-          <h2>Enough for today means you can see the shape.</h2>
-          <p>This is not an exam. Mark what is true now; leave uncertainty visible rather than pretending mastery.</p>
-        </div>
-        <div class="checklist reveal" data-checklist>
-          <label><input type="checkbox"><span>I studied Father Most’s Lesson 1.</span></label>
-          <label><input type="checkbox"><span>I can ask “who did it?” and “what received the action?”</span></label>
-          <label><input type="checkbox"><span>I noticed that endings carry grammatical information.</span></label>
-          <label><input type="checkbox"><span>I wrote down one uncertainty to revisit.</span></label>
-          <div class="progress-line"><span data-progress></span></div>
-          <p class="progress-copy" data-progress-copy>0 of 4 checked — begin when ready.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section next-section">
+    <section class="section">
       <div class="shell next-card reveal">
-        <div>
-          <span class="eyebrow light">Next on the route</span>
-          <h2>Reread the source before moving on.</h2>
-          <p>The natural method works through repeated contact. Return to the Latin passage once more and see whether the roles become easier to spot.</p>
-        </div>
-        <a class="button button-light" href="https://archive.org/details/Latin_method_Most_1stYear" target="_blank" rel="noopener noreferrer">Return to Father Most <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-
-    <section id="sources" class="section sources-section">
-      <div class="shell sources-grid">
-        <div class="section-heading reveal">
-          <span class="eyebrow">Sources and further reading</span>
-          <h2>Light, visible sourcing.</h2>
-          <p>The source course, supporting explanation and TLE’s own synthesis remain distinct.</p>
-        </div>
-        <div class="source-list reveal">
-          <a href="https://archive.org/details/Latin_method_Most_1stYear" target="_blank" rel="noopener noreferrer"><span>Primary source</span><strong>William G. Most, <cite>Latin by the Natural Method</cite>, First Year</strong><small>Internet Archive scan; item page marks the content public domain and states educational reuse terms for the digitisation.</small></a>
-          <a href="https://learnchurchlatin.com/2019/06/21/latin-by-the-natural-method-vol-1-fr-william-most/" target="_blank" rel="noopener noreferrer"><span>Accessible guide</span><strong>Learn Church Latin: overview and study resources</strong><small>Course background, recordings and supporting materials.</small></a>
-          <a href="https://learnchurchlatin.com/2019/05/20/ecclesiastical-latin-pronunciation-guide/" target="_blank" rel="noopener noreferrer"><span>Pronunciation support</span><strong>Ecclesiastical Latin pronunciation guide</strong><small>A practical external starting point; future TLE pronunciation notes will identify variation where it matters.</small></a>
-        </div>
+        <div><span class="eyebrow" style="color:#ffd59d">The first practical step</span><h2>Start before Lesson 1.</h2><p>A short orientation covers pronunciation, cases, declensions and the notebook choice—just enough to stop unfamiliar terminology becoming the first obstacle.</p></div>
+        <a class="button button-light" href="before-course.html">Open Lesson 0 →</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div>
-        <a class="brand footer-brand" href="#top"><span class="brand-copy"><small>The Catholic Experiment</small><strong>The Latin Experiment</strong></span></a>
-        <p>A British and Irish Catholic learning experiment: accessible, sourced and still learning in public.</p>
-      </div>
-      <div class="footer-note">
-        <strong>Prototype status</strong>
-        <p>Content, visual identity and structure are drafts for founder review. Nothing here is yet the permanent project baseline.</p>
-      </div>
+      <div><a class="brand" href="index.html"><span class="brand-copy"><small>The Catholic Experiment</small><strong>The Latin Experiment</strong></span></a><p>A British-Irish Catholic beginner learning Ecclesiastical Latin in public: accessible, sourced and willing to be corrected.</p></div>
+      <div class="footer-links"><a href="before-course.html">Begin</a><a href="course.html">About Father Most’s course</a><a href="lesson-01.html">Lesson 1 companion</a><a href="about.html">About the experiment</a></div>
     </div>
-    <div class="shell footer-bottom"><span>© 2026 Alan Gallagher</span><span>AI-assisted draft · requires human and source checking</span></div>
+    <div class="shell footer-bottom"><span>© 2026 Alan Gallagher</span><span>Prototype · AI-assisted and subject to human/source checking</span></div>
   </footer>
 </body>
 </html>
