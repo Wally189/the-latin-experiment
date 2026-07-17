@@ -23,6 +23,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build isolated page views
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          page = Path('index.html')
+          html = page.read_text(encoding='utf-8')
+          html = html.replace(
+              '</style>',
+              '</style><link rel="stylesheet" href="view-router.css">',
+              1,
+          )
+          html = html.replace(
+              '</html>',
+              '<script src="view-router.js" defer></script></html>',
+              1,
+          )
+          page.write_text(html, encoding='utf-8')
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
