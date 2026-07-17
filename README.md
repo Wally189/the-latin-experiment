@@ -1,26 +1,24 @@
 # The Catholic Experiment
 
-## Current prototype
+Current prototype: **The Latin Experiment**, a responsive static site published through GitHub Pages.
 
-The repository now contains the first integrated visual pilot for **The Latin Experiment**: a companion page for Father William Most's *Latin by the Natural Method*, Lesson 1.
+## Live structure
 
-The pilot tests:
+- `index.html` — first-person homepage and invitation
+- `before-course.html` — Lesson 0 / beginner orientation
+- `course.html` — Father Most source-course explanation and copyright boundary
+- `lesson-01.html` — revised Lesson 1 companion and first-person experiment journal
+- `about.html` — Alan's purpose, viewpoint and editorial boundaries
+- `learning-notebook.md` — learner-owned progress and reflection template
+- `styles.css` — shared visual system
+- `script.js` — navigation, reveal controls and on-device progress saving/export
 
-- a warm Mediterranean visual direction;
-- mixed photography and original graphic illustration;
-- a source-first lesson journey;
-- clearly separated source, TLE explanation, practice and founder-journal content;
-- responsive mobile and desktop layouts;
-- a simple GitHub Pages deployment.
+## Editorial model
 
-## Prototype status
+Father William Most provides the source course. Alan Gallagher provides the lived learning experiment. TLE provides original beginner support, explanation and consolidation without reproducing the complete source lessons.
 
-This is a founder-review draft. Content, visual identity, page structure and interaction are expected to change.
+## Status
 
-## View locally
+This remains a founder-review prototype. Content, Latin, legal wording, visual identity and navigation can all change page by page.
 
-Open `index.html` in a browser, or run a simple local web server.
-
-## Archive
-
-The previous website and all of its code are preserved on the `archive-pre-reset-2026-07-17` branch.
+The previous website remains preserved on the `archive-pre-reset-2026-07-17` branch.
