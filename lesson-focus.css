@@ -1,0 +1,65 @@
+/* Lesson focus mode */
+.lesson-focus-actions{
+  position:sticky;
+  top:0;
+  z-index:15;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:10px;
+  margin:-10px 0 18px;
+  padding:10px 0;
+  background:linear-gradient(#fff 76%,rgba(255,255,255,0));
+}
+.lesson-focus-actions .btn{
+  font:inherit;
+}
+.lesson-focus-actions .btn-secondary{
+  background:#fff;
+  border:1px solid #cfc4bd;
+  color:#190806;
+}
+.lesson-focus-actions .btn-complete{
+  background:#2f6b50;
+  color:#fff;
+}
+.course.lesson-focus{
+  grid-template-columns:1fr;
+}
+.course.lesson-focus .catalog{
+  display:none;
+}
+.course.lesson-focus .detail{
+  width:min(100%,1100px);
+  margin:0 auto;
+  padding:34px clamp(22px,5vw,72px) 70px;
+}
+.course.lesson-focus .pic{
+  height:min(46vw,430px);
+}
+.course.lesson-focus .lesson-open-button{
+  display:none;
+}
+.course:not(.lesson-focus) .lesson-back-button,
+.course:not(.lesson-focus) .lesson-complete-button{
+  display:none;
+}
+@media(max-width:800px){
+  .lesson-focus-actions{
+    top:62px;
+    justify-content:stretch;
+    background:#fff;
+    margin:-4px 0 14px;
+  }
+  .lesson-focus-actions .btn{
+    flex:1 1 160px;
+    text-align:center;
+  }
+  .course.lesson-focus .detail{
+    padding:18px 18px 55px;
+  }
+  .course.lesson-focus .pic{
+    height:46vw;
+    min-height:190px;
+  }
+}
