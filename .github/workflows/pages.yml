@@ -39,12 +39,12 @@ jobs:
 
           html = html.replace(
               '</style>',
-              '</style><link rel="stylesheet" href="view-router.css?v=3"><link rel="stylesheet" href="lesson-focus.css?v=3"><link rel="stylesheet" href="lesson-one.css?v=3">',
+              '</style><link rel="stylesheet" href="view-router.css?v=4"><link rel="stylesheet" href="lesson-focus.css?v=4"><link rel="stylesheet" href="lesson-one.css?v=4"><link rel="stylesheet" href="lesson-journal.css?v=1">',
               1,
           )
           html = html.replace(
               '</html>',
-              '<script src="view-router.js?v=3" defer></script><script src="lesson-one.js?v=3" defer></script><script src="lesson-focus.js?v=3" defer></script></html>',
+              '<script src="view-router.js?v=4" defer></script><script src="lesson-one.js?v=4" defer></script><script src="lesson-journal.js?v=1" defer></script><script src="lesson-focus.js?v=4" defer></script></html>',
               1,
           )
           page.write_text(html, encoding='utf-8')
