@@ -1,0 +1,30 @@
+/* Ensure exactly one page view is visible at a time. */
+[data-v][hidden] {
+  display: none !important;
+}
+
+.main {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+[data-v]:not([hidden]) {
+  animation: view-in 160ms ease-out;
+}
+
+@keyframes view-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  [data-v]:not([hidden]) {
+    min-height: calc(100vh - 86px);
+  }
+}
