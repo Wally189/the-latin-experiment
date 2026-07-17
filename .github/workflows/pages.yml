@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build isolated page views
+      - name: Build integrated Lesson I page
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -39,12 +39,12 @@ jobs:
 
           html = html.replace(
               '</style>',
-              '</style><link rel="stylesheet" href="view-router.css"><link rel="stylesheet" href="lesson-focus.css?v=2"><link rel="stylesheet" href="lesson-one.css?v=1">',
+              '</style><link rel="stylesheet" href="view-router.css?v=3"><link rel="stylesheet" href="lesson-focus.css?v=3"><link rel="stylesheet" href="lesson-one.css?v=3">',
               1,
           )
           html = html.replace(
               '</html>',
-              '<script src="view-router.js" defer></script><script src="lesson-one.js?v=1" defer></script><script src="lesson-focus.js?v=2" defer></script></html>',
+              '<script src="view-router.js?v=3" defer></script><script src="lesson-one.js?v=3" defer></script><script src="lesson-focus.js?v=3" defer></script></html>',
               1,
           )
           page.write_text(html, encoding='utf-8')
