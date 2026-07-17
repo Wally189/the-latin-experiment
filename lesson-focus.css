@@ -45,35 +45,64 @@
   display:none;
 }
 
-/* Mobile lesson catalogue accordion */
-.lesson-catalogue-toggle{
+/* Mobile lesson catalogue controls */
+.lesson-catalogue-controls{
   display:none;
 }
 
 @media(max-width:800px){
-  .lesson-catalogue-toggle{
+  .lesson-catalogue-controls{
     display:flex;
-    width:100%;
     align-items:center;
     justify-content:space-between;
     gap:12px;
     padding:14px 16px;
-    border:0;
-    border-bottom:1px solid rgba(255,255,255,.2);
     background:#170806;
-    color:#fff;
-    font:700 1rem/1.2 inherit;
-    text-align:left;
-    cursor:pointer;
+    border-bottom:1px solid rgba(255,255,255,.16);
   }
 
-  .lesson-catalogue-toggle::after{
+  .lesson-catalogue-controls button{
+    min-height:46px;
+    border-radius:999px;
+    padding:11px 18px;
+    font:700 .98rem/1.2 inherit;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+
+  .lesson-catalogue-controls button:active{
+    transform:translateY(1px);
+  }
+
+  .lesson-catalogue-controls button:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:3px;
+  }
+
+  .lesson-catalogue-label{
+    border:1px solid rgba(255,255,255,.45);
+    background:#fff;
+    color:#190806;
+  }
+
+  .lesson-catalogue-action{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    border:1px solid #d9aa32;
+    background:#d9aa32;
+    color:#190806;
+    box-shadow:0 5px 14px rgba(0,0,0,.22);
+  }
+
+  .lesson-catalogue-action::after{
     content:"▴";
-    font-size:1rem;
+    font-size:.9rem;
     transition:transform .2s ease;
   }
 
-  .course.mobile-catalogue-collapsed .lesson-catalogue-toggle::after{
+  .course.mobile-catalogue-collapsed .lesson-catalogue-action::after{
     transform:rotate(180deg);
   }
 
@@ -81,7 +110,7 @@
     display:none;
   }
 
-  .course.lesson-focus .lesson-catalogue-toggle{
+  .course.lesson-focus .lesson-catalogue-controls{
     display:none;
   }
 
