@@ -23,9 +23,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build unchanged site shell and Course page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          course = Path('index.html').read_text(encoding='utf-8')
+          replacements = {
+              '<a href="#">⌂ Home</a>': '<a href="index.html#home">⌂ Home</a>',
+              '<a href="#" aria-current="page">▤ Course</a>': '<a href="course.html" aria-current="page">▤ Course</a>',
+              '<a href="#">▣ Schedule</a>': '<a href="index.html#schedule">▣ Schedule</a>',
+              '<a href="#">▧ Materials</a>': '<a href="index.html#materials">▧ Materials</a>',
+              '<a href="#">✦ Certificates</a>': '<a href="index.html#certificates">✦ Certificates</a>',
+              '<a href="#">✉ Contact</a>': '<a href="index.html#contact">✉ Contact</a>',
+          }
+          for old, new in replacements.items():
+              if old not in course:
+                  raise SystemExit(f'Course navigation item not found: {old}')
+              course = course.replace(old, new, 1)
+          Path('course.html').write_text(course, encoding='utf-8')
+
+          html = Path('site-shell.html').read_text(encoding='utf-8')
+          old_cards = '<div class=cards><div class=card><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></div><div class=card style="--c:#1c3f8f"><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></div><div class=card style="--c:#d6a43a"><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></div></div>'
+          new_cards = '<div class="cards home-links"><a class=card href=course.html><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></a><a class=card style="--c:#1c3f8f" href=#schedule><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></a><a class=card style="--c:#d6a43a" href=#materials><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></a><a class=card style="--c:#6b2d70" href=#certificates><h2>Certificates</h2><p>See learning milestones, badges and indicative ability stages.</p></a><a class=card style="--c:#2f6b50" href=#contact><h2>Contact</h2><p>Send a question, correction or thoughtful piece of feedback.</p></a></div>'
+          if old_cards not in html:
+              raise SystemExit('Home card block was not found')
+          html = html.replace(old_cards, new_cards, 1)
+          html = html.replace('<a href=#course data-n=course>', '<a href=course.html data-n=course>', 1)
+          html = html.replace('<a class=btn href=#course>', '<a class=btn href=course.html>', 1)
+          html = html.replace('</style>', '</style><link rel="stylesheet" href="view-router.css">', 1)
+          html = html.replace('</html>', '<script src="view-router.js" defer></script></html>', 1)
+          Path('index.html').write_text(html, encoding='utf-8')
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload site exactly as committed
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
