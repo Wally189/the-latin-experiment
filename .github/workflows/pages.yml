@@ -23,35 +23,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build integrated Lesson I page
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          page = Path('index.html')
-          html = page.read_text(encoding='utf-8')
-
-          old_cards = '<div class=cards><div class=card><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></div><div class=card style="--c:#1c3f8f"><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></div><div class=card style="--c:#d6a43a"><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></div></div>'
-          new_cards = '<div class="cards home-links"><a class=card href=#course><h2>Course</h2><p>Browse lessons, examinations and learning details.</p></a><a class=card style="--c:#1c3f8f" href=#schedule><h2>Schedule</h2><p>Set a start date and build a realistic goal.</p></a><a class=card style="--c:#d6a43a" href=#materials><h2>Materials</h2><p>Collect texts, grammar notes and practice aids.</p></a><a class=card style="--c:#6b2d70" href=#certificates><h2>Certificates</h2><p>See learning milestones, badges and indicative ability stages.</p></a><a class=card style="--c:#2f6b50" href=#contact><h2>Contact</h2><p>Send a question, correction or thoughtful piece of feedback.</p></a></div>'
-          if old_cards not in html:
-              raise SystemExit('Home card block was not found')
-          html = html.replace(old_cards, new_cards, 1)
-
-          html = html.replace(
-              '</style>',
-              '</style><link rel="stylesheet" href="view-router.css?v=4"><link rel="stylesheet" href="lesson-focus.css?v=4"><link rel="stylesheet" href="lesson-one.css?v=4"><link rel="stylesheet" href="lesson-journal.css?v=1">',
-              1,
-          )
-          html = html.replace(
-              '</html>',
-              '<script src="view-router.js?v=4" defer></script><script src="lesson-one.js?v=4" defer></script><script src="lesson-journal.js?v=1" defer></script><script src="lesson-focus.js?v=4" defer></script></html>',
-              1,
-          )
-          page.write_text(html, encoding='utf-8')
-          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: Upload site exactly as committed
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
