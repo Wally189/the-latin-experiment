@@ -11,15 +11,21 @@
 
   detail.setAttribute('tabindex', '-1');
 
-  const catalogueToggle = document.createElement('button');
-  catalogueToggle.type = 'button';
-  catalogueToggle.className = 'lesson-catalogue-toggle';
-  catalogueToggle.setAttribute('aria-expanded', 'true');
-  catalogueToggle.setAttribute('aria-controls', 'list');
-  catalogueToggle.innerHTML = '<span>Lessons</span><span class="catalogue-state">Hide lessons</span>';
-  courseView.insertBefore(catalogueToggle, catalogue);
+  const catalogueControls = document.createElement('div');
+  catalogueControls.className = 'lesson-catalogue-controls';
+  catalogueControls.setAttribute('aria-label', 'Lesson catalogue controls');
+  catalogueControls.innerHTML = `
+    <button type="button" class="lesson-catalogue-label" aria-expanded="true" aria-controls="list">
+      Lessons
+    </button>
+    <button type="button" class="lesson-catalogue-action" aria-expanded="true" aria-controls="list">
+      Hide lessons
+    </button>
+  `;
+  courseView.insertBefore(catalogueControls, catalogue);
 
-  const catalogueState = catalogueToggle.querySelector('.catalogue-state');
+  const catalogueLabelButton = catalogueControls.querySelector('.lesson-catalogue-label');
+  const catalogueActionButton = catalogueControls.querySelector('.lesson-catalogue-action');
 
   const actions = document.createElement('div');
   actions.className = 'lesson-focus-actions';
@@ -49,14 +55,20 @@
 
   function setCatalogueCollapsed(collapsed, moveToLesson = false) {
     courseView.classList.toggle('mobile-catalogue-collapsed', collapsed);
-    catalogueToggle.setAttribute('aria-expanded', String(!collapsed));
-    catalogueState.textContent = collapsed ? 'Show lessons' : 'Hide lessons';
+    catalogueLabelButton.setAttribute('aria-expanded', String(!collapsed));
+    catalogueActionButton.setAttribute('aria-expanded', String(!collapsed));
+    catalogueActionButton.textContent = collapsed ? 'Show lessons' : 'Hide lessons';
 
     if (collapsed && moveToLesson && isMobile()) {
       requestAnimationFrame(() => {
         detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
+  }
+
+  function toggleCatalogue() {
+    const collapsed = courseView.classList.contains('mobile-catalogue-collapsed');
+    setCatalogueCollapsed(!collapsed);
   }
 
   function updateControlLabels() {
@@ -111,11 +123,8 @@
     closeLesson();
   }
 
-  catalogueToggle.addEventListener('click', () => {
-    const collapsed = courseView.classList.contains('mobile-catalogue-collapsed');
-    setCatalogueCollapsed(!collapsed);
-  });
-
+  catalogueLabelButton.addEventListener('click', toggleCatalogue);
+  catalogueActionButton.addEventListener('click', toggleCatalogue);
   openButton.addEventListener('click', openLesson);
   backButton.addEventListener('click', closeLesson);
   completeButton.addEventListener('click', completeAndReturn);
