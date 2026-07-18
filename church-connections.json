@@ -1,0 +1,23 @@
+{
+  "connections": [
+    {
+      "lesson": 1,
+      "title": "Agnus or agnum?",
+      "teaser": "See how Lesson I appears in the Mass.",
+      "latin": "Agnus Dei, qui tollis peccata mundi…",
+      "english": "Lamb of God, who takes away the sins of the world…",
+      "explanation": [
+        "In Father Most’s lesson, agnum means ‘lamb’ when the lamb is receiving the action.",
+        "In Agnus Dei, the form is agnus because the Lamb of God is the one performing the action: taking away the sins of the world.",
+        "The change is small, but it shows why Latin endings matter. They help tell us what job a word is doing in the sentence."
+      ],
+      "forms": [
+        {"latin": "agnus", "meaning": "the lamb is doing something"},
+        {"latin": "agnum", "meaning": "something is being done to the lamb"}
+      ],
+      "exercise": "Can you now see why the prayer begins with agnus rather than agnum?",
+      "sourceLabel": "See the Agnus Dei in an official Vatican liturgical resource",
+      "sourceUrl": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20041014_anno-eucaristia_en.html"
+    }
+  ]
+}
