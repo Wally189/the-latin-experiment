@@ -147,3 +147,5 @@
   `;
   document.head.appendChild(style);
 })();
+
+import('./certificates.js').catch(() => {});
