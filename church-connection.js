@@ -1,45 +1,60 @@
 (() => {
-  const card = [...document.querySelectorAll('.side-card')].find(item => item.querySelector('h3')?.textContent.trim() === 'In the Church');
-  if (!card) return;
+  let connections = [];
 
-  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[character]));
+
+  function currentLessonNumber() {
+    const number = Number(document.querySelector('.lesson-page')?.dataset.lessonNumber || window.LatinLessonTemplate?.currentLesson?.number || 1);
+    return Number.isInteger(number) && number > 0 ? number : 1;
+  }
+
+  function render() {
+    const card = document.querySelector('[data-church-connection]')
+      || [...document.querySelectorAll('.side-card')].find(item => item.querySelector('h3')?.textContent.trim() === 'In the Church');
+    if (!card) return;
+
+    const lesson = currentLessonNumber();
+    const connection = connections.find(item => Number(item.lesson) === lesson);
+    if (!connection) {
+      card.classList.remove('church-connection-card');
+      card.innerHTML = '<span class="church-eyebrow">In the Church</span><h3>Connection awaiting study</h3><p>A proportionate connection to worship, Scripture or Catholic tradition will be added after this lesson has been completed and checked.</p>';
+      return;
+    }
+
+    const explanation = (connection.explanation || []).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
+    const forms = (connection.forms || []).map(form => `<tr><th scope="row"><em>${escapeHtml(form.latin)}</em></th><td>${escapeHtml(form.meaning)}</td></tr>`).join('');
+
+    card.classList.add('church-connection-card');
+    card.innerHTML = `
+      <span class="church-eyebrow">In the Church</span>
+      <h3>${escapeHtml(connection.title)}</h3>
+      <p>${escapeHtml(connection.teaser)}</p>
+      <details class="church-reveal">
+        <summary><span>Open the Church connection</span><b class="church-plus">＋</b></summary>
+        <div class="church-body">
+          <blockquote><span>${escapeHtml(connection.latin)}</span><small>${escapeHtml(connection.english)}</small></blockquote>
+          ${explanation}
+          ${forms ? `<div class="church-table-wrap"><table><thead><tr><th>Form</th><th>What it is doing</th></tr></thead><tbody>${forms}</tbody></table></div>` : ''}
+          <div class="church-exercise"><strong>Notice it yourself</strong><p>${escapeHtml(connection.exercise)}</p></div>
+          <a class="church-source" href="${escapeHtml(connection.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(connection.sourceLabel)} →</a>
+        </div>
+      </details>`;
+  }
 
   fetch('church-connections.json', {cache:'no-store'})
     .then(response => {
-      if (!response.ok) throw new Error('Church connection could not be loaded.');
+      if (!response.ok) throw new Error('Church connections could not be loaded.');
       return response.json();
     })
     .then(data => {
-      const connection = (data.connections || []).find(item => Number(item.lesson) === 1);
-      if (!connection) throw new Error('No Church connection is available for this lesson.');
-
-      const explanation = (connection.explanation || []).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
-      const forms = (connection.forms || []).map(form => `<tr><th scope="row"><em>${escapeHtml(form.latin)}</em></th><td>${escapeHtml(form.meaning)}</td></tr>`).join('');
-
-      card.classList.add('church-connection-card');
-      card.innerHTML = `
-        <span class="church-eyebrow">In the Church</span>
-        <h3>${escapeHtml(connection.title)}</h3>
-        <p>${escapeHtml(connection.teaser)}</p>
-        <details class="church-reveal">
-          <summary><span>Open the Church connection</span><b class="church-plus">＋</b></summary>
-          <div class="church-body">
-            <blockquote><span>${escapeHtml(connection.latin)}</span><small>${escapeHtml(connection.english)}</small></blockquote>
-            ${explanation}
-            <div class="church-table-wrap">
-              <table>
-                <thead><tr><th>Form</th><th>What it is doing</th></tr></thead>
-                <tbody>${forms}</tbody>
-              </table>
-            </div>
-            <div class="church-exercise"><strong>Notice it yourself</strong><p>${escapeHtml(connection.exercise)}</p></div>
-            <a class="church-source" href="${escapeHtml(connection.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(connection.sourceLabel)} →</a>
-          </div>
-        </details>`;
+      connections = Array.isArray(data.connections) ? data.connections : [];
+      render();
     })
-    .catch(error => {
-      card.innerHTML = `<h3>In the Church</h3><p>${escapeHtml(error.message)}</p>`;
-    });
+    .catch(() => render());
+
+  window.addEventListener('latin-lesson-rendered', render);
 
   const style = document.createElement('style');
   style.textContent = `
