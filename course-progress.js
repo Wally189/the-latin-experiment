@@ -1,6 +1,7 @@
 (() => {
   const progress = window.LatinExperimentProgress;
   if (!progress) return;
+  let publicationSanitised = false;
 
   function roman(number) {
     let value = Number(number);
@@ -28,6 +29,18 @@
     if (Number.isInteger(fromPage) && fromPage > 0) return fromPage;
     const fromTemplate = Number(window.LatinLessonTemplate?.currentLesson?.number);
     return Number.isInteger(fromTemplate) && fromTemplate > 0 ? fromTemplate : 1;
+  }
+
+  function publishedLessonNumbers() {
+    return [...document.querySelectorAll('.lesson-link[data-reader-completable="true"]')]
+      .map(lessonNumber)
+      .filter(number => Number.isInteger(number));
+  }
+
+  function sanitisePublicationProgress() {
+    if (publicationSanitised || typeof progress.retainCompleted !== 'function') return;
+    publicationSanitised = true;
+    progress.retainCompleted(publishedLessonNumbers());
   }
 
   function addLessonChecks() {
@@ -164,5 +177,8 @@
 
   sync();
   window.addEventListener('latin-progress-changed', handleProgressChange);
-  window.addEventListener('latin-lesson-rendered', sync);
+  window.addEventListener('latin-lesson-rendered', () => {
+    sanitisePublicationProgress();
+    sync();
+  });
 })();
