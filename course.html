@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Latin Experiment — Lesson I</title>
+<title>The Latin Experiment — Course</title>
 <style>html,body{margin:0;min-height:100%;background:#efe3d6}body{font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;padding:30px;color:#1d0806;text-align:center}</style>
 </head>
 <body>
-<div class="loading">Opening Lesson I…</div>
+<div class="loading">Opening your next lesson…</div>
 <script>
 fetch('course-source.html',{cache:'no-store'})
   .then(response=>{if(!response.ok)throw new Error('Course source could not be loaded.');return response.text()})
@@ -17,7 +17,7 @@ fetch('course-source.html',{cache:'no-store'})
     const output=source.replace('</body>',scripts+'</body>');
     document.open();document.write(output);document.close();
   })
-  .catch(error=>{document.body.innerHTML='<main class="loading"><p><strong>Lesson I could not be opened.</strong><br>'+error.message+'</p></main>'});
+  .catch(error=>{document.body.innerHTML='<main class="loading"><p><strong>The course could not be opened.</strong><br>'+error.message+'</p></main>'});
 </script>
 </body>
 </html>
