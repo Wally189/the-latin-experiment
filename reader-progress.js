@@ -44,6 +44,19 @@
     return normalise(migrated);
   }
 
+  function syncLegacySet(completed) {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(LEGACY_SET_KEY) || '[]');
+      const retained = Array.isArray(parsed)
+        ? parsed.filter(value => !/^l\d+$/i.test(String(value)))
+        : [];
+      const lessonValues = completed.map(number => `l${number}`);
+      localStorage.setItem(LEGACY_SET_KEY, JSON.stringify([...retained, ...lessonValues]));
+    } catch (error) {
+      localStorage.setItem(LEGACY_SET_KEY, JSON.stringify(completed.map(number => `l${number}`)));
+    }
+  }
+
   function progressDetail(completed) {
     const through = completedThrough(completed);
     return {
@@ -59,6 +72,7 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
       localStorage.setItem(LEGACY_LESSON_ONE_KEY, completed.includes(1) ? 'yes' : 'no');
+      syncLegacySet(completed);
     } catch (error) {
       // The interface can still update for this page even when storage is unavailable.
     }
@@ -70,7 +84,13 @@
     return completed;
   }
 
-  const initial = migrateLegacy(readStored());
+  let hasCurrentRecord = false;
+  try {
+    hasCurrentRecord = localStorage.getItem(STORAGE_KEY) !== null;
+  } catch (error) {
+    hasCurrentRecord = false;
+  }
+  const initial = hasCurrentRecord ? readStored() : migrateLegacy([]);
   write(initial, false);
 
   window.LatinExperimentProgress = {
@@ -109,7 +129,7 @@
 
   window.addEventListener('storage', event => {
     if (event.key === STORAGE_KEY || event.key === LEGACY_LESSON_ONE_KEY || event.key === LEGACY_SET_KEY) {
-      const completed = migrateLegacy(readStored());
+      const completed = readStored();
       window.dispatchEvent(new CustomEvent('latin-progress-changed', {
         detail: progressDetail(completed)
       }));
