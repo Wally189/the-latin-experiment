@@ -152,7 +152,17 @@
   `;
   document.head.appendChild(style);
 
+  function handleProgressChange() {
+    sync();
+    const next = nextLessonNumber();
+    const current = currentLessonNumber();
+    const nextRecord = window.LatinLessonTemplate?.getLesson?.(next);
+    if (next && current > next && nextRecord?.available) {
+      window.LatinLessonTemplate.render(next);
+    }
+  }
+
   sync();
-  window.addEventListener('latin-progress-changed', sync);
+  window.addEventListener('latin-progress-changed', handleProgressChange);
   window.addEventListener('latin-lesson-rendered', sync);
 })();
