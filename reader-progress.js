@@ -11,6 +11,13 @@
       .sort((a, b) => a - b);
   }
 
+  function completedThrough(values) {
+    const completed = new Set(normalise(values));
+    let lesson = 0;
+    while (lesson < MAX_LESSON && completed.has(lesson + 1)) lesson += 1;
+    return lesson;
+  }
+
   function readStored() {
     try {
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -37,6 +44,16 @@
     return normalise(migrated);
   }
 
+  function progressDetail(completed) {
+    const through = completedThrough(completed);
+    return {
+      completed,
+      count: completed.length,
+      completedThrough: through,
+      nextLesson: through < MAX_LESSON ? through + 1 : null
+    };
+  }
+
   function write(values, announce = true) {
     const completed = normalise(values);
     try {
@@ -47,22 +64,30 @@
     }
     if (announce) {
       window.dispatchEvent(new CustomEvent('latin-progress-changed', {
-        detail: {completed, count: completed.length}
+        detail: progressDetail(completed)
       }));
     }
     return completed;
   }
 
-  let initial = migrateLegacy(readStored());
+  const initial = migrateLegacy(readStored());
   write(initial, false);
 
   window.LatinExperimentProgress = {
     key: STORAGE_KEY,
+    maxLesson: MAX_LESSON,
     getCompleted() {
       return readStored();
     },
     count() {
       return readStored().length;
+    },
+    completedThrough() {
+      return completedThrough(readStored());
+    },
+    nextIncomplete() {
+      const through = completedThrough(readStored());
+      return through < MAX_LESSON ? through + 1 : null;
     },
     isComplete(lesson) {
       return readStored().includes(Number(lesson));
@@ -86,7 +111,7 @@
     if (event.key === STORAGE_KEY || event.key === LEGACY_LESSON_ONE_KEY || event.key === LEGACY_SET_KEY) {
       const completed = migrateLegacy(readStored());
       window.dispatchEvent(new CustomEvent('latin-progress-changed', {
-        detail: {completed, count: completed.length}
+        detail: progressDetail(completed)
       }));
     }
   });
