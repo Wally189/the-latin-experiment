@@ -1,0 +1,76 @@
+{
+  "lessons": [
+    {
+      "number": 1,
+      "roman": "I",
+      "available": true,
+      "title": "The very first steps",
+      "status": "Template preview — awaiting Alan’s real completion",
+      "lede": "The experiment begins here: Father William Most’s course, a notebook, a microphone and a determination to discover whether the Church’s language can become something genuinely usable.",
+      "estimatedTime": "30–45 minutes plus handwriting and speech",
+      "aim": "Meet the first Latin patterns and begin thinking beyond translation",
+      "dayNote": "Day 1. Excited. A little daunted. This template will be replaced by Alan’s genuine account after he completes the lesson. — A.W.G.",
+      "curiosityTitle": "Let’s begin…",
+      "curiosityText": "The first step is to read through Lesson I in Father William Most’s Latin by the Natural Method.",
+      "curiositySample": "Read first. Notice second. Explain only after the text has had a chance to speak.",
+      "readings": [
+        {"label": "1A", "title": "We Are Discovered"},
+        {"label": "1B", "title": "Columbus and Lamb Stew"}
+      ],
+      "studySteps": [
+        {"title": "Write out the vocabulary", "text": "Write each word in Latin and English. Keep the two languages together so the vocabulary can be checked and recalled."},
+        {"title": "Copy both texts by hand", "text": "Copy the lesson texts from the book to become accustomed to forming and seeing the Latin words."},
+        {"title": "Think in plain English", "text": "Record what the endings appear to be doing before reaching for a technical explanation."},
+        {"title": "Complete Father Most’s exercise", "text": "Work from the original book. This site records the experience without reproducing the textbook exercise."}
+      ],
+      "checklist": [
+        "Read Lesson I in Father Most’s textbook",
+        "Make a genuine first reading before studying",
+        "Write the vocabulary in Latin and English",
+        "Copy the lesson texts by hand",
+        "Record what seemed easy, difficult or surprising",
+        "Return for a second reading after study"
+      ],
+      "todayLatin": "This is a provisional template. After Alan completes Lesson I, this space will record what was easy, what was difficult, what remained challenging and what should happen next.",
+      "journalSlug": "lesson-1",
+      "notebookCaption": "Alan’s Lesson I notebook photograph will appear here after the lesson is completed.",
+      "churchPlaceholder": "The Lesson I connection is loaded from the separate Church-connections record."
+    },
+    {
+      "number": 2,
+      "roman": "II",
+      "available": true,
+      "title": "Nouns: first patterns",
+      "status": "Demonstration template — test content only",
+      "lede": "Lesson II is open as a working example of the repeatable publishing system. Its wording and evidence will be replaced after Alan has genuinely completed the lesson.",
+      "estimatedTime": "30–45 minutes plus handwriting and speech",
+      "aim": "Test how a second lesson flows through the same reusable page structure",
+      "dayNote": "Lesson II template preview. No learning claim is being made yet. This note will be replaced by Alan’s real bus-journey reflection. — A.W.G.",
+      "curiosityTitle": "What changes when a noun changes its job?",
+      "curiosityText": "This is a demonstration prompt rather than Alan’s finished explanation. The real curiosity hook will be written from what he actually notices in Lesson II.",
+      "curiositySample": "Same template. New lesson. Real evidence replaces every placeholder.",
+      "readings": [
+        {"label": "1A", "title": "Lesson II first reading"}
+      ],
+      "studySteps": [
+        {"title": "Read the original lesson", "text": "Begin with Father Most’s book and make an unpolished first attempt."},
+        {"title": "Write the vocabulary", "text": "Copy the new words in Latin and English, preserving any uncertainty for later checking."},
+        {"title": "Copy and notice", "text": "Write the lesson material by hand and note repeated noun forms or endings without inventing conclusions."},
+        {"title": "Record the real reaction", "text": "Replace this demonstration text with Alan’s observations, corrections and questions after study."}
+      ],
+      "checklist": [
+        "Read Lesson II in Father Most’s textbook",
+        "Make a first reading before studying",
+        "Write the new vocabulary",
+        "Copy the relevant material by hand",
+        "Photograph the notebook page",
+        "Send the journal thoughts for publication",
+        "Return for a second reading"
+      ],
+      "todayLatin": "This demonstration proves that Lesson II can use the same page without duplicating the site design. When Alan completes it, the placeholder will be replaced by his real easy, difficult, challenging and next-step reflection.",
+      "journalSlug": "lesson-2",
+      "notebookCaption": "Test position for Alan’s Lesson II notebook photograph.",
+      "churchPlaceholder": "A proportionate Church connection will be added only after the lesson has been studied and checked."
+    }
+  ]
+}
