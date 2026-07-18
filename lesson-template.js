@@ -2,7 +2,6 @@
   const page = document.querySelector('.lesson-page');
   const desktopList = document.getElementById('desktopLessons');
   const mobileList = document.getElementById('mobileList');
-  const toast = document.getElementById('lockToast');
   if (!page || !desktopList || !mobileList) return;
 
   const sharedStages = [
@@ -19,36 +18,62 @@
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[character]));
 
-  function showLock() {
-    if (!toast) return;
-    toast.textContent = 'That lesson will open when its template or completed material is available.';
-    toast.classList.add('show');
-    clearTimeout(showLock.timer);
-    showLock.timer = setTimeout(() => toast.classList.remove('show'), 2200);
+  function roman(number) {
+    let value = Number(number);
+    let result = '';
+    const numerals = [[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+    numerals.forEach(([amount, symbol]) => {
+      while (value >= amount) {
+        result += symbol;
+        value -= amount;
+      }
+    });
+    return result || String(number);
   }
 
-  function lessonByNumber(number) {
-    return lessons.find(lesson => Number(lesson.number) === Number(number));
+  function storedLesson(number) {
+    return lessons.find(lesson => Number(lesson.number) === Number(number)) || null;
   }
 
-  function availableLesson(number) {
-    const lesson = lessonByNumber(number);
-    return lesson && lesson.available ? lesson : null;
+  function lessonRecord(number) {
+    const stored = storedLesson(number);
+    if (stored) return stored;
+    return {
+      number: Number(number),
+      roman: roman(number),
+      publicationStatus: 'coming-soon',
+      title: 'Coming soon',
+      status: 'Coming soon'
+    };
   }
 
-  function nextInitialLesson() {
-    const requested = Number(new URLSearchParams(location.search).get('lesson'));
-    if (availableLesson(requested)) return requested;
+  function isPublished(numberOrLesson) {
+    const lesson = typeof numberOrLesson === 'object' ? numberOrLesson : lessonRecord(numberOrLesson);
+    return lesson?.publicationStatus === 'published';
+  }
 
+  function publishedLessons() {
+    return lessons
+      .filter(isPublished)
+      .sort((a, b) => Number(a.number) - Number(b.number));
+  }
+
+  function preferredLessonNumber() {
     const progress = window.LatinExperimentProgress;
-    const next = progress && typeof progress.nextIncomplete === 'function' ? progress.nextIncomplete() : 1;
-    if (availableLesson(next)) return next;
+    const published = publishedLessons();
 
-    const firstIncomplete = lessons.find(lesson => lesson.available && !(progress?.isComplete?.(lesson.number)));
-    if (firstIncomplete) return firstIncomplete.number;
+    if (!published.length) return 1;
 
-    const published = lessons.filter(lesson => lesson.available);
-    return published.length ? published[published.length - 1].number : 1;
+    const firstIncomplete = published.find(lesson => !progress?.isComplete?.(lesson.number));
+    if (firstIncomplete) return Number(firstIncomplete.number);
+
+    const lastPublished = Number(published[published.length - 1].number);
+    return Math.min(81, lastPublished + 1);
+  }
+
+  function requestedLessonNumber() {
+    const requested = Number(new URLSearchParams(location.search).get('lesson'));
+    return Number.isInteger(requested) && requested >= 1 && requested <= 81 ? requested : null;
   }
 
   function updateAddress(number) {
@@ -57,33 +82,38 @@
     history.replaceState({lesson:number}, '', url.pathname + url.search + url.hash);
   }
 
+  function setActiveLesson(number) {
+    document.querySelectorAll('.lesson-link').forEach(row => {
+      row.classList.toggle('active', Number(row.dataset.lessonNumber) === Number(number));
+    });
+  }
+
+  function closeMobileCatalogue() {
+    mobileList.classList.remove('open');
+    const toggle = document.getElementById('mobileToggle');
+    if (toggle) {
+      toggle.textContent = 'Show lessons';
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
   function buildList(target) {
     target.innerHTML = '';
     for (let number = 1; number <= 81; number += 1) {
-      const lesson = availableLesson(number);
+      const lesson = lessonRecord(number);
+      const published = isPublished(lesson);
       const button = document.createElement('button');
       button.type = 'button';
       button.dataset.lessonNumber = String(number);
-      button.className = `lesson-link${lesson ? '' : ' locked'}`;
-      button.innerHTML = `<span class="icon">${lesson ? escapeHtml(lesson.roman) : '·'}</span><span><strong>Lesson ${number}</strong><small>${lesson ? escapeHtml(lesson.title) : 'Awaiting publication'}</small></span>`;
-
-      if (lesson) {
-        button.addEventListener('click', event => {
-          if (event.target.closest('.lesson-progress-check')) return;
-          renderLesson(number, true);
-          if (target === mobileList) {
-            mobileList.classList.remove('open');
-            const toggle = document.getElementById('mobileToggle');
-            if (toggle) {
-              toggle.textContent = 'Show lessons';
-              toggle.setAttribute('aria-expanded', 'false');
-            }
-          }
-        });
-      } else {
-        button.setAttribute('aria-disabled', 'true');
-        button.addEventListener('click', showLock);
-      }
+      button.dataset.publicationStatus = published ? 'published' : 'coming-soon';
+      button.dataset.readerCompletable = String(published);
+      button.className = `lesson-link ${published ? 'published' : 'coming-soon'}`;
+      button.innerHTML = `<span class="icon">${escapeHtml(lesson.roman || roman(number))}</span><span><strong>Lesson ${number}</strong><small>${published ? escapeHtml(lesson.title) : `${escapeHtml(lesson.title || 'Coming soon')} · coming soon`}</small></span>`;
+      button.addEventListener('click', event => {
+        if (event.target.closest('.lesson-progress-check')) return;
+        renderLesson(number, true);
+        if (target === mobileList) closeMobileCatalogue();
+      });
       target.appendChild(button);
     }
   }
@@ -117,25 +147,30 @@
       </button>`).join('');
   }
 
-  function renderLesson(number, updateUrl = false) {
-    const lesson = availableLesson(number);
-    if (!lesson) {
-      showLock();
-      return;
-    }
+  function renderComingSoon(lesson) {
+    page.innerHTML = `
+      <div class="breadcrumbs">Course <span>›</span> First year <span>›</span> Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</div>
+      <section class="coming-soon-page">
+        <div class="coming-soon-mark">${escapeHtml(lesson.roman || roman(lesson.number))}</div>
+        <p class="kicker">Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</p>
+        <h1>Coming soon.</h1>
+        <p class="coming-soon-title">${escapeHtml(lesson.title || 'The next stage of the experiment')}</p>
+        <p class="coming-soon-lede">Alan has not yet completed and documented this lesson. It will be published after the real work has been done rather than filled with invented progress.</p>
+        <div class="coming-soon-grid">
+          <article><span>1</span><h2>Learn</h2><p>Complete the lesson from Father Most’s original book, whether on the bus or elsewhere.</p></article>
+          <article><span>2</span><h2>Record</h2><p>Keep the handwritten notes, first reactions, difficulties, corrections and any recordings.</p></article>
+          <article><span>3</span><h2>Publish</h2><p>Add the genuine evidence to the reusable lesson template, individually or as a weekend batch.</p></article>
+        </div>
+        <div class="coming-soon-note"><strong>What the finished lesson will contain:</strong> Alan’s notebook, honest reflection, learning guidance, before-and-after evidence, journal entry and a proportionate connection to the life of the Church.</div>
+        <div class="coming-soon-actions"><a class="coming-soon-button" href="index.html#materials">Open the course materials</a><a href="experiment.html">Read the experiment journal →</a></div>
+      </section>`;
+  }
 
-    window.LatinLessonTemplate.currentLesson = lesson;
-    page.dataset.lessonNumber = String(lesson.number);
-
-    document.querySelectorAll('.lesson-link').forEach(row => {
-      row.classList.toggle('active', Number(row.dataset.lessonNumber) === lesson.number);
-    });
-
+  function renderPublished(lesson) {
     page.innerHTML = `
       <div class="breadcrumbs">Course <span>›</span> First year <span>›</span> Lesson ${escapeHtml(lesson.roman)}</div>
       <div class="lesson-grid">
         <div class="main-column">
-          <div class="lesson-template-status"><strong>${escapeHtml(lesson.status)}</strong><span>This page is available for testing and makes no claim that Alan has completed the lesson.</span></div>
           <section class="hero">
             <div>
               <p class="kicker">First year · learning module</p>
@@ -196,9 +231,20 @@
     page.querySelectorAll('[data-scroll-target]').forEach(button => button.addEventListener('click', () => {
       document.getElementById(button.dataset.scrollTarget)?.scrollIntoView({behavior:'smooth', block:'start'});
     }));
+  }
+
+  function renderLesson(number, updateUrl = false) {
+    const lesson = lessonRecord(number);
+    window.LatinLessonTemplate.currentLesson = lesson;
+    page.dataset.lessonNumber = String(lesson.number);
+    page.dataset.publicationStatus = isPublished(lesson) ? 'published' : 'coming-soon';
+    setActiveLesson(lesson.number);
+
+    if (isPublished(lesson)) renderPublished(lesson);
+    else renderComingSoon(lesson);
 
     if (updateUrl) updateAddress(lesson.number);
-    document.title = `The Latin Experiment — Lesson ${lesson.roman}`;
+    document.title = `The Latin Experiment — Lesson ${lesson.roman || roman(lesson.number)}`;
     window.dispatchEvent(new CustomEvent('latin-lesson-rendered', {detail:{lesson}}));
   }
 
@@ -206,16 +252,18 @@
     lessons = Array.isArray(data.lessons) ? data.lessons : [];
     buildList(desktopList);
     buildList(mobileList);
-    const availableCount = lessons.filter(lesson => lesson.available).length;
+    const publishedCount = publishedLessons().length;
     document.querySelectorAll('.rail-meta').forEach(element => {
-      element.textContent = `${availableCount} of 81 lesson templates available`;
+      element.textContent = `${publishedCount} of 81 lessons published`;
     });
-    renderLesson(nextInitialLesson(), true);
+    renderLesson(requestedLessonNumber() || preferredLessonNumber(), true);
   }
 
   window.LatinLessonTemplate = {
     currentLesson: null,
-    getLesson: lessonByNumber,
+    getLesson: lessonRecord,
+    isPublished,
+    preferredLessonNumber,
     render: number => renderLesson(number, true)
   };
 
@@ -231,7 +279,8 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .lesson-template-status{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 18px;padding:13px 16px;border:1px solid #d8c78f;border-radius:14px;background:#fff8df;color:#5d4b1f;line-height:1.45}.lesson-template-status strong{color:#7d5700}.lesson-template-status span{color:#6f6250}
+    .lesson-link.coming-soon{opacity:.78}.lesson-link.coming-soon .icon{background:#9a918b}.lesson-link.coming-soon small{color:#766e69}.lesson-link.coming-soon.active{opacity:1;border-color:#d8c78f;background:#fff8df}.lesson-link.coming-soon.active .icon{background:var(--gold);color:var(--ink)}
+    .coming-soon-page{position:relative;overflow:hidden;max-width:1050px;margin:0 auto;padding:clamp(34px,6vw,80px);border:1px solid #e3d7cd;border-radius:28px;background:radial-gradient(circle at 88% 12%,rgba(221,169,55,.24),transparent 27%),linear-gradient(145deg,#fffdf9,#fff7e8);box-shadow:var(--shadow)}.coming-soon-mark{position:absolute;right:clamp(18px,5vw,70px);top:20px;color:rgba(142,21,48,.07);font:700 clamp(110px,22vw,280px)/1 Georgia,serif;pointer-events:none}.coming-soon-page h1{position:relative;margin:0;font-size:clamp(62px,10vw,126px);line-height:.86}.coming-soon-title{position:relative;margin:20px 0 8px;color:var(--burgundy);font:italic 27px Georgia,serif}.coming-soon-lede{position:relative;max-width:760px;margin:0;color:#514945;font-size:18px;line-height:1.7}.coming-soon-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:34px 0}.coming-soon-grid article{padding:20px;border:1px solid #e5d9ce;border-radius:18px;background:rgba(255,255,255,.86)}.coming-soon-grid span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--gold);font-weight:900}.coming-soon-grid h2{margin:13px 0 7px;font-size:23px}.coming-soon-grid p{margin:0;color:#655b55;line-height:1.6}.coming-soon-note{position:relative;padding:18px 20px;border-left:6px solid var(--burgundy);border-radius:0 15px 15px 0;background:#fff;color:#5e534d;line-height:1.65}.coming-soon-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:24px}.coming-soon-actions a{color:var(--burgundy);font-weight:900}.coming-soon-actions .coming-soon-button{padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;text-decoration:none}
     .begin-block{width:100%}.begin-block .sample-latin{margin-top:18px;padding:18px;border-radius:14px;background:#fff;color:var(--ink);font:700 19px/1.55 Georgia,serif}
     .book-title-link{color:var(--burgundy);font-weight:900;text-decoration-thickness:2px;text-underline-offset:3px}
     .reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.reading-card{position:relative;padding-top:23px}.sequence-number{position:absolute;right:15px;top:14px;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--burgundy);color:#fff;font-weight:900}.after-card{border-color:#cad8f5;background:#f8faff}.after-card .sequence-number{background:var(--blue)}.after-tag{background:#eaf0ff!important;color:#244b9b!important}
@@ -240,7 +289,7 @@
     .path-card{position:relative}.open-cue{display:flex;justify-content:center;margin-top:15px;padding:9px;border-radius:9px;background:#f2ece7;color:var(--ink);font-size:11px;font-weight:900}.cue-close{display:none}.path-card[aria-expanded="true"] .cue-open{display:none}.path-card[aria-expanded="true"] .cue-close{display:inline}
     .lesson-reflection{padding:16px;border-left:5px solid var(--burgundy);border-radius:0 14px 14px 0;background:#fbf6ef;color:#514945;line-height:1.65}.lesson-reflection p{margin:0}.lesson-reflection p+p{margin-top:12px}.journal-link a{color:var(--burgundy);font-weight:900}
     .lesson-template-error{padding:40px;color:#7a2222}
-    @media(max-width:760px){.reading-grid,.reader-checklist{grid-template-columns:1fr}.study-step{grid-template-columns:40px minmax(0,1fr)}.step-number{width:36px;height:36px}}
+    @media(max-width:760px){.coming-soon-grid,.reading-grid,.reader-checklist{grid-template-columns:1fr}.study-step{grid-template-columns:40px minmax(0,1fr)}.step-number{width:36px;height:36px}.coming-soon-page{padding:32px 21px}.coming-soon-mark{right:8px;top:28px}}
   `;
   document.head.appendChild(style);
 })();
