@@ -1,0 +1,84 @@
+{
+  "totalLessons": 81,
+  "sessionMinutes": "30–45",
+  "blocks": [
+    {
+      "id": "foundations",
+      "from": 1,
+      "to": 12,
+      "title": "Finding the shape of a Latin sentence",
+      "colour": "#8e1730",
+      "method": "Father Most begins with short readings and introduces grammar through what the learner meets there. This opening block establishes third-person perfect verbs, the main singular and plural noun forms, prepositions, neuter nouns and basic adjective agreement. Lessons 4, 8 and 12 are recapitulations.",
+      "outcomes": [
+        "Follow the basic movement of a short Latin narrative without translating every word first.",
+        "Recognise common nominative, accusative and ablative forms and use them to identify who acts, what receives the action and how a preposition connects the sentence.",
+        "Recognise simple third-person perfect verbs, infinitives, neuter nouns and basic adjective agreement."
+      ]
+    },
+    {
+      "id": "description-and-time",
+      "from": 13,
+      "to": 24,
+      "title": "Description, completed action and present action",
+      "colour": "#244b9b",
+      "method": "The readings now add third-declension adjectives, the pluperfect, perfect passive forms, participles, the ablative absolute, the genitive, demonstratives and the present active. Lessons 16, 20 and 24 consolidate the new material.",
+      "outcomes": [
+        "Read sentences that distinguish completed, earlier-completed and present actions.",
+        "Recognise perfect passive constructions and the common shape of an ablative absolute.",
+        "Connect nouns and adjectives across different declensions and recognise basic demonstratives such as hic and ille."
+      ]
+    },
+    {
+      "id": "connections-and-voice",
+      "from": 25,
+      "to": 40,
+      "title": "Connecting ideas and changing the voice",
+      "colour": "#c78b13",
+      "method": "This block expands pronouns and relative clauses, then develops the present passive, dative, deponent verbs, imperfect and future forms, participles, questions and indirect statement. Lessons 28, 32, 36 and 40 provide regular recapitulation.",
+      "outcomes": [
+        "Follow who or what a pronoun refers to across a short passage.",
+        "Distinguish active and passive statements in the present, imperfect and future.",
+        "Recognise relative clauses, indirect statements and common uses of the dative while reading connected prose."
+      ]
+    },
+    {
+      "id": "purpose-and-perspective",
+      "from": 41,
+      "to": 52,
+      "title": "Purpose, result and a change of perspective",
+      "colour": "#71307b",
+      "method": "Father Most introduces the subjunctive through purpose, result, cum clauses, commands, prohibitions and indirect questions. The course also begins moving beyond third-person narration into first- and second-person active forms. Lessons 44, 48 and 52 are recapitulations.",
+      "outcomes": [
+        "Recognise why a subjunctive clause is present even before naming every technical rule.",
+        "Distinguish common purpose, result and indirect-question patterns.",
+        "Read and form basic statements involving I, you and we in several active tenses."
+      ]
+    },
+    {
+      "id": "complete-verb-system",
+      "from": 53,
+      "to": 66,
+      "title": "Commands and the wider verb system",
+      "colour": "#2e7051",
+      "method": "The course develops active commands, irregular verbs and the first- and second-person passive system, then introduces the future perfect, perfect subjunctive, passive imperative and the gerundive of obligation. Lessons 55, 59, 63 and 66 perform the reviewing work in this part of the book.",
+      "outcomes": [
+        "Recognise and use common commands and important irregular verbs such as esse, posse, velle, nolle, ire and ferre.",
+        "Follow first- and second-person forms in both active and passive sentences.",
+        "Recognise obligation expressed with the gerundive and understand the broad sequence of Latin verb time and voice."
+      ]
+    },
+    {
+      "id": "advanced-reading-tools",
+      "from": 67,
+      "to": 81,
+      "title": "Advanced tools for connected reading",
+      "colour": "#8b4d10",
+      "method": "The final block adds gerund and gerundive constructions, future participles and infinitives, comparison, conditions, impersonal verbs, the locative, advanced ablative uses, i-stem rules and further deponent forms. Lessons 70, 74 and 78 consolidate the progression before the final three lessons.",
+      "outcomes": [
+        "Follow purpose, obligation, comparison and conditional meaning in more complex sentences.",
+        "Recognise common gerund, gerundive, future-participle and future-infinitive constructions.",
+        "Approach a connected first-year Latin passage with a working grasp of the principal cases, voices, moods and tenses introduced in Volume I."
+      ]
+    }
+  ]
+}
