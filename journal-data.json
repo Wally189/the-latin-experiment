@@ -6,10 +6,22 @@
       "slug": "lesson-1",
       "title": "The very first steps",
       "date": "",
-      "status": "Awaiting completion",
-      "todayLatin": "This entry will be written after Lesson I has been completed. It will record what became clear, what remained difficult and what changed between the first and second readings.",
+      "status": "Template preview — awaiting completion",
+      "todayLatin": "This entry will be replaced after Lesson I has been genuinely completed. It will record what was easy, what was difficult, what remained challenging and what should happen next.",
       "journal": [
-        "The journal entry for this lesson will be added after the work is complete. It will preserve the real sequence: first reading, study, second reading and reflection, without inventing progress in advance."
+        "The structure is ready, but Alan has not yet completed the lesson. This placeholder exists so the full publication workflow can be tested without inventing progress."
+      ]
+    },
+    {
+      "lesson": 2,
+      "roman": "II",
+      "slug": "lesson-2",
+      "title": "Nouns: first patterns",
+      "date": "",
+      "status": "Demonstration template — test content only",
+      "todayLatin": "Lesson II is present as a demonstration of the reusable template. Its real account will be written from Alan’s notes, notebook image and reflections after he completes the lesson.",
+      "journal": [
+        "This is not a claim that Lesson II has been studied. It shows where the genuine bus-journey reflection, corrections and evidence will appear when supplied."
       ]
     }
   ]
