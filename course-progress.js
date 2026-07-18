@@ -46,11 +46,56 @@
     clean.addEventListener('click', () => progress.toggle(1));
   }
 
-  function sync() {
+  function nextLessonNumber() {
+    if (typeof progress.nextIncomplete === 'function') return progress.nextIncomplete();
+    const completed = new Set(progress.getCompleted());
+    for (let lesson = 1; lesson <= 81; lesson += 1) {
+      if (!completed.has(lesson)) return lesson;
+    }
+    return null;
+  }
+
+  function sequenceCount() {
+    if (typeof progress.completedThrough === 'function') return progress.completedThrough();
+    const next = nextLessonNumber();
+    return next === null ? 81 : next - 1;
+  }
+
+  function preferredLessonRow(number) {
+    if (!number) return null;
+    const selector = `.lesson-link[data-lesson-number="${number}"]`;
+    const mobile = window.matchMedia('(max-width: 800px)').matches;
+    return document.querySelector(`${mobile ? '#mobileList' : '#desktopLessons'} ${selector}`)
+      || document.querySelector(selector);
+  }
+
+  function markNextLesson(openOnArrival = false) {
+    const next = nextLessonNumber();
+    document.querySelectorAll('.lesson-link.next-up').forEach(row => row.classList.remove('next-up'));
+    if (!next) return;
+
+    document.querySelectorAll(`.lesson-link[data-lesson-number="${next}"]`).forEach(row => {
+      row.classList.add('next-up');
+    });
+
+    const row = preferredLessonRow(next);
+    if (!row) return;
+
+    if (next > 1) {
+      requestAnimationFrame(() => row.scrollIntoView({ block: 'center', inline: 'nearest' }));
+    }
+
+    const openable = !row.classList.contains('locked') && row.getAttribute('aria-disabled') !== 'true';
+    if (openOnArrival && openable && next > 1) {
+      requestAnimationFrame(() => row.click());
+    }
+  }
+
+  function sync(openOnArrival = false) {
     addLessonChecks();
     replaceCompleteButton();
     const completed = progress.getCompleted();
-    const count = completed.length;
+    const count = sequenceCount();
     const percentage = Math.round((count / 81) * 100);
 
     document.querySelectorAll('.lesson-link[data-lesson-number]').forEach(row => {
@@ -76,14 +121,16 @@
 
     const chip = document.querySelector('.progress-chip');
     if (chip) {
-      chip.textContent = count
-        ? `My progress · ${count} of 81 complete`
-        : 'My progress · 0 of 81';
+      chip.textContent = count === 81
+        ? 'My progress · Volume I complete'
+        : `My progress · ${count} of 81 complete`;
     }
 
     document.querySelectorAll('.course-rail .progress-track span').forEach(track => {
       track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;
     });
+
+    markNextLesson(openOnArrival);
   }
 
   const style = document.createElement('style');
@@ -96,11 +143,14 @@
     .lesson-link.reader-complete.active{border-color:#9fc8af;background:linear-gradient(135deg,#f1faf4,#fff8e7)}
     .lesson-link.reader-complete .icon{background:var(--green)}
     .lesson-link.reader-complete small:after{content:" · completed";color:var(--green);font-weight:800}
+    .lesson-link.next-up{border-color:var(--gold);background:#fff8e7;box-shadow:0 0 0 3px rgba(221,169,55,.14)}
+    .lesson-link.next-up small:before{content:"Next lesson · ";color:#8b5b00;font-weight:900}
+    .lesson-link.next-up.locked small:before{content:"Next lesson · awaiting publication · "}
     .complete-button.done{background:var(--green)!important;color:#fff!important}
     @media(max-width:1050px){.lesson-link:not(.locked){grid-template-columns:58px minmax(0,1fr) 36px}.lesson-progress-check{width:32px;height:32px}}
   `;
   document.head.appendChild(style);
 
-  sync();
-  window.addEventListener('latin-progress-changed', sync);
+  sync(true);
+  window.addEventListener('latin-progress-changed', () => sync(false));
 })();
