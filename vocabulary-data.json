@@ -1,0 +1,26 @@
+{
+  "totalLessons": 81,
+  "note": "This companion records vocabulary used during The Latin Experiment. Father Most’s complete lesson lists remain in the textbook.",
+  "lessons": [
+    {
+      "lesson": 1,
+      "roman": "I",
+      "status": "In progress",
+      "words": [
+        {"latin": "Marcus", "english": "Marcus — a man’s name"},
+        {"latin": "vidit", "english": "saw; has seen"},
+        {"latin": "agnum", "english": "lamb — receiving the action"},
+        {"latin": "Columbus", "english": "Columbus"},
+        {"latin": "Isabellam", "english": "Isabella — receiving the action"},
+        {"latin": "rotundus", "english": "round"},
+        {"latin": "planus", "english": "flat; level"},
+        {"latin": "Indiam", "english": "India — receiving the action"},
+        {"latin": "Americam", "english": "America — receiving the action"},
+        {"latin": "nauta", "english": "sailor"},
+        {"latin": "navem", "english": "ship — receiving the action"},
+        {"latin": "regina", "english": "queen"},
+        {"latin": "pecuniam", "english": "money — receiving the action"}
+      ]
+    }
+  ]
+}
