@@ -57,13 +57,14 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[character]));
 
-  function completedFromJournal(data) {
-    const entries = Array.isArray(data?.entries) ? data.entries : [];
-    return entries.filter(entry => {
-      if (entry.completed === true) return true;
-      const status = String(entry.status || '').toLowerCase();
-      return /(^|\b)(complete|completed|published)(\b|$)/.test(status) && !/awaiting|planned|draft/.test(status);
-    }).length;
+  function completedCount() {
+    if (window.LatinExperimentProgress) return window.LatinExperimentProgress.count();
+    try {
+      const parsed = JSON.parse(localStorage.getItem('latinExperiment.completedLessons.v1') || '[]');
+      return Array.isArray(parsed) ? new Set(parsed.map(Number).filter(Number.isInteger)).size : 0;
+    } catch (error) {
+      return 0;
+    }
   }
 
   function render(completedLessons) {
@@ -73,7 +74,7 @@
 
     section.innerHTML = `
       <h1>Certificates</h1>
-      <p class="muted certificate-intro">A visual record of progress through Father William Most’s first-year course, from the first completed lesson to the end of Volume I.</p>
+      <p class="muted certificate-intro">A visual record of your progress through Father William Most’s first-year course, from the first completed lesson to the end of Volume I.</p>
 
       <div class="certificate-note">
         <strong>Indicative comparison, not an accredited qualification.</strong>
@@ -82,7 +83,7 @@
 
       <section class="progress-panel" aria-label="Course progress">
         <div>
-          <span class="progress-label">Recorded progress</span>
+          <span class="progress-label">Recorded progress on this device</span>
           <h2>${completedLessons} of 81 lessons</h2>
           <p>${currentMilestone ? `Current indicative stage: <strong>${escapeHtml(currentMilestone.code)}</strong>.` : 'Complete Lesson I to reach the first indicative stage.'} ${nextMilestone ? `The next milestone is ${escapeHtml(nextMilestone.code)} at Lesson ${nextMilestone.lessons}.` : 'Volume I is complete.'}</p>
         </div>
@@ -91,7 +92,7 @@
       </section>
 
       <div class="certificate-grid">
-        ${milestones.map((milestone, index) => {
+        ${milestones.map(milestone => {
           const unlocked = completedLessons >= milestone.lessons;
           const remaining = Math.max(0, milestone.lessons - completedLessons);
           return `
@@ -108,7 +109,7 @@
         }).join('')}
       </div>
 
-      <div class="certificate-footer-note"><strong>What completion means here:</strong> these stages record work completed in this experiment. They do not claim that Father Most assigned CEFR levels to his book, or that completing a lesson automatically proves mastery.</div>`;
+      <div class="certificate-footer-note"><strong>What completion means here:</strong> these stages follow the lessons you mark complete in this browser. They do not claim that Father Most assigned CEFR levels to his book, or that selecting a check automatically proves mastery.</div>`;
   }
 
   const style = document.createElement('style');
@@ -123,12 +124,10 @@
   `;
   document.head.appendChild(style);
 
-  render(0);
-  fetch('journal-data.json', {cache:'no-store'})
-    .then(response => {
-      if (!response.ok) throw new Error('Progress data could not be loaded.');
-      return response.json();
-    })
-    .then(data => render(completedFromJournal(data)))
-    .catch(() => render(0));
+  const sync = () => render(completedCount());
+  sync();
+  window.addEventListener('latin-progress-changed', sync);
+  window.addEventListener('storage', event => {
+    if (event.key === 'latinExperiment.completedLessons.v1') sync();
+  });
 })();
