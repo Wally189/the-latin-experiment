@@ -35,27 +35,38 @@ jobs:
           from pathlib import Path
 
           version = os.environ['RELEASE_VERSION']
+
           index = Path('_site/index.html')
           source = index.read_text(encoding='utf-8')
-
           old_script = '<script src="schedule.js"></script>'
           new_scripts = (
+              f'<script src="reader-progress.js?v={version}"></script>\n'
               f'<script src="schedule.js?v={version}"></script>\n'
               f'<script src="certificates.js?v={version}"></script>'
           )
-
           if old_script not in source:
               raise SystemExit('Expected schedule script tag was not found in index.html')
           source = source.replace(old_script, new_scripts)
 
           old_certificates = '''<section class="view" data-v="certificates" hidden><h1>Certificates</h1><div class="note"><b>These are personal learning milestones, not accredited qualifications.</b></div><div class="cards"><div class="card badge" style="--c:var(--burgundy)"><div class="medal">I</div><h2>First lesson</h2><p>Complete the first full experiment.</p></div><div class="card badge" style="--c:var(--gold)"><div class="medal">V</div><h2>Five lessons</h2><p>Complete the first review cycle.</p></div><div class="card badge" style="--c:var(--blue)"><div class="medal">X</div><h2>Ten lessons</h2><p>Establish a repeatable learning rhythm.</p></div></div></section>'''
           new_certificates = '''<section class="view" data-v="certificates" hidden><h1>Certificates</h1><div class="note"><b>Loading the six-stage course progression…</b></div></section>'''
-
-          if old_certificates not in source:
-              raise SystemExit('Obsolete certificate markup was not found in index.html')
-          source = source.replace(old_certificates, new_certificates)
-
+          if old_certificates in source:
+              source = source.replace(old_certificates, new_certificates)
           index.write_text(source, encoding='utf-8')
+
+          schedule = Path('_site/schedule.js')
+          schedule_source = schedule.read_text(encoding='utf-8')
+          schedule_source = schedule_source.replace("\nimport('./certificates.js').catch(() => {});\n", "\n")
+          schedule.write_text(schedule_source, encoding='utf-8')
+
+          course = Path('_site/course.html')
+          course_source = course.read_text(encoding='utf-8')
+          for filename in ('reader-progress.js', 'course-enhancements.js', 'course-progress.js', 'church-connection.js'):
+              course_source = course_source.replace(
+                  f'src="{filename}"',
+                  f'src="{filename}?v={version}"'
+              )
+          course.write_text(course_source, encoding='utf-8')
           PY
 
       - name: Configure Pages
