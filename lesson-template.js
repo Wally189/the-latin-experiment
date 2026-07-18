@@ -152,7 +152,7 @@
 
   function renderComingSoon(lesson) {
     page.innerHTML = `
-      <div class="breadcrumbs">Course <span>›</span> First year <span>›</span> Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</div>
+      <div class="breadcrumbs">Course <span>›</span> First volume <span>›</span> Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</div>
       <section class="coming-soon-page">
         <div class="coming-soon-mark">${escapeHtml(lesson.roman || roman(lesson.number))}</div>
         <p class="kicker">Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</p>
@@ -171,12 +171,12 @@
 
   function renderPublished(lesson) {
     page.innerHTML = `
-      <div class="breadcrumbs">Course <span>›</span> First year <span>›</span> Lesson ${escapeHtml(lesson.roman)}</div>
+      <div class="breadcrumbs">Course <span>›</span> First volume <span>›</span> Lesson ${escapeHtml(lesson.roman)}</div>
       <div class="lesson-grid">
         <div class="main-column">
           <section class="hero">
             <div>
-              <p class="kicker">First year · learning module</p>
+              <p class="kicker">First volume · learning module</p>
               <h1>Lesson ${escapeHtml(lesson.roman)}</h1>
               <p class="subtitle">${escapeHtml(lesson.title)}.</p>
               <p class="lede">${escapeHtml(lesson.lede)}</p>

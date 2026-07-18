@@ -9,7 +9,7 @@
     <div class="l1-page">
       <section class="l1-hero">
         <div>
-          <p class="l1-kicker">First year · learning module</p>
+          <p class="l1-kicker">First volume · learning module</p>
           <h1 class="l1-title" id="ct">Lectio I</h1>
           <p class="l1-subtitle">The very first steps.</p>
           <p class="l1-lede" id="cd">The experiment begins here: one ordinary Catholic, Father William Most’s course, a notebook, a microphone and a determination to discover whether the Church’s language can become something genuinely usable.</p>
