@@ -14,8 +14,8 @@
 
   function plannedDate(start, completedLessons, daysEachWeek) {
     if (completedLessons <= 1) return start;
-    const elapsedWeeks = Math.ceil(completedLessons / daysEachWeek) - 1;
-    return addDays(start, elapsedWeeks * 7);
+    const elapsedDays = Math.ceil(((completedLessons - 1) * 7) / daysEachWeek);
+    return addDays(start, elapsedDays);
   }
 
   function renderPlan() {
@@ -30,7 +30,7 @@
     goal.innerHTML = `
       <span class="goal-label">Suggested target</span>
       <h2>${formatDate(finish)}</h2>
-      <p><strong>${weeks} weeks</strong> at ${daysEachWeek} study ${daysEachWeek === 1 ? 'day' : 'days'} each week.</p>
+      <p><strong>About ${weeks} weeks</strong> at ${daysEachWeek} study ${daysEachWeek === 1 ? 'day' : 'days'} each week.</p>
       <small>${course.totalLessons} textbook lessons · roughly ${Math.round(totalMinutesLow/60)}–${Math.round(totalMinutesHigh/60)} focused hours in total.</small>`;
 
     blocksTarget.innerHTML = course.blocks.map((block,index) => {
@@ -89,7 +89,7 @@
     .schedule-plan{align-items:start}.schedule-builder{position:sticky;top:20px}.schedule-builder .field-help{display:block;margin:-8px 0 14px;color:#d9cbc4;font-size:12px;line-height:1.45}
     .schedule-method{margin-bottom:18px;padding:18px;border-left:6px solid var(--blue);border-radius:0 15px 15px 0;background:#f3f6ff;color:#4f5667;line-height:1.65}
     .schedule-method strong{color:var(--ink)}
-    #goal{margin-top:9px}.goal-label{display:block;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.goal-label+#goal h2,#goal h2{margin:8px 0;font-size:27px}.goal-label~p,#goal p{margin:0 0 7px;line-height:1.45}.goal-label~small,#goal small{display:block;line-height:1.45}
+    #goal{margin-top:9px}#goal .goal-label{display:block;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}#goal h2{margin:8px 0;font-size:27px}#goal p{margin:0 0 7px;line-height:1.45}#goal small{display:block;line-height:1.45}
     .schedule-status{display:inline-block;margin:0 0 12px;padding:7px 11px;border-radius:999px;background:#efe7df;color:#5d5049;font-size:12px;font-weight:800}
     .block-list{display:grid;gap:12px}
     .schedule-block{overflow:hidden;border:1px solid #ddd5cf;border-left:8px solid var(--block);border-radius:17px;background:#fff;box-shadow:0 5px 16px rgba(25,8,6,.04)}
