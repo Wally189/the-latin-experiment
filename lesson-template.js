@@ -108,7 +108,10 @@
       button.dataset.publicationStatus = published ? 'published' : 'coming-soon';
       button.dataset.readerCompletable = String(published);
       button.className = `lesson-link ${published ? 'published' : 'coming-soon'}`;
-      button.innerHTML = `<span class="icon">${escapeHtml(lesson.roman || roman(number))}</span><span><strong>Lesson ${number}</strong><small>${published ? escapeHtml(lesson.title) : `${escapeHtml(lesson.title || 'Coming soon')} · coming soon`}</small></span>`;
+      const comingSoonLabel = !lesson.title || lesson.title === 'Coming soon'
+        ? 'Coming soon'
+        : `${escapeHtml(lesson.title)} · coming soon`;
+      button.innerHTML = `<span class="icon">${escapeHtml(lesson.roman || roman(number))}</span><span><strong>Lesson ${number}</strong><small>${published ? escapeHtml(lesson.title) : comingSoonLabel}</small></span>`;
       button.addEventListener('click', event => {
         if (event.target.closest('.lesson-progress-check')) return;
         renderLesson(number, true);
@@ -155,13 +158,13 @@
         <p class="kicker">Lesson ${escapeHtml(lesson.roman || roman(lesson.number))}</p>
         <h1>Coming soon.</h1>
         <p class="coming-soon-title">${escapeHtml(lesson.title || 'The next stage of the experiment')}</p>
-        <p class="coming-soon-lede">Alan has not yet completed and documented this lesson. It will be published after the real work has been done rather than filled with invented progress.</p>
+        <p class="coming-soon-lede">This lesson has not yet been added to The Latin Experiment. It will be published as the journey continues.</p>
+        <p class="coming-soon-lede coming-soon-context">The author has set himself the challenge of learning Ecclesiastical Latin and built this website to document the journey one lesson at a time. You can follow along as each lesson appears—or, if you join later, work through the published course at your own pace.</p>
         <div class="coming-soon-grid">
-          <article><span>1</span><h2>Learn</h2><p>Complete the lesson from Father Most’s original book, whether on the bus or elsewhere.</p></article>
-          <article><span>2</span><h2>Record</h2><p>Keep the handwritten notes, first reactions, difficulties, corrections and any recordings.</p></article>
-          <article><span>3</span><h2>Publish</h2><p>Add the genuine evidence to the reusable lesson template, individually or as a weekend batch.</p></article>
+          <article><span>1</span><h2>Learn</h2><p>The author works through the lesson using Father Most’s original course.</p></article>
+          <article><span>2</span><h2>Record</h2><p>The readings, handwritten notes, questions, difficulties, corrections and reflections are preserved.</p></article>
+          <article><span>3</span><h2>Publish</h2><p>The completed lesson is added to the website so readers can follow the journey or work through it later.</p></article>
         </div>
-        <div class="coming-soon-note"><strong>What the finished lesson will contain:</strong> Alan’s notebook, honest reflection, learning guidance, before-and-after evidence, journal entry and a proportionate connection to the life of the Church.</div>
         <div class="coming-soon-actions"><a class="coming-soon-button" href="index.html#materials">Open the course materials</a><a href="experiment.html">Read the experiment journal →</a></div>
       </section>`;
   }
@@ -280,7 +283,7 @@
   const style = document.createElement('style');
   style.textContent = `
     .lesson-link.coming-soon{opacity:.78}.lesson-link.coming-soon .icon{background:#9a918b}.lesson-link.coming-soon small{color:#766e69}.lesson-link.coming-soon.active{opacity:1;border-color:#d8c78f;background:#fff8df}.lesson-link.coming-soon.active .icon{background:var(--gold);color:var(--ink)}
-    .coming-soon-page{position:relative;overflow:hidden;max-width:1050px;margin:0 auto;padding:clamp(34px,6vw,80px);border:1px solid #e3d7cd;border-radius:28px;background:radial-gradient(circle at 88% 12%,rgba(221,169,55,.24),transparent 27%),linear-gradient(145deg,#fffdf9,#fff7e8);box-shadow:var(--shadow)}.coming-soon-mark{position:absolute;right:clamp(18px,5vw,70px);top:20px;color:rgba(142,21,48,.07);font:700 clamp(110px,22vw,280px)/1 Georgia,serif;pointer-events:none}.coming-soon-page h1{position:relative;margin:0;font-size:clamp(62px,10vw,126px);line-height:.86}.coming-soon-title{position:relative;margin:20px 0 8px;color:var(--burgundy);font:italic 27px Georgia,serif}.coming-soon-lede{position:relative;max-width:760px;margin:0;color:#514945;font-size:18px;line-height:1.7}.coming-soon-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:34px 0}.coming-soon-grid article{padding:20px;border:1px solid #e5d9ce;border-radius:18px;background:rgba(255,255,255,.86)}.coming-soon-grid span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--gold);font-weight:900}.coming-soon-grid h2{margin:13px 0 7px;font-size:23px}.coming-soon-grid p{margin:0;color:#655b55;line-height:1.6}.coming-soon-note{position:relative;padding:18px 20px;border-left:6px solid var(--burgundy);border-radius:0 15px 15px 0;background:#fff;color:#5e534d;line-height:1.65}.coming-soon-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:24px}.coming-soon-actions a{color:var(--burgundy);font-weight:900}.coming-soon-actions .coming-soon-button{padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;text-decoration:none}
+    .coming-soon-page{position:relative;overflow:hidden;max-width:1050px;margin:0 auto;padding:clamp(34px,6vw,80px);border:1px solid #e3d7cd;border-radius:28px;background:radial-gradient(circle at 88% 12%,rgba(221,169,55,.24),transparent 27%),linear-gradient(145deg,#fffdf9,#fff7e8);box-shadow:var(--shadow)}.coming-soon-mark{position:absolute;right:clamp(18px,5vw,70px);top:20px;color:rgba(142,21,48,.07);font:700 clamp(110px,22vw,280px)/1 Georgia,serif;pointer-events:none}.coming-soon-page h1{position:relative;margin:0;font-size:clamp(62px,10vw,126px);line-height:.86}.coming-soon-title{position:relative;margin:20px 0 8px;color:var(--burgundy);font:italic 27px Georgia,serif}.coming-soon-lede{position:relative;max-width:760px;margin:0;color:#514945;font-size:18px;line-height:1.7}.coming-soon-context{margin-top:14px}.coming-soon-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:34px 0}.coming-soon-grid article{padding:20px;border:1px solid #e5d9ce;border-radius:18px;background:rgba(255,255,255,.86)}.coming-soon-grid span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--gold);font-weight:900}.coming-soon-grid h2{margin:13px 0 7px;font-size:23px}.coming-soon-grid p{margin:0;color:#655b55;line-height:1.6}.coming-soon-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:24px}.coming-soon-actions a{color:var(--burgundy);font-weight:900}.coming-soon-actions .coming-soon-button{padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;text-decoration:none}
     .begin-block{width:100%}.begin-block .sample-latin{margin-top:18px;padding:18px;border-radius:14px;background:#fff;color:var(--ink);font:700 19px/1.55 Georgia,serif}
     .book-title-link{color:var(--burgundy);font-weight:900;text-decoration-thickness:2px;text-underline-offset:3px}
     .reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.reading-card{position:relative;padding-top:23px}.sequence-number{position:absolute;right:15px;top:14px;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--burgundy);color:#fff;font-weight:900}.after-card{border-color:#cad8f5;background:#f8faff}.after-card .sequence-number{background:var(--blue)}.after-tag{background:#eaf0ff!important;color:#244b9b!important}
