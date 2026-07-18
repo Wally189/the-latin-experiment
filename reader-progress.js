@@ -99,6 +99,13 @@
     getCompleted() {
       return readStored();
     },
+    replaceCompleted(lessons) {
+      return write(lessons);
+    },
+    retainCompleted(allowedLessons) {
+      const allowed = new Set(normalise(allowedLessons));
+      return write(readStored().filter(number => allowed.has(number)));
+    },
     count() {
       return readStored().length;
     },
