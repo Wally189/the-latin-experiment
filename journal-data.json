@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "lesson": 1,
+      "roman": "I",
+      "slug": "lesson-1",
+      "title": "The very first steps",
+      "date": "",
+      "status": "Awaiting completion",
+      "todayLatin": "This entry will be written after Lesson I has been completed. It will record what became clear, what remained difficult and what changed between the first and second readings.",
+      "journal": [
+        "The journal entry for this lesson will be added after the work is complete. It will preserve the real sequence: first reading, study, second reading and reflection, without inventing progress in advance."
+      ]
+    }
+  ]
+}
