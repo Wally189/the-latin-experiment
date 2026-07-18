@@ -6,10 +6,11 @@
       "slug": "lesson-1",
       "title": "The very first steps",
       "date": "",
-      "status": "Template preview — awaiting completion",
-      "todayLatin": "This entry will be replaced after Lesson I has been genuinely completed. It will record what was easy, what was difficult, what remained challenging and what should happen next.",
+      "publicationStatus": "coming-soon",
+      "status": "Awaiting completion",
+      "todayLatin": "This entry will be written after Lesson I has been genuinely completed.",
       "journal": [
-        "The structure is ready, but Alan has not yet completed the lesson. This placeholder exists so the full publication workflow can be tested without inventing progress."
+        "The structure is ready, but the journal will not be presented as a completed entry until Alan has actually done the lesson."
       ]
     },
     {
@@ -18,10 +19,11 @@
       "slug": "lesson-2",
       "title": "Nouns: first patterns",
       "date": "",
-      "status": "Demonstration template — test content only",
-      "todayLatin": "Lesson II is present as a demonstration of the reusable template. Its real account will be written from Alan’s notes, notebook image and reflections after he completes the lesson.",
+      "publicationStatus": "coming-soon",
+      "status": "Awaiting completion",
+      "todayLatin": "This entry will be written from Alan’s notes, notebook image and reflections after Lesson II has been completed.",
       "journal": [
-        "This is not a claim that Lesson II has been studied. It shows where the genuine bus-journey reflection, corrections and evidence will appear when supplied."
+        "The reusable record is prepared behind the scenes, but no public learning claim is made before the real work exists."
       ]
     }
   ]
