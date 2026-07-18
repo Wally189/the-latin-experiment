@@ -1,0 +1,388 @@
+{
+  "terms": [
+    {
+      "id": "noun",
+      "term": "Noun",
+      "category": "Building blocks",
+      "aliases": ["noun", "nouns"],
+      "plain": "A naming word: a person, place, thing or idea. In Latin, a noun’s ending often changes to show what job it is doing in the sentence.",
+      "example": "agnus — lamb; ecclesia — church"
+    },
+    {
+      "id": "verb",
+      "term": "Verb",
+      "category": "Building blocks",
+      "aliases": ["verb", "verbs"],
+      "plain": "A doing or being word. A Latin verb can carry information about who is acting, when it happens and whether the subject acts or receives the action.",
+      "example": "orat — prays; est — is"
+    },
+    {
+      "id": "preposition",
+      "term": "Preposition",
+      "category": "Building blocks",
+      "aliases": ["preposition", "prepositions"],
+      "plain": "A small word that shows a relationship such as in, with, from, to or through. In Latin, a preposition normally expects the following noun to use a particular case.",
+      "example": "in ecclesia — in the church"
+    },
+    {
+      "id": "adjective",
+      "term": "Adjective",
+      "category": "Building blocks",
+      "aliases": ["adjective", "adjectives"],
+      "plain": "A describing word. In Latin, an adjective changes its ending so that it matches the noun it describes in gender, number and case.",
+      "example": "bonus pastor — good shepherd"
+    },
+    {
+      "id": "agreement",
+      "term": "Agreement",
+      "category": "Building blocks",
+      "aliases": ["adjective agreement", "agreement"],
+      "plain": "The matching system between connected words. A Latin adjective normally matches its noun in gender, number and case, even when the two words are separated.",
+      "example": "The matching endings help show which description belongs to which noun."
+    },
+    {
+      "id": "singular-and-plural",
+      "term": "Singular and plural",
+      "category": "Building blocks",
+      "aliases": ["singular and plural", "singular", "plural"],
+      "plain": "Singular means one; plural means more than one. Latin usually shows this difference through word endings.",
+      "example": "agnus — a lamb; agni — lambs"
+    },
+    {
+      "id": "case",
+      "term": "Case",
+      "category": "Nouns and cases",
+      "aliases": ["case", "cases"],
+      "plain": "A way of showing what job a noun or pronoun is doing. English relies heavily on word order; Latin often changes the ending instead. Nominative, accusative, genitive, dative and ablative are the main cases met in this course.",
+      "example": "agnus can be the doer; agnum can receive the action."
+    },
+    {
+      "id": "declension",
+      "term": "Declension",
+      "category": "Nouns and cases",
+      "aliases": ["declension", "declensions"],
+      "plain": "A family of noun-ending patterns. Saying that a noun is first, second or third declension tells you which set of endings it normally follows; it is not a level of difficulty or a separate kind of Latin.",
+      "example": "Think of it as the noun’s pattern family."
+    },
+    {
+      "id": "nominative",
+      "term": "Nominative",
+      "category": "Nouns and cases",
+      "aliases": ["nominative"],
+      "plain": "The case most often used for the subject—the person or thing doing the action or being described.",
+      "example": "Agnus tollit… — The Lamb takes away…"
+    },
+    {
+      "id": "accusative",
+      "term": "Accusative",
+      "category": "Nouns and cases",
+      "aliases": ["accusative"],
+      "plain": "The case most often used for the direct object—the person or thing directly receiving the action. It is also used after certain prepositions.",
+      "example": "videt agnum — he sees the lamb"
+    },
+    {
+      "id": "genitive",
+      "term": "Genitive",
+      "category": "Nouns and cases",
+      "aliases": ["genitive", "genitives"],
+      "plain": "The case commonly used for belonging, origin or close connection. English often expresses it with ‘of’ or an apostrophe-s.",
+      "example": "Agnus Dei — Lamb of God"
+    },
+    {
+      "id": "dative",
+      "term": "Dative",
+      "category": "Nouns and cases",
+      "aliases": ["dative", "datives"],
+      "plain": "The case commonly used for the person or thing receiving, benefiting from or being affected by something. English often uses ‘to’ or ‘for’.",
+      "example": "dat discipulo librum — he gives the student a book"
+    },
+    {
+      "id": "ablative",
+      "term": "Ablative",
+      "category": "Nouns and cases",
+      "aliases": ["ablative", "ablatives"],
+      "plain": "A flexible case used for ideas such as by, with, from, in or through. Context and any nearby preposition tell you which sense is intended.",
+      "example": "cum amico — with a friend"
+    },
+    {
+      "id": "locative",
+      "term": "Locative",
+      "category": "Nouns and cases",
+      "aliases": ["locative"],
+      "plain": "A small surviving case used mainly to say where something is, especially with names of towns, small islands and a few common nouns.",
+      "example": "Romae — at Rome"
+    },
+    {
+      "id": "neuter",
+      "term": "Neuter noun",
+      "category": "Nouns and cases",
+      "aliases": ["neuter noun", "neuter nouns", "neuter"],
+      "plain": "One of Latin’s three grammatical genders: masculine, feminine and neuter. It is a grammatical grouping, not a claim that the thing itself has a biological sex.",
+      "example": "verbum — word"
+    },
+    {
+      "id": "person",
+      "term": "First, second and third person",
+      "category": "Verbs",
+      "aliases": ["first- and second-person", "first and second person", "first person", "second person", "third person"],
+      "plain": "These labels simply identify who is involved. First person is I or we; second person is you; third person is he, she, it or they.",
+      "example": "oro — I pray; oras — you pray; orat — he, she or it prays"
+    },
+    {
+      "id": "tense",
+      "term": "Tense",
+      "category": "Verbs",
+      "aliases": ["tense", "tenses"],
+      "plain": "The part of a verb system that places an action in time or shows how it unfolds. Latin has several past, present and future forms.",
+      "example": "orat — prays; oravit — prayed or has prayed"
+    },
+    {
+      "id": "present",
+      "term": "Present tense",
+      "category": "Verbs",
+      "aliases": ["present active", "present tense", "present"],
+      "plain": "A verb form normally used for what is happening now, what regularly happens or what is generally true.",
+      "example": "orat — he or she prays / is praying"
+    },
+    {
+      "id": "imperfect",
+      "term": "Imperfect tense",
+      "category": "Verbs",
+      "aliases": ["imperfect", "imperfect tense"],
+      "plain": "A past form often used for an action that was continuing, repeated or not viewed as a single completed event.",
+      "example": "orabat — he or she was praying / used to pray"
+    },
+    {
+      "id": "future",
+      "term": "Future tense",
+      "category": "Verbs",
+      "aliases": ["future tense", "future forms", "future"],
+      "plain": "A verb form used for what will happen.",
+      "example": "orabit — he or she will pray"
+    },
+    {
+      "id": "perfect",
+      "term": "Perfect tense",
+      "category": "Verbs",
+      "aliases": ["perfect verbs", "perfect tense", "perfect"],
+      "plain": "A past form that normally presents an action as completed. Depending on context, English may translate it as ‘did’ or ‘has done’.",
+      "example": "oravit — he or she prayed / has prayed"
+    },
+    {
+      "id": "third-person-perfect",
+      "term": "Third-person perfect",
+      "category": "Verbs",
+      "aliases": ["third-person perfect", "third person perfect"],
+      "plain": "A frightening label for a simple idea: a completed action done by he, she, it or they. ‘Third person’ tells you who; ‘perfect’ tells you the action is viewed as completed.",
+      "example": "vidit — he, she or it saw; viderunt — they saw"
+    },
+    {
+      "id": "pluperfect",
+      "term": "Pluperfect tense",
+      "category": "Verbs",
+      "aliases": ["pluperfect", "pluperfect tense"],
+      "plain": "A past-before-the-past form. It describes something that had already happened before another past event.",
+      "example": "oraverat — he or she had prayed"
+    },
+    {
+      "id": "future-perfect",
+      "term": "Future perfect",
+      "category": "Verbs",
+      "aliases": ["future perfect"],
+      "plain": "A form for something that will already have been completed by a future point.",
+      "example": "oraverit — he or she will have prayed"
+    },
+    {
+      "id": "voice",
+      "term": "Active and passive voice",
+      "category": "Verbs",
+      "aliases": ["active and passive", "active voice", "passive voice", "voice"],
+      "plain": "Voice tells you whether the subject performs the action or receives it. Active: ‘the priest blesses the people’. Passive: ‘the people are blessed’.",
+      "example": "benedicit — blesses; benedicitur — is blessed"
+    },
+    {
+      "id": "perfect-passive",
+      "term": "Perfect passive",
+      "category": "Verbs",
+      "aliases": ["perfect passive", "perfect passive forms", "perfect passive constructions"],
+      "plain": "A completed action received by the subject. It is often built from a participle plus a form of ‘to be’.",
+      "example": "laudatus est — he was praised / has been praised"
+    },
+    {
+      "id": "subjunctive",
+      "term": "Subjunctive",
+      "category": "Verbs",
+      "aliases": ["subjunctive", "subjunctives"],
+      "plain": "A verb mood often used when the action is presented as intended, possible, commanded, feared, questioned or dependent on another idea rather than stated as a plain fact. The surrounding words usually reveal why it is there.",
+      "example": "ut oret — so that he may pray"
+    },
+    {
+      "id": "perfect-subjunctive",
+      "term": "Perfect subjunctive",
+      "category": "Verbs",
+      "aliases": ["perfect subjunctive"],
+      "plain": "A subjunctive form that presents an action as completed. Its exact English meaning depends on the clause around it.",
+      "example": "oraverit — may have prayed / has prayed, depending on context"
+    },
+    {
+      "id": "imperative",
+      "term": "Imperative or command",
+      "category": "Verbs",
+      "aliases": ["passive imperative", "imperative", "imperatives", "commands", "command", "prohibitions", "prohibition"],
+      "plain": "The form used to tell or ask someone to do something. A prohibition is a negative command—telling someone not to do it. A passive imperative tells someone to receive or undergo an action.",
+      "example": "ora — pray; noli timere — do not be afraid"
+    },
+    {
+      "id": "irregular-verb",
+      "term": "Irregular verb",
+      "category": "Verbs",
+      "aliases": ["irregular verb", "irregular verbs"],
+      "plain": "A common verb that does not follow the most regular pattern in every form. ‘Irregular’ does not mean random; it means the learner must become familiar with its particular pattern.",
+      "example": "esse — to be; posse — to be able; ire — to go"
+    },
+    {
+      "id": "deponent",
+      "term": "Deponent verb",
+      "category": "Verbs",
+      "aliases": ["deponent verb", "deponent verbs", "deponent forms", "deponent"],
+      "plain": "A verb that looks passive in form but normally has an active meaning. Treat it as a special pattern rather than trying to translate it as passive.",
+      "example": "loquitur — he or she speaks"
+    },
+    {
+      "id": "infinitive",
+      "term": "Infinitive",
+      "category": "Verbs",
+      "aliases": ["future infinitive", "future infinitives", "infinitive", "infinitives"],
+      "plain": "The basic ‘to…’ form of a verb, such as to pray or to see. Latin also has infinitives that indicate time and voice, including a future infinitive for an action expected to happen later.",
+      "example": "orare — to pray"
+    },
+    {
+      "id": "participle",
+      "term": "Participle",
+      "category": "Verbs",
+      "aliases": ["future participle", "future participles", "participle", "participles"],
+      "plain": "A verb form used like an adjective. It describes a noun while retaining an idea of action. A future participle describes someone or something about to act or intending to act.",
+      "example": "orans — praying; oraturus — about to pray"
+    },
+    {
+      "id": "pronoun",
+      "term": "Pronoun",
+      "category": "Connecting ideas",
+      "aliases": ["pronoun", "pronouns"],
+      "plain": "A word used instead of a noun, such as he, she, it, they, this or that. Latin pronouns change form according to their job in the sentence.",
+      "example": "ille — he / that man; eum — him"
+    },
+    {
+      "id": "demonstrative",
+      "term": "Demonstrative",
+      "category": "Connecting ideas",
+      "aliases": ["demonstrative", "demonstratives"],
+      "plain": "A pointing word such as this, that, these or those. In Latin it changes ending to match its number, gender and case.",
+      "example": "hic — this; ille — that"
+    },
+    {
+      "id": "relative-clause",
+      "term": "Relative clause",
+      "category": "Connecting ideas",
+      "aliases": ["relative clause", "relative clauses"],
+      "plain": "A part of a sentence beginning with who, which or that and giving more information about a noun.",
+      "example": "Agnus, qui tollit… — the Lamb, who takes away…"
+    },
+    {
+      "id": "indirect-statement",
+      "term": "Indirect statement",
+      "category": "Connecting ideas",
+      "aliases": ["indirect statement", "indirect statements"],
+      "plain": "A way of reporting what someone says, thinks, knows or perceives without quoting their exact words. Latin commonly uses an accusative subject plus an infinitive.",
+      "example": "dicit eum venire — he says that he is coming"
+    },
+    {
+      "id": "indirect-question",
+      "term": "Indirect question",
+      "category": "Connecting ideas",
+      "aliases": ["indirect question", "indirect questions"],
+      "plain": "A question reported inside another sentence rather than asked directly.",
+      "example": "rogat quid faciat — he asks what he is doing / should do"
+    },
+    {
+      "id": "purpose-clause",
+      "term": "Purpose clause",
+      "category": "Connecting ideas",
+      "aliases": ["purpose clause", "purpose clauses", "purpose"],
+      "plain": "A clause explaining why something is done—its aim or purpose. Latin often introduces it with ut or ne and uses a subjunctive verb.",
+      "example": "venit ut oret — he comes in order to pray"
+    },
+    {
+      "id": "result-clause",
+      "term": "Result clause",
+      "category": "Connecting ideas",
+      "aliases": ["result clause", "result clauses", "result"],
+      "plain": "A clause explaining what happened as a consequence. Latin often uses ut with a subjunctive, usually after a word suggesting such, so or so great.",
+      "example": "tam laetus est ut cantet — he is so happy that he sings"
+    },
+    {
+      "id": "cum-clause",
+      "term": "Cum clause",
+      "category": "Connecting ideas",
+      "aliases": ["cum clause", "cum clauses"],
+      "plain": "A clause beginning with cum. Depending on context, cum can mean when, since or although. The verb form and the surrounding story help identify the sense.",
+      "example": "cum veniret — when / since / although he was coming"
+    },
+    {
+      "id": "ablative-absolute",
+      "term": "Ablative absolute",
+      "category": "Connecting ideas",
+      "aliases": ["ablative absolute", "ablative absolutes"],
+      "plain": "A compact side phrase, usually containing a noun and participle in the ablative, that gives background such as time, cause or circumstance. It is grammatically ‘loose’ from the main sentence.",
+      "example": "missa finita — when the Mass had ended"
+    },
+    {
+      "id": "gerund",
+      "term": "Gerund",
+      "category": "Advanced tools",
+      "aliases": ["gerund", "gerunds"],
+      "plain": "A verbal noun: the action itself treated as a thing. English often uses an -ing form in this way.",
+      "example": "ars orandi — the art of praying"
+    },
+    {
+      "id": "gerundive",
+      "term": "Gerundive",
+      "category": "Advanced tools",
+      "aliases": ["gerundive of obligation", "gerundive constructions", "gerundive", "gerundives"],
+      "plain": "A verbal adjective usually carrying the sense of something needing or deserving to be done. With a form of ‘to be’, it can express obligation.",
+      "example": "hoc faciendum est — this must be done"
+    },
+    {
+      "id": "condition",
+      "term": "Conditional sentence",
+      "category": "Advanced tools",
+      "aliases": ["conditional meaning", "conditional", "conditions", "condition"],
+      "plain": "An if–then sentence. Latin changes its verb forms according to whether the condition is presented as factual, possible, unlikely or contrary to fact.",
+      "example": "si venit, gaudeo — if he comes, I rejoice"
+    },
+    {
+      "id": "comparison",
+      "term": "Comparison",
+      "category": "Advanced tools",
+      "aliases": ["comparison"],
+      "plain": "The system used for ideas such as good, better and best, or strong, stronger and strongest.",
+      "example": "bonus, melior, optimus — good, better, best"
+    },
+    {
+      "id": "impersonal-verb",
+      "term": "Impersonal verb",
+      "category": "Advanced tools",
+      "aliases": ["impersonal verb", "impersonal verbs"],
+      "plain": "A verb normally used without a specific person or thing as its subject. English has similar expressions such as ‘it rains’ or ‘it is necessary’.",
+      "example": "oportet — it is necessary"
+    },
+    {
+      "id": "i-stem",
+      "term": "I-stem",
+      "category": "Advanced tools",
+      "aliases": ["i-stem rules", "i-stem", "i-stems"],
+      "plain": "A subgroup within the third declension whose endings preserve an extra i in certain forms. It is best understood as a variation within the normal third-declension pattern.",
+      "example": "civis, civium — citizen, of citizens"
+    }
+  ]
+}
