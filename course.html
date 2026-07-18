@@ -9,6 +9,7 @@
 <body>
 <div class="loading">Opening your next lesson…</div>
 <script>
+const legacyLesson=/^#lesson-(\d+)$/.exec(location.hash);if(legacyLesson){const url=new URL(location.href);url.searchParams.set('lesson',legacyLesson[1]);url.hash='';history.replaceState({},'',url.pathname+url.search)}
 fetch('course-source.html',{cache:'no-store'})
   .then(response=>{if(!response.ok)throw new Error('Course source could not be loaded.');return response.text()})
   .then(source=>{
