@@ -3,88 +3,48 @@
   if (!section) return;
 
   const milestones = [
-    {
-      code: 'Pre-A1',
-      lessons: 1,
-      roman: 'I',
-      colour: 'var(--burgundy)',
-      title: 'The first complete experiment',
-      description: 'Complete one full cycle: first reading, vocabulary, handwriting, study, second reading and reflection.'
-    },
-    {
-      code: 'Early A1',
-      lessons: 5,
-      roman: 'V',
-      colour: 'var(--gold)',
-      title: 'Recognition begins to settle',
-      description: 'Recognise recurring vocabulary, familiar endings and the first basic sentence patterns across several readings.'
-    },
-    {
-      code: 'A1',
-      lessons: 10,
-      roman: 'X',
-      colour: 'var(--blue)',
-      title: 'A working foundation',
-      description: 'Follow the broad movement of short adapted Latin readings and identify common forms without translating every word first.'
-    },
-    {
-      code: 'A1+',
-      lessons: 20,
-      roman: 'XX',
-      colour: 'var(--purple)',
-      title: 'Beyond isolated sentences',
-      description: 'Read more connected passages and recognise a growing range of noun, adjective and verb forms with support.'
-    },
-    {
-      code: 'A2',
-      lessons: 40,
-      roman: 'XL',
-      colour: 'var(--burgundy)',
-      title: 'Connected reading',
-      description: 'Work through increasingly complex prose involving time, voice, pronouns and connected clauses.'
-    },
-    {
-      code: 'A2+ / B1 pathway',
-      lessons: 81,
-      roman: 'LXXXI',
-      colour: 'var(--green)',
-      title: 'Volume I completed',
-      description: 'Complete Father Most’s first-year course with experience of the principal cases, tenses, voices and moods introduced in Volume I.'
-    }
+    {code:'Pre-A1',lessons:1,roman:'I',colour:'var(--burgundy)',title:'The first complete experiment',description:'Complete one full cycle: first reading, vocabulary, handwriting, study, second reading and reflection.'},
+    {code:'Early A1',lessons:5,roman:'V',colour:'var(--gold)',title:'Recognition begins to settle',description:'Recognise recurring vocabulary, familiar endings and the first basic sentence patterns across several readings.'},
+    {code:'A1',lessons:10,roman:'X',colour:'var(--blue)',title:'A working foundation',description:'Follow the broad movement of short adapted Latin readings and identify common forms without translating every word first.'},
+    {code:'A1+',lessons:20,roman:'XX',colour:'var(--purple)',title:'Beyond isolated sentences',description:'Read more connected passages and recognise a growing range of noun, adjective and verb forms with support.'},
+    {code:'A2',lessons:40,roman:'XL',colour:'var(--burgundy)',title:'Connected reading',description:'Work through increasingly complex prose involving time, voice, pronouns and connected clauses.'},
+    {code:'A2+ / B1 pathway',lessons:81,roman:'LXXXI',colour:'var(--green)',title:'Volume I completed',description:'Complete Father Most’s first-year course with experience of the principal cases, tenses, voices and moods introduced in Volume I.'}
   ];
 
+  let publishedLessons = new Set();
+
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'
   }[character]));
 
-  function countCompletedInSequence(values) {
-    const completed = new Set((Array.isArray(values) ? values : [])
-      .map(Number)
-      .filter(number => Number.isInteger(number) && number >= 1 && number <= 81));
-    let lesson = 0;
-    while (lesson < 81 && completed.has(lesson + 1)) lesson += 1;
-    return lesson;
+  function storedCompletion() {
+    if (window.LatinExperimentProgress) return window.LatinExperimentProgress.getCompleted?.() || [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem('latinExperiment.completedLessons.v1') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      return [];
+    }
   }
 
   function completedCount() {
-    if (window.LatinExperimentProgress) {
-      if (typeof window.LatinExperimentProgress.completedThrough === 'function') {
-        return window.LatinExperimentProgress.completedThrough();
-      }
-      return countCompletedInSequence(window.LatinExperimentProgress.getCompleted?.() || []);
-    }
-    try {
-      const parsed = JSON.parse(localStorage.getItem('latinExperiment.completedLessons.v1') || '[]');
-      return countCompletedInSequence(parsed);
-    } catch (error) {
-      return 0;
-    }
+    const completed = new Set(storedCompletion()
+      .map(Number)
+      .filter(number => Number.isInteger(number) && publishedLessons.has(number)));
+    let lesson = 0;
+    while (lesson < 81 && publishedLessons.has(lesson + 1) && completed.has(lesson + 1)) lesson += 1;
+    return lesson;
   }
 
-  function render(completedLessons) {
+  function render() {
+    const completedLessons = completedCount();
+    const publishedCount = publishedLessons.size;
     const currentMilestone = [...milestones].reverse().find(item => completedLessons >= item.lessons);
     const nextMilestone = milestones.find(item => completedLessons < item.lessons);
     const percentage = Math.min(100, Math.round((completedLessons / 81) * 100));
+    const progressText = publishedCount === 0
+      ? 'Lesson I is coming soon. Reader progress begins when the first completed lesson is published.'
+      : `${currentMilestone ? `Current indicative stage: <strong>${escapeHtml(currentMilestone.code)}</strong>.` : 'Complete Lesson I to reach the first indicative stage.'} ${nextMilestone ? `The next milestone is ${escapeHtml(nextMilestone.code)} at Lesson ${nextMilestone.lessons}.` : 'Volume I is complete.'}`;
 
     section.innerHTML = `
       <h1>Certificates</h1>
@@ -99,7 +59,7 @@
         <div>
           <span class="progress-label">Recorded progress on this device</span>
           <h2>${completedLessons} of 81 lessons</h2>
-          <p>${currentMilestone ? `Current indicative stage: <strong>${escapeHtml(currentMilestone.code)}</strong>.` : 'Complete Lesson I to reach the first indicative stage.'} ${nextMilestone ? `The next milestone is ${escapeHtml(nextMilestone.code)} at Lesson ${nextMilestone.lessons}.` : 'Volume I is complete.'}</p>
+          <p>${progressText}</p>
         </div>
         <div class="progress-ring" style="--progress:${percentage * 3.6}deg"><span>${percentage}%</span></div>
         <div class="progress-track"><span style="width:${percentage}%"></span></div>
@@ -123,7 +83,7 @@
         }).join('')}
       </div>
 
-      <div class="certificate-footer-note"><strong>What completion means here:</strong> these stages follow the uninterrupted sequence of lessons you mark complete in this browser. If an earlier lesson is unmarked, the progress display returns to that point until the gap is completed again. They do not claim that Father Most assigned CEFR levels to his book, or that selecting a check automatically proves mastery.</div>`;
+      <div class="certificate-footer-note"><strong>What completion means here:</strong> only published lessons can contribute to these stages. Progress follows the uninterrupted sequence of published lessons marked complete in this browser. If an earlier lesson is unmarked, the display returns to that point until the gap is completed again.</div>`;
   }
 
   const style = document.createElement('style');
@@ -138,10 +98,20 @@
   `;
   document.head.appendChild(style);
 
-  const sync = () => render(completedCount());
-  sync();
-  window.addEventListener('latin-progress-changed', sync);
+  render();
+  fetch('lessons-data.json', {cache:'no-store'})
+    .then(response => response.ok ? response.json() : {lessons:[]})
+    .then(data => {
+      publishedLessons = new Set((data.lessons || [])
+        .filter(lesson => lesson.publicationStatus === 'published')
+        .map(lesson => Number(lesson.number))
+        .filter(Number.isInteger));
+      render();
+    })
+    .catch(render);
+
+  window.addEventListener('latin-progress-changed', render);
   window.addEventListener('storage', event => {
-    if (event.key === 'latinExperiment.completedLessons.v1') sync();
+    if (event.key === 'latinExperiment.completedLessons.v1') render();
   });
 })();
