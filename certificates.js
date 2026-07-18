@@ -57,11 +57,25 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[character]));
 
+  function countCompletedInSequence(values) {
+    const completed = new Set((Array.isArray(values) ? values : [])
+      .map(Number)
+      .filter(number => Number.isInteger(number) && number >= 1 && number <= 81));
+    let lesson = 0;
+    while (lesson < 81 && completed.has(lesson + 1)) lesson += 1;
+    return lesson;
+  }
+
   function completedCount() {
-    if (window.LatinExperimentProgress) return window.LatinExperimentProgress.count();
+    if (window.LatinExperimentProgress) {
+      if (typeof window.LatinExperimentProgress.completedThrough === 'function') {
+        return window.LatinExperimentProgress.completedThrough();
+      }
+      return countCompletedInSequence(window.LatinExperimentProgress.getCompleted?.() || []);
+    }
     try {
       const parsed = JSON.parse(localStorage.getItem('latinExperiment.completedLessons.v1') || '[]');
-      return Array.isArray(parsed) ? new Set(parsed.map(Number).filter(Number.isInteger)).size : 0;
+      return countCompletedInSequence(parsed);
     } catch (error) {
       return 0;
     }
@@ -109,7 +123,7 @@
         }).join('')}
       </div>
 
-      <div class="certificate-footer-note"><strong>What completion means here:</strong> these stages follow the lessons you mark complete in this browser. They do not claim that Father Most assigned CEFR levels to his book, or that selecting a check automatically proves mastery.</div>`;
+      <div class="certificate-footer-note"><strong>What completion means here:</strong> these stages follow the uninterrupted sequence of lessons you mark complete in this browser. If an earlier lesson is unmarked, the progress display returns to that point until the gap is completed again. They do not claim that Father Most assigned CEFR levels to his book, or that selecting a check automatically proves mastery.</div>`;
   }
 
   const style = document.createElement('style');
