@@ -23,12 +23,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Build publish directory
+        env:
+          RELEASE_VERSION: ${{ github.sha }}
+        run: |
+          mkdir -p _site
+          rsync -a --exclude '.git' --exclude '_site' ./ _site/
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          version = os.environ['RELEASE_VERSION']
+          index = Path('_site/index.html')
+          source = index.read_text(encoding='utf-8')
+
+          old = '<script src="schedule.js"></script>'
+          new = (
+              f'<script src="schedule.js?v={version}"></script>\n'
+              f'<script src="certificates.js?v={version}"></script>'
+          )
+
+          if old not in source:
+              raise SystemExit('Expected schedule script tag was not found in index.html')
+
+          index.write_text(source.replace(old, new), encoding='utf-8')
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload repository
+
+      - name: Upload prepared site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "_site"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
