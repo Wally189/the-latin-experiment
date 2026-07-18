@@ -149,3 +149,43 @@
 })();
 
 import('./certificates.js').catch(() => {});
+
+(() => {
+  const form = document.querySelector('[data-v="contact"] form');
+  if (!form) return;
+
+  form.removeAttribute('onsubmit');
+  form.onsubmit = null;
+  form.action = 'https://formspree.io/f/mgvgrgvb';
+  form.method = 'POST';
+  form.acceptCharset = 'UTF-8';
+
+  const inputs = form.querySelectorAll('input');
+  if (inputs[0]) {
+    inputs[0].name = 'name';
+    inputs[0].autocomplete = 'name';
+  }
+  if (inputs[1]) {
+    inputs[1].name = 'email';
+    inputs[1].autocomplete = 'email';
+  }
+
+  const subject = form.querySelector('#subject');
+  const message = form.querySelector('#message');
+  if (subject) subject.name = 'subject';
+  if (message) message.name = 'message';
+
+  if (!form.querySelector('input[name="_subject"]')) {
+    const formSubject = document.createElement('input');
+    formSubject.type = 'hidden';
+    formSubject.name = '_subject';
+    formSubject.value = 'Message from The Latin Experiment';
+    form.prepend(formSubject);
+  }
+
+  const button = form.querySelector('button');
+  if (button) {
+    button.type = 'submit';
+    button.textContent = 'Send message →';
+  }
+})();
