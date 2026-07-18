@@ -35,7 +35,10 @@
       const number = lessonNumber(row);
       if (!number) return;
       row.dataset.lessonNumber = String(number);
-      if (row.classList.contains('locked')) return;
+      if (row.dataset.readerCompletable !== 'true') {
+        row.querySelector('.lesson-progress-check')?.remove();
+        return;
+      }
       if (row.querySelector('.lesson-progress-check')) return;
 
       const check = document.createElement('span');
@@ -65,28 +68,27 @@
     const clean = original.cloneNode(true);
     clean.dataset.sharedProgress = 'true';
     original.replaceWith(clean);
-    clean.addEventListener('click', () => progress.toggle(currentLessonNumber()));
-  }
-
-  function nextLessonNumber() {
-    if (typeof progress.nextIncomplete === 'function') return progress.nextIncomplete();
-    const completed = new Set(progress.getCompleted());
-    for (let lesson = 1; lesson <= 81; lesson += 1) {
-      if (!completed.has(lesson)) return lesson;
-    }
-    return null;
+    clean.addEventListener('click', () => {
+      const number = currentLessonNumber();
+      if (window.LatinLessonTemplate?.isPublished?.(number)) progress.toggle(number);
+    });
   }
 
   function sequenceCount() {
     if (typeof progress.completedThrough === 'function') return progress.completedThrough();
-    const next = nextLessonNumber();
-    return next === null ? 81 : next - 1;
+    const completed = new Set(progress.getCompleted());
+    let count = 0;
+    while (count < 81 && completed.has(count + 1)) count += 1;
+    return count;
+  }
+
+  function preferredLessonNumber() {
+    return window.LatinLessonTemplate?.preferredLessonNumber?.() || 1;
   }
 
   function markNextLesson() {
-    const next = nextLessonNumber();
+    const next = preferredLessonNumber();
     document.querySelectorAll('.lesson-link.next-up').forEach(row => row.classList.remove('next-up'));
-    if (!next) return;
     document.querySelectorAll(`.lesson-link[data-lesson-number="${next}"]`).forEach(row => row.classList.add('next-up'));
   }
 
@@ -99,7 +101,7 @@
 
     document.querySelectorAll('.lesson-link[data-lesson-number]').forEach(row => {
       const number = Number(row.dataset.lessonNumber);
-      const done = completed.includes(number);
+      const done = row.dataset.readerCompletable === 'true' && completed.includes(number);
       row.classList.toggle('reader-complete', done);
       const check = row.querySelector('.lesson-progress-check');
       if (check) {
@@ -136,7 +138,7 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .lesson-link:not(.locked){grid-template-columns:34px minmax(0,1fr) 30px}
+    .lesson-link[data-reader-completable="true"]{grid-template-columns:34px minmax(0,1fr) 30px}
     .lesson-progress-check{display:grid;place-items:center;align-self:center;width:27px;height:27px;border:2px solid #bdb4ad;border-radius:50%;background:#fff;color:#fff;font-size:16px;font-weight:900;transition:.18s ease;box-shadow:0 2px 5px rgba(29,8,6,.06)}
     .lesson-progress-check:hover,.lesson-progress-check:focus-visible{border-color:var(--green);outline:3px solid rgba(46,112,81,.18);outline-offset:2px}
     .lesson-progress-check.checked{border-color:var(--green);background:var(--green);color:#fff}
@@ -145,20 +147,18 @@
     .lesson-link.reader-complete .icon{background:var(--green)}
     .lesson-link.reader-complete small:after{content:" · completed";color:var(--green);font-weight:800}
     .lesson-link.next-up{border-color:var(--gold);background:#fff8e7;box-shadow:0 0 0 3px rgba(221,169,55,.14)}
-    .lesson-link.next-up small:before{content:"Next lesson · ";color:#8b5b00;font-weight:900}
-    .lesson-link.next-up.locked small:before{content:"Next lesson · awaiting publication · "}
+    .lesson-link.next-up small:before{content:"Next up · ";color:#8b5b00;font-weight:900}
     .complete-button.done{background:var(--green)!important;color:#fff!important}
-    @media(max-width:1050px){.lesson-link:not(.locked){grid-template-columns:58px minmax(0,1fr) 36px}.lesson-progress-check{width:32px;height:32px}}
+    @media(max-width:1050px){.lesson-link[data-reader-completable="true"]{grid-template-columns:58px minmax(0,1fr) 36px}.lesson-progress-check{width:32px;height:32px}}
   `;
   document.head.appendChild(style);
 
   function handleProgressChange() {
     sync();
-    const next = nextLessonNumber();
+    const preferred = preferredLessonNumber();
     const current = currentLessonNumber();
-    const nextRecord = window.LatinLessonTemplate?.getLesson?.(next);
-    if (next && current > next && nextRecord?.available) {
-      window.LatinLessonTemplate.render(next);
+    if (preferred < current && window.LatinLessonTemplate?.isPublished?.(preferred)) {
+      window.LatinLessonTemplate.render(preferred);
     }
   }
 
