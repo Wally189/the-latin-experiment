@@ -13,7 +13,8 @@ fetch('course-source.html',{cache:'no-store'})
   .then(response=>{if(!response.ok)throw new Error('Course source could not be loaded.');return response.text()})
   .then(source=>{
     if(!source.includes('</body>'))throw new Error('Course source is incomplete.');
-    const output=source.replace('</body>','<script src="course-enhancements.js"><\/script></body>');
+    const scripts='<script src="course-enhancements.js"><\/script><script src="church-connection.js"><\/script>';
+    const output=source.replace('</body>',scripts+'</body>');
     document.open();document.write(output);document.close();
   })
   .catch(error=>{document.body.innerHTML='<main class="loading"><p><strong>Lesson I could not be opened.</strong><br>'+error.message+'</p></main>'});
