@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Latin Experiment — Lesson I</title>
+  <style>html,body{margin:0;min-height:100%;background:#efe3d6}body{font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;color:#1d0806}</style>
+</head>
+<body>
+  <div class="loading">Opening Lesson I…</div>
+  <script>
+  fetch('course-source.html', {cache:'no-store'})
+    .then(response => {
+      if (!response.ok) throw new Error('Course source could not be loaded.');
+      return response.text();
+    })
+    .then(course => {
+      const replaceOnce = (oldText, newText) => {
+        if (!course.includes(oldText)) throw new Error('Expected course content was not found.');
+        course = course.replace(oldText, newText);
+      };
+
+      const navigation = [
+        ['<a href="#">⌂ Home</a>', '<a href="index.html#home">⌂ Home</a>'],
+        ['<a href="#" aria-current="page">▤ Course</a>', '<a href="course.html" aria-current="page">▤ Course</a>'],
+        ['<a href="#">▣ Schedule</a>', '<a href="index.html#schedule">▣ Schedule</a>'],
+        ['<a href="#">▧ Materials</a>', '<a href="index.html#materials">▧ Materials</a>'],
+        ['<a href="#">✦ Certificates</a>', '<a href="index.html#certificates">✦ Certificates</a>'],
+        ['<a href="#">✉ Contact</a>', '<a href="index.html#contact">✉ Contact</a>']
+      ];
+      navigation.forEach(([oldText,newText]) => replaceOnce(oldText,newText));
+
+      const replacements = [
+        ['The experiment begins here: one ordinary Catholic, Father William Most’s course, a notebook, a microphone and a determination to discover whether the Church’s language can become something genuinely usable.','The experiment begins here: one Catholic learning in public, Father William Most’s course, a notebook, a microphone and a determination to discover whether the Church’s language can become something genuinely usable.'],
+        ['<div class="fact"><strong>Based on</strong><span>Father William Most<br><em>Latin by the Natural Method</em></span></div>','<div class="fact"><strong>Based on</strong><span>Father William Most<br><a class="book-title-link" href="index.html#materials"><em>Latin by the Natural Method</em></a></span></div>'],
+        ['Day 1.<br><br>Excited. A little daunted. This is where my own account will appear after I complete the lesson.<br><br>— A.W.G.','Day 1. Excited. A little daunted.<br><br>Today I open Lesson I, read it aloud before I know what I am doing, and begin finding out whether the language can become usable. My honest account will replace this note after I complete the lesson.<br><br>— A.W.G.'],
+        ['Original supplementary examples; Father Most’s lesson remains in the book.','Supplementary examples. Review Lesson I in Father Most’s book first; these sentences are here only to help me notice the pattern without reproducing the lesson.'],
+        ['The audio slots are ready for Alan’s real recordings.','I record myself before studying the lesson and again afterwards, then add my immediate reactions: what changed, what still felt awkward and what I misunderstood.'],
+        ['This will preserve the honest starting point rather than pretending to be an authoritative pronunciation guide.','Recorded before study: an honest first attempt, followed by my immediate reaction to what sounded uncertain, unfamiliar or simply wrong.'],
+        ['Recorded after reading, handwriting practice, repeated speech and comprehension work.','Recorded after reading, handwriting, repeated speech and comprehension work, followed by my reaction to what improved and what still needs practice.'],
+        ['Five repeatable stages for every published lesson.','The five repeatable stages used throughout the experiment.'],
+        ['A concise explanation in ordinary English.','A concise explanation in clear English.'],
+        ['<div class="placeholder"><strong>Publication boundary:</strong> after Alan completes the lesson, this area will contain his own summary, short attributed references where justified, original supplementary examples and the patterns he found. It will not reproduce Father Most’s lesson wholesale.</div>','<div class="lesson-reflection"><p><strong>Before I begin:</strong> Lesson I makes the experiment concrete by presenting Latin as language rather than as a table to memorise. The first challenge is to trust complete sentences, notice recurring forms and resist translating every word before grasping the movement of the passage.</p><p>After completing the lesson, I will replace this provisional reflection with what I actually understood, where I stalled, what surprised me and whether Father Most’s natural method began to work in practice.</p></div>'],
+        ['<a href="#">Find a copy →</a>','<a href="index.html#materials">Find a copy →</a>'],
+        ['<a href="#">Find your copy →</a>','<a href="index.html#materials">Find your copy →</a>'],
+        ['what happens when ordinary Catholics begin recognising this language as something they can actually use?','what happens when Catholics begin recognising this language as something they can actually use?']
+      ];
+      replacements.forEach(([oldText,newText]) => replaceOnce(oldText,newText));
+
+      replaceOnce(
+`                <article class="audio-card">
+                  <h3>Your turn</h3>
+                  <p>Open Father Most’s book. Attempt the lesson aloud before hearing Alan’s second recording.</p>
+                  <div class="reader-actions">
+                    <button>🎙 Read aloud</button>
+                    <button>✎ Write it by hand</button>
+                    <button>◉ Record yourself privately</button>
+                  </div>
+                </article>`,
+`                <article class="audio-card reader-turn">
+                  <span class="reader-label">Your part in the experiment</span>
+                  <h3>Your turn</h3>
+                  <p>Use Father Most’s Lesson I before hearing my second recording. These checks are for your own attempt; nothing is uploaded or shared.</p>
+                  <div class="reader-checklist">
+                    <label class="reader-check"><input type="checkbox"> <span><strong>Read it aloud</strong><small>Make a genuine first attempt before comparing recordings.</small></span></label>
+                    <label class="reader-check"><input type="checkbox"> <span><strong>Write it by hand</strong><small>Notice endings, repeated forms and anything that slows you down.</small></span></label>
+                    <label class="reader-check"><input type="checkbox"> <span><strong>Record yourself privately</strong><small>Keep the recording so you can compare it after study.</small></span></label>
+                  </div>
+                </article>`);
+
+      const editorialStyles = `
+.book-title-link{color:var(--burgundy);font-weight:900;text-decoration-thickness:2px;text-underline-offset:3px}
+.reader-turn{position:relative;border:2px solid var(--gold);background:linear-gradient(145deg,#fff7dc,#fffdf8);box-shadow:0 10px 25px rgba(111,69,0,.11)}
+.reader-label{display:inline-block;margin-bottom:7px;color:#8b5b00;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.reader-checklist{display:grid;gap:9px;margin-top:14px}
+.reader-check{display:flex;align-items:flex-start;gap:10px;padding:11px;border:1px solid #e6d29c;border-radius:12px;background:rgba(255,255,255,.82);cursor:pointer}
+.reader-check input{flex:0 0 18px;width:18px;height:18px;margin:2px 0 0;accent-color:var(--burgundy)}
+.reader-check span{display:block;color:var(--ink)}
+.reader-check strong{display:block;font-size:13px}
+.reader-check small{display:block;margin-top:2px;color:#6b625b;font-size:11px;line-height:1.4}
+.lesson-reflection{margin-top:14px;padding:18px;border-left:5px solid var(--burgundy);border-radius:0 14px 14px 0;background:#fbf6ef;color:#514945;font-size:14px;line-height:1.65}
+.lesson-reflection p{margin:0}.lesson-reflection p+p{margin-top:12px}`;
+      replaceOnce('</style>', editorialStyles + '\n</style>');
+
+      if ((course.match(/class="path-card"/g) || []).length !== 5) {
+        throw new Error('Lesson I does not contain exactly five stages.');
+      }
+
+      document.open();
+      document.write(course);
+      document.close();
+    })
+    .catch(error => {
+      document.body.innerHTML = '<main class="loading"><p><strong>Lesson I could not be opened.</strong><br>' + error.message + '</p></main>';
+    });
+  </script>
+</body>
+</html>
