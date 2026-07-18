@@ -2,10 +2,32 @@
   const progress = window.LatinExperimentProgress;
   if (!progress) return;
 
+  function roman(number) {
+    let value = Number(number);
+    let result = '';
+    const numerals = [[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+    numerals.forEach(([amount, symbol]) => {
+      while (value >= amount) {
+        result += symbol;
+        value -= amount;
+      }
+    });
+    return result || String(number);
+  }
+
   function lessonNumber(row) {
+    const fromData = Number(row.dataset.lessonNumber);
+    if (Number.isInteger(fromData) && fromData > 0) return fromData;
     const label = row.querySelector('strong')?.textContent || '';
     const match = /Lesson\s+(\d+)/i.exec(label);
     return match ? Number(match[1]) : null;
+  }
+
+  function currentLessonNumber() {
+    const fromPage = Number(document.querySelector('.lesson-page')?.dataset.lessonNumber);
+    if (Number.isInteger(fromPage) && fromPage > 0) return fromPage;
+    const fromTemplate = Number(window.LatinLessonTemplate?.currentLesson?.number);
+    return Number.isInteger(fromTemplate) && fromTemplate > 0 ? fromTemplate : 1;
   }
 
   function addLessonChecks() {
@@ -43,7 +65,7 @@
     const clean = original.cloneNode(true);
     clean.dataset.sharedProgress = 'true';
     original.replaceWith(clean);
-    clean.addEventListener('click', () => progress.toggle(1));
+    clean.addEventListener('click', () => progress.toggle(currentLessonNumber()));
   }
 
   function nextLessonNumber() {
@@ -61,37 +83,14 @@
     return next === null ? 81 : next - 1;
   }
 
-  function preferredLessonRow(number) {
-    if (!number) return null;
-    const selector = `.lesson-link[data-lesson-number="${number}"]`;
-    const mobile = window.matchMedia('(max-width: 800px)').matches;
-    return document.querySelector(`${mobile ? '#mobileList' : '#desktopLessons'} ${selector}`)
-      || document.querySelector(selector);
-  }
-
-  function markNextLesson(openOnArrival = false) {
+  function markNextLesson() {
     const next = nextLessonNumber();
     document.querySelectorAll('.lesson-link.next-up').forEach(row => row.classList.remove('next-up'));
     if (!next) return;
-
-    document.querySelectorAll(`.lesson-link[data-lesson-number="${next}"]`).forEach(row => {
-      row.classList.add('next-up');
-    });
-
-    const row = preferredLessonRow(next);
-    if (!row) return;
-
-    if (next > 1) {
-      requestAnimationFrame(() => row.scrollIntoView({ block: 'center', inline: 'nearest' }));
-    }
-
-    const openable = !row.classList.contains('locked') && row.getAttribute('aria-disabled') !== 'true';
-    if (openOnArrival && openable && next > 1) {
-      requestAnimationFrame(() => row.click());
-    }
+    document.querySelectorAll(`.lesson-link[data-lesson-number="${next}"]`).forEach(row => row.classList.add('next-up'));
   }
 
-  function sync(openOnArrival = false) {
+  function sync() {
     addLessonChecks();
     replaceCompleteButton();
     const completed = progress.getCompleted();
@@ -113,9 +112,11 @@
 
     const completeButton = document.getElementById('completeButton');
     if (completeButton) {
-      const done = completed.includes(1);
+      const number = currentLessonNumber();
+      const done = completed.includes(number);
+      const label = roman(number);
       completeButton.classList.toggle('done', done);
-      completeButton.textContent = done ? 'Lesson I completed ✓' : 'Mark Lesson I complete';
+      completeButton.textContent = done ? `Lesson ${label} completed ✓` : `Mark Lesson ${label} complete`;
       completeButton.setAttribute('aria-pressed', String(done));
     }
 
@@ -130,7 +131,7 @@
       track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;
     });
 
-    markNextLesson(openOnArrival);
+    markNextLesson();
   }
 
   const style = document.createElement('style');
@@ -151,6 +152,7 @@
   `;
   document.head.appendChild(style);
 
-  sync(true);
-  window.addEventListener('latin-progress-changed', () => sync(false));
+  sync();
+  window.addEventListener('latin-progress-changed', sync);
+  window.addEventListener('latin-lesson-rendered', sync);
 })();
