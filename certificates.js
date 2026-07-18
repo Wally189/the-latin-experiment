@@ -14,7 +14,7 @@
   let publishedLessons = new Set();
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[character]));
 
   function storedCompletion() {
@@ -105,7 +105,7 @@
       publishedLessons = new Set((data.lessons || [])
         .filter(lesson => lesson.publicationStatus === 'published')
         .map(lesson => Number(lesson.number))
-        .filter(Number.isInteger));
+        .filter(number => Number.isInteger(number)));
       render();
     })
     .catch(render);
