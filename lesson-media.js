@@ -7,25 +7,19 @@
     const images = lessonNumber === 1
       ? [
           {
-            sources: [
-              'assets/lesson-one-notebook-1.jpg?v=20260720-lesson1',
-              'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-1.jpg?raw=1'
-            ],
+            src: 'assets/lesson-one-notebook-spread-v3.jpg?v=20260720-resolved',
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
             caption: 'Notebook spread — first observations and repeated forms'
           },
           {
-            sources: [
-              'assets/lesson-one-notebook-2.jpg?v=20260720-lesson1',
-              'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-2.jpg?raw=1'
-            ],
+            src: 'assets/lesson-one-vocabulary-v3.jpg?v=20260720-resolved',
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
             caption: 'Vocabulary list — words gathered during the lesson'
           }
         ]
       : lesson?.notebookImage
         ? [{
-            sources: [lesson.notebookImage],
+            src: lesson.notebookImage,
             alt: lesson.notebookAlt || `Handwritten notes for Lesson ${lesson.roman || lesson.number}`,
             caption: lesson.notebookCaption || lesson.notebookAlt || `Handwritten notes for Lesson ${lesson.roman || lesson.number}`
           }]
@@ -43,26 +37,16 @@
       const figure = document.createElement('figure');
       figure.className = 'notebook-evidence-card';
 
-      const frame = document.createElement('div');
-      frame.className = 'notebook-image-frame';
-
       const image = document.createElement('img');
+      image.src = item.src;
       image.alt = item.alt;
       image.loading = 'eager';
       image.decoding = 'async';
 
-      let sourceIndex = 0;
-      image.src = item.sources[sourceIndex];
-      image.addEventListener('error', () => {
-        sourceIndex += 1;
-        if (sourceIndex < item.sources.length) image.src = item.sources[sourceIndex];
-      });
-
       const caption = document.createElement('figcaption');
       caption.textContent = item.caption;
 
-      frame.appendChild(image);
-      figure.append(frame, caption);
+      figure.append(image, caption);
       gallery.appendChild(figure);
     });
 
@@ -135,17 +119,7 @@
       border-radius:14px!important;
       background:#fffaf2!important;
     }
-    .notebook-image-frame{
-      display:block!important;
-      width:100%!important;
-      height:auto!important;
-      min-height:0!important;
-      margin:0!important;
-      padding:0!important;
-      overflow:hidden!important;
-      background:#eee5d8!important;
-    }
-    .notebook-image-frame img{
+    .notebook-evidence-card img{
       display:block!important;
       width:100%!important;
       max-width:100%!important;
@@ -154,6 +128,7 @@
       max-height:none!important;
       margin:0!important;
       padding:0!important;
+      aspect-ratio:auto!important;
       object-fit:contain!important;
       object-position:center!important;
       background:transparent!important;
