@@ -7,13 +7,15 @@
     const images = lessonNumber === 1
       ? [
           {
-            src: 'assets/lesson-one-notebook-spread-v3.jpg',
+            src: 'assets/lesson-one-notebook-1.jpg?v=20260720-final',
+            fallback: 'assets/lesson-one-notebook-spread-v3.jpg?v=20260720-final',
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
             caption: 'Notebook spread — first observations and repeated forms',
             crop: true
           },
           {
-            src: 'assets/lesson-one-vocabulary-v3.jpg',
+            src: 'assets/lesson-one-notebook-2.jpg?v=20260720-final',
+            fallback: 'assets/lesson-one-vocabulary-v3.jpg?v=20260720-final',
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
             caption: 'Vocabulary list — words gathered during the lesson'
           }
@@ -35,19 +37,27 @@
     gallery.className = 'notebook-gallery';
 
     images.forEach(item => {
-      const figure = document.createElement('figure');
+      const card = document.createElement('div');
+      card.className = 'notebook-photo-card';
       const image = document.createElement('img');
-      const caption = document.createElement('figcaption');
+      const caption = document.createElement('div');
+      caption.className = 'notebook-photo-caption';
 
       image.src = item.src;
       image.alt = item.alt;
       image.loading = 'eager';
       image.decoding = 'async';
       if (item.crop) image.classList.add('crop-ashtray');
+      if (item.fallback) {
+        image.addEventListener('error', () => {
+          if (image.src.includes(item.fallback)) return;
+          image.src = item.fallback;
+        });
+      }
       caption.textContent = item.caption;
 
-      figure.append(image, caption);
-      gallery.appendChild(figure);
+      card.append(image, caption);
+      gallery.appendChild(card);
     });
 
     notebook.appendChild(gallery);
@@ -89,18 +99,13 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .notebook.has-notebook-image{padding:10px!important;background:#f7f0e5!important;min-height:0!important;height:auto!important;font-family:system-ui,sans-serif!important}
-    .notebook-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
-    .notebook-gallery figure{margin:0!important;overflow:hidden;border-radius:14px;background:#fffaf2}
-    .notebook-gallery img{display:block!important;width:100%!important;height:auto!important;max-height:520px!important;object-fit:contain!important;background:#eee5d8!important}
-    .notebook-gallery img.crop-ashtray{height:360px!important;object-fit:cover!important;object-position:left center!important}
-    .notebook-gallery figcaption{padding:10px 12px;color:#655a52;font:13px/1.45 system-ui,sans-serif;background:#fffaf2}
+    .notebook.has-notebook-image{display:block!important;padding:10px!important;background:#f7f0e5!important;min-height:0!important;height:auto!important;transform:none!important;font-family:system-ui,sans-serif!important}
+    .notebook-gallery{display:flex!important;flex-direction:column!important;gap:12px!important;width:100%!important;height:auto!important;min-height:0!important}
+    .notebook-photo-card{display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;border-radius:14px!important;background:#fffaf2!important}
+    .notebook-photo-card img{display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;object-fit:contain!important;background:transparent!important}
+    .notebook-photo-card img.crop-ashtray{width:112%!important;max-width:none!important;clip-path:inset(0 11% 0 0)!important}
+    .notebook-photo-caption{display:block!important;margin:0!important;padding:10px 12px!important;color:#655a52!important;background:#fffaf2!important;font:13px/1.45 system-ui,sans-serif!important}
     .audio-placeholder.has-audio{display:block;height:auto;padding:12px}.audio-placeholder.has-audio audio{display:block;width:100%}
-    @media(max-width:720px){
-      .notebook-gallery{grid-template-columns:1fr;gap:12px}
-      .notebook-gallery img{max-height:460px!important}
-      .notebook-gallery img.crop-ashtray{height:320px!important}
-    }
   `;
   document.head.appendChild(style);
 })();
