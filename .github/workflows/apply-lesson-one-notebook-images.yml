@@ -38,21 +38,14 @@ jobs:
               raise SystemExit('Lesson I was not found in lessons-data.json')
 
           lesson['notebookImages'] = [
-              {
-                  'src': 'assets/lesson-one-notebook-1.jpg',
-                  'alt': 'Alan’s handwritten reading and translation notes for Lesson I'
-              },
-              {
-                  'src': 'assets/lesson-one-notebook-2.jpg',
-                  'alt': 'Alan’s handwritten vocabulary notes for Lesson I'
-              }
+              {'src': 'assets/lesson-one-notebook-1.jpg', 'alt': 'Alan’s handwritten reading and translation notes for Lesson I'},
+              {'src': 'assets/lesson-one-notebook-2.jpg', 'alt': 'Alan’s handwritten vocabulary notes for Lesson I'}
           ]
           lesson['notebookCaption'] = 'The original handwritten reading, translation and vocabulary notes from Lesson I.'
           data_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
           js_path = root / 'lesson-template.js'
           js = js_path.read_text(encoding='utf-8')
-
           marker = "  function renderPublished(lesson) {\n"
           helper = """  function renderNotebook(lesson) {
     const images = Array.isArray(lesson.notebookImages) && lesson.notebookImages.length
