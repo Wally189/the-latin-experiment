@@ -7,22 +7,26 @@
     const images = lessonNumber === 1
       ? [
           {
-            src: 'assets/lesson-one-notebook-1.jpg?v=20260720-final',
-            fallback: 'assets/lesson-one-notebook-spread-v3.jpg?v=20260720-final',
+            sources: [
+              'assets/lesson-one-notebook-1.jpg?v=20260720-1045',
+              'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-1.jpg?raw=1'
+            ],
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
             caption: 'Notebook spread — first observations and repeated forms',
-            crop: true
+            cropRight: true
           },
           {
-            src: 'assets/lesson-one-notebook-2.jpg?v=20260720-final',
-            fallback: 'assets/lesson-one-vocabulary-v3.jpg?v=20260720-final',
+            sources: [
+              'assets/lesson-one-notebook-2.jpg?v=20260720-1045',
+              'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-2.jpg?raw=1'
+            ],
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
             caption: 'Vocabulary list — words gathered during the lesson'
           }
         ]
       : lesson?.notebookImage
         ? [{
-            src: lesson.notebookImage,
+            sources: [lesson.notebookImage],
             alt: lesson.notebookAlt || `Handwritten notes for Lesson ${lesson.roman || lesson.number}`,
             caption: lesson.notebookCaption || lesson.notebookAlt || `Handwritten notes for Lesson ${lesson.roman || lesson.number}`
           }]
@@ -30,34 +34,37 @@
 
     if (!images.length) return;
 
-    notebook.innerHTML = '';
-    notebook.classList.add('has-notebook-image');
+    notebook.replaceChildren();
+    notebook.className = 'placeholder notebook has-notebook-image';
 
     const gallery = document.createElement('div');
-    gallery.className = 'notebook-gallery';
+    gallery.className = 'notebook-evidence-list';
 
     images.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'notebook-photo-card';
-      const image = document.createElement('img');
-      const caption = document.createElement('div');
-      caption.className = 'notebook-photo-caption';
+      const figure = document.createElement('figure');
+      figure.className = 'notebook-evidence-card';
 
-      image.src = item.src;
+      const frame = document.createElement('div');
+      frame.className = item.cropRight ? 'notebook-image-frame crop-right' : 'notebook-image-frame';
+
+      const image = document.createElement('img');
       image.alt = item.alt;
       image.loading = 'eager';
       image.decoding = 'async';
-      if (item.crop) image.classList.add('crop-ashtray');
-      if (item.fallback) {
-        image.addEventListener('error', () => {
-          if (image.src.includes(item.fallback)) return;
-          image.src = item.fallback;
-        });
-      }
+
+      let sourceIndex = 0;
+      image.src = item.sources[sourceIndex];
+      image.addEventListener('error', () => {
+        sourceIndex += 1;
+        if (sourceIndex < item.sources.length) image.src = item.sources[sourceIndex];
+      });
+
+      const caption = document.createElement('figcaption');
       caption.textContent = item.caption;
 
-      card.append(image, caption);
-      gallery.appendChild(card);
+      frame.appendChild(image);
+      figure.append(frame, caption);
+      gallery.appendChild(figure);
     });
 
     notebook.appendChild(gallery);
@@ -99,13 +106,73 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .notebook.has-notebook-image{display:block!important;padding:10px!important;background:#f7f0e5!important;min-height:0!important;height:auto!important;transform:none!important;font-family:system-ui,sans-serif!important}
-    .notebook-gallery{display:flex!important;flex-direction:column!important;gap:12px!important;width:100%!important;height:auto!important;min-height:0!important}
-    .notebook-photo-card{display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;border-radius:14px!important;background:#fffaf2!important}
-    .notebook-photo-card img{display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;object-fit:contain!important;background:transparent!important}
-    .notebook-photo-card img.crop-ashtray{width:112%!important;max-width:none!important;clip-path:inset(0 11% 0 0)!important}
-    .notebook-photo-caption{display:block!important;margin:0!important;padding:10px 12px!important;color:#655a52!important;background:#fffaf2!important;font:13px/1.45 system-ui,sans-serif!important}
-    .audio-placeholder.has-audio{display:block;height:auto;padding:12px}.audio-placeholder.has-audio audio{display:block;width:100%}
+    .notebook.has-notebook-image{
+      display:block!important;
+      min-height:0!important;
+      height:auto!important;
+      padding:10px!important;
+      overflow:visible!important;
+      transform:none!important;
+      background:#f7f0e5!important;
+      font-family:system-ui,sans-serif!important;
+    }
+    .notebook-evidence-list{
+      display:grid!important;
+      grid-template-columns:1fr!important;
+      gap:14px!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+    }
+    .notebook-evidence-card{
+      display:block!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+      margin:0!important;
+      padding:0!important;
+      overflow:hidden!important;
+      border-radius:14px!important;
+      background:#fffaf2!important;
+    }
+    .notebook-image-frame{
+      display:block!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+      margin:0!important;
+      padding:0!important;
+      overflow:hidden!important;
+      background:#eee5d8!important;
+    }
+    .notebook-image-frame img{
+      display:block!important;
+      width:100%!important;
+      max-width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+      max-height:none!important;
+      margin:0!important;
+      padding:0!important;
+      object-fit:contain!important;
+      object-position:center!important;
+      background:transparent!important;
+    }
+    .notebook-image-frame.crop-right img{
+      width:114%!important;
+      max-width:none!important;
+      transform:translateX(0)!important;
+    }
+    .notebook-evidence-card figcaption{
+      display:block!important;
+      margin:0!important;
+      padding:11px 13px!important;
+      color:#655a52!important;
+      background:#fffaf2!important;
+      font:14px/1.45 system-ui,sans-serif!important;
+    }
+    .audio-placeholder.has-audio{display:block;height:auto;padding:12px}
+    .audio-placeholder.has-audio audio{display:block;width:100%}
   `;
   document.head.appendChild(style);
 })();
