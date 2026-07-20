@@ -7,13 +7,13 @@
     const images = lessonNumber === 1
       ? [
           {
-            src: 'assets/lesson-one-notebook-1.jpg',
+            src: 'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-1.jpg?v=2',
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
             caption: 'Notebook spread — first observations and repeated forms',
             crop: true
           },
           {
-            src: 'assets/lesson-one-notebook-2.jpg',
+            src: 'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-2.jpg?v=2',
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
             caption: 'Vocabulary list — words gathered during the lesson'
           }
@@ -41,7 +41,7 @@
 
       image.src = item.src;
       image.alt = item.alt;
-      image.loading = 'lazy';
+      image.loading = 'eager';
       image.decoding = 'async';
       if (item.crop) image.classList.add('crop-ashtray');
       caption.textContent = item.caption;
@@ -92,11 +92,15 @@
     .notebook.has-notebook-image{padding:12px;background:#f7f0e5}
     .notebook-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .notebook-gallery figure{margin:0;overflow:hidden;border-radius:14px;background:#eee5d8}
-    .notebook-gallery img{display:block;width:100%;height:430px;object-fit:cover;background:#eee5d8}
-    .notebook-gallery img.crop-ashtray{object-position:left bottom}
+    .notebook-gallery img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#eee5d8}
+    .notebook-gallery img.crop-ashtray{object-position:left center}
     .notebook-gallery figcaption{padding:10px 12px;color:#655a52;font:13px/1.45 system-ui,sans-serif;background:#fffaf2}
     .audio-placeholder.has-audio{display:block;height:auto;padding:12px}.audio-placeholder.has-audio audio{display:block;width:100%}
-    @media(max-width:720px){.notebook-gallery{grid-template-columns:1fr}.notebook-gallery img{height:auto;max-height:620px;object-fit:contain}.notebook-gallery img.crop-ashtray{height:500px;object-fit:cover;object-position:left bottom}}
+    @media(max-width:720px){
+      .notebook-gallery{grid-template-columns:1fr;gap:14px}
+      .notebook-gallery img{aspect-ratio:auto;height:auto;max-height:none;object-fit:contain}
+      .notebook-gallery img.crop-ashtray{height:360px;aspect-ratio:auto;object-fit:cover;object-position:left 72%}
+    }
   `;
   document.head.appendChild(style);
 })();
