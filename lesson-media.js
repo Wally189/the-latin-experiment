@@ -7,13 +7,13 @@
     const images = lessonNumber === 1
       ? [
           {
-            src: 'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-1.jpg?v=2',
+            src: 'assets/lesson-one-notebook-1.jpg?v=20260720c',
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
             caption: 'Notebook spread — first observations and repeated forms',
             crop: true
           },
           {
-            src: 'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-2.jpg?v=2',
+            src: 'assets/lesson-one-notebook-2.jpg?v=20260720c',
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
             caption: 'Vocabulary list — words gathered during the lesson'
           }
@@ -42,10 +42,11 @@
       image.src = item.src;
       image.alt = item.alt;
       image.loading = 'eager';
-      image.decoding = 'async';
+      image.decoding = 'sync';
       if (item.crop) image.classList.add('crop-ashtray');
       caption.textContent = item.caption;
 
+      image.addEventListener('error', () => figure.remove(), {once:true});
       figure.append(image, caption);
       gallery.appendChild(figure);
     });
@@ -89,17 +90,19 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .notebook.has-notebook-image{padding:12px;background:#f7f0e5}
-    .notebook-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .notebook-gallery figure{margin:0;overflow:hidden;border-radius:14px;background:#eee5d8}
-    .notebook-gallery img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#eee5d8}
-    .notebook-gallery img.crop-ashtray{object-position:left center}
-    .notebook-gallery figcaption{padding:10px 12px;color:#655a52;font:13px/1.45 system-ui,sans-serif;background:#fffaf2}
+    .notebook.has-notebook-image{padding:12px!important;background:#f7f0e5!important;min-height:0!important;height:auto!important;font-family:system-ui,sans-serif!important}
+    .notebook-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+    .notebook-gallery figure{display:block;margin:0!important;padding:0!important;min-height:0!important;height:auto!important;overflow:hidden;border-radius:14px;background:#fffaf2}
+    .notebook-gallery img{display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;background:transparent!important}
+    .notebook-gallery img.crop-ashtray{clip-path:inset(0 10% 0 0);width:111%!important}
+    .notebook-gallery figcaption{display:block;padding:10px 12px;color:#655a52;font:13px/1.45 system-ui,sans-serif;background:#fffaf2}
     .audio-placeholder.has-audio{display:block;height:auto;padding:12px}.audio-placeholder.has-audio audio{display:block;width:100%}
     @media(max-width:720px){
-      .notebook-gallery{grid-template-columns:1fr;gap:14px}
-      .notebook-gallery img{aspect-ratio:auto;height:auto;max-height:none;object-fit:contain}
-      .notebook-gallery img.crop-ashtray{height:360px;aspect-ratio:auto;object-fit:cover;object-position:left 72%}
+      .notebook.has-notebook-image{padding:8px!important}
+      .notebook-gallery{grid-template-columns:1fr;gap:12px}
+      .notebook-gallery figure{width:100%!important}
+      .notebook-gallery img{width:100%!important;height:auto!important;max-height:520px!important;object-fit:contain!important}
+      .notebook-gallery img.crop-ashtray{clip-path:inset(0 12% 0 0);width:114%!important;max-height:420px!important;object-fit:cover!important;object-position:left center!important}
     }
   `;
   document.head.appendChild(style);
