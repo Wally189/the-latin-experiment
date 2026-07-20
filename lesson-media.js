@@ -8,16 +8,15 @@
       ? [
           {
             sources: [
-              'assets/lesson-one-notebook-1.jpg?v=20260720-1045',
+              'assets/lesson-one-notebook-1.jpg?v=20260720-lesson1',
               'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-1.jpg?raw=1'
             ],
             alt: 'Open notebook showing handwritten Lesson I notes and highlighted Latin words',
-            caption: 'Notebook spread — first observations and repeated forms',
-            cropRight: true
+            caption: 'Notebook spread — first observations and repeated forms'
           },
           {
             sources: [
-              'assets/lesson-one-notebook-2.jpg?v=20260720-1045',
+              'assets/lesson-one-notebook-2.jpg?v=20260720-lesson1',
               'https://raw.githubusercontent.com/Wally189/the-catholic-experiment/main/assets/lesson-one-notebook-2.jpg?raw=1'
             ],
             alt: 'Handwritten Lesson I vocabulary list dated 20 July 2026',
@@ -45,7 +44,7 @@
       figure.className = 'notebook-evidence-card';
 
       const frame = document.createElement('div');
-      frame.className = item.cropRight ? 'notebook-image-frame crop-right' : 'notebook-image-frame';
+      frame.className = 'notebook-image-frame';
 
       const image = document.createElement('img');
       image.alt = item.alt;
@@ -103,6 +102,7 @@
   }
 
   window.addEventListener('latin-lesson-rendered', applyMedia);
+  queueMicrotask(() => applyMedia());
 
   const style = document.createElement('style');
   style.textContent = `
@@ -157,11 +157,6 @@
       object-fit:contain!important;
       object-position:center!important;
       background:transparent!important;
-    }
-    .notebook-image-frame.crop-right img{
-      width:114%!important;
-      max-width:none!important;
-      transform:translateX(0)!important;
     }
     .notebook-evidence-card figcaption{
       display:block!important;
