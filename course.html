@@ -10,11 +10,11 @@
 <div class="loading">Opening your next lesson…</div>
 <script>
 const legacyLesson=/^#lesson-(\d+)$/.exec(location.hash);if(legacyLesson){const url=new URL(location.href);url.searchParams.set('lesson',legacyLesson[1]);url.hash='';history.replaceState({},'',url.pathname+url.search)}
-fetch('course-source.html?v=20260720-resolved',{cache:'no-store'})
+fetch('course-source.html?v=20260720-notebook-rebuild',{cache:'no-store'})
   .then(response=>{if(!response.ok)throw new Error('Course source could not be loaded.');return response.text()})
   .then(source=>{
     if(!source.includes('</body>'))throw new Error('Course source is incomplete.');
-    const scripts='<script src="reader-progress.js?v=20260720-resolved"><\/script><script src="course-enhancements.js?v=20260720-resolved"><\/script><script src="journal-lesson-intro.js?v=20260720"><\/script><script src="lesson-template.js?v=20260720-resolved"><\/script><script src="checklist-persistence.js?v=20260720-resolved"><\/script><script src="lesson-media.js?v=20260720-resolved"><\/script><script src="course-progress.js?v=20260720-resolved"><\/script><script src="church-connection.js?v=20260720-resolved"><\/script>';
+    const scripts='<script src="reader-progress.js?v=20260720-notebook-rebuild"><\/script><script src="course-enhancements.js?v=20260720-notebook-rebuild"><\/script><script src="journal-lesson-intro.js?v=20260720"><\/script><script src="lesson-template.js?v=20260720-notebook-rebuild"><\/script><script src="checklist-persistence.js?v=20260720-notebook-rebuild"><\/script><script src="lesson-notebook.js?v=20260720-notebook-rebuild"><\/script><script src="lesson-media.js?v=20260720-notebook-rebuild"><\/script><script src="course-progress.js?v=20260720-notebook-rebuild"><\/script><script src="church-connection.js?v=20260720-notebook-rebuild"><\/script>';
     const output=source.replace('</body>',scripts+'</body>');
     document.open();document.write(output);document.close();
   })
