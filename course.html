@@ -46,4 +46,4 @@ function render(){document.querySelectorAll('.lesson-link').forEach(b=>b.classLi
 page.querySelectorAll('.path-card').forEach(c=>c.onclick=()=>c.setAttribute('aria-expanded',String(c.getAttribute('aria-expanded')!=='true')));document.getElementById('completeButton').onclick=()=>{localStorage.setItem(key(1),isComplete(1)?'no':'yes');render();updateProgress()}}
 toggle.onclick=()=>{const open=mobile.classList.toggle('open');toggle.textContent=open?'Hide lessons':'Show lessons';toggle.setAttribute('aria-expanded',String(open))};document.getElementById('mobileLessons').onclick=toggle.onclick;document.addEventListener('click',e=>{if(e.target.closest('.lesson-link.coming')){const t=document.getElementById('lockToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}},true);buildList(desktop);buildList(mobile);render();updateProgress()})();
 </script>
-</body></html>
+<script src="course-polish.js?v=20260722-1"></script></body></html>
