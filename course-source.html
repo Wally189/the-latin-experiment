@@ -416,14 +416,14 @@ h1{margin:0;font-size:clamp(58px,7vw,104px);line-height:.9;letter-spacing:-.035e
   .quick-actions{grid-template-columns:1fr}
   .day-note{width:180px;font-size:14px}
 }
-</style>
+.global-nav a:focus-visible,.book-card a:focus-visible,.side-card a:focus-visible,.reader-actions button:focus-visible,.quick-action:focus-visible,.path-card:focus-visible,.complete-button:focus-visible,.mobile-catalogue button:focus-visible{outline:3px solid rgba(221,169,55,.55);outline-offset:3px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>
 </head>
 <body>
 <div class="shell">
   <div class="frame">
     <nav class="global-nav" aria-label="Primary">
       <div class="brand">
-        <div class="brand-mark">✠</div>
+        <div class="brand-mark" aria-hidden="true">✠</div>
         <div><strong>The Latin Experiment</strong><small>Ecclesiastical Latin, one lesson at a time</small></div>
       </div>
       <div class="nav-links">
@@ -434,7 +434,7 @@ h1{margin:0;font-size:clamp(58px,7vw,104px);line-height:.9;letter-spacing:-.035e
         <a href="#">✦ Certificates</a>
         <a href="#">✉ Contact</a>
       </div>
-      <button class="progress-chip">My progress · 0%</button>
+      <div class="progress-chip" role="status" aria-live="polite">My progress · 0 of 81 complete</div>
     </nav>
 
     <div class="mobile-catalogue">
@@ -447,7 +447,7 @@ h1{margin:0;font-size:clamp(58px,7vw,104px);line-height:.9;letter-spacing:-.035e
       <aside class="course-rail">
         <p class="rail-heading">Course progress</p>
         <div class="rail-meta">1 of 81 lessons published</div>
-        <div class="progress-track"><span></span></div>
+        <div class="progress-track" role="progressbar" aria-label="Course progress" aria-valuemin="0" aria-valuemax="81" aria-valuenow="0"><span></span></div>
         <div class="lesson-list" id="desktopLessons"></div>
         <div class="book-card">
           <strong>Use Father Most’s book</strong>

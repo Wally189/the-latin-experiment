@@ -143,7 +143,7 @@
     }
 
     document.querySelectorAll('.course-rail .progress-track span').forEach(track => {
-      track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;
+      track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`; track.parentElement?.setAttribute('aria-valuenow', String(count));
     });
 
     markNextLesson();
