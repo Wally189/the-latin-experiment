@@ -23,16 +23,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Apply approved footer and accessibility standards
+      - name: Apply approved footer, accessibility and contact standards
         run: |
           python - <<'PY'
           from pathlib import Path
           old = 'This website has been built with the assistance of AI tools. Where appropriate this has been cross validated with Magnifica Humanae'
           new = 'This website has been built with the assistance of AI tools. Where appropriate, content has been checked against Magnifica Humanae and relevant authoritative Catholic sources.'
+          old_form = '''<form class="card" onsubmit="event.preventDefault();location.href='mailto:contact@example.org?subject='+encodeURIComponent(subject.value)+'&body='+encodeURIComponent(message.value)"><label>Name<input required></label><label>Email<input type="email" required></label><label>Subject<input id="subject" required></label><label>Message<textarea id="message" required></textarea></label><button class="btn">Prepare email →</button></form>'''
+          new_form = '''<form class="card" action="https://formspree.io/f/mgvgrgvb" method="POST" accept-charset="UTF-8"><input type="hidden" name="_subject" value="Message from The Latin Experiment"><input type="hidden" name="site" value="The Latin Experiment"><label>Name<input name="name" autocomplete="name" required></label><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Subject<input id="subject" name="subject" required></label><label>Message<textarea id="message" name="message" required></textarea></label><button class="btn" type="submit">Send message →</button></form>'''
           for path in Path('.').rglob('*'):
               if path.is_file() and path.suffix.lower() in {'.html', '.js', '.css'}:
                   text = path.read_text(encoding='utf-8')
                   text = text.replace(old, new)
+                  if path.name == 'index.html':
+                      text = text.replace(old_form, new_form)
                   if path.suffix.lower() == '.html':
                       text = text.replace('<div class="brand-mark">✠</div>', '<div class="brand-mark" aria-hidden="true">✠</div>')
                       text = text.replace('<button class="progress-chip">My progress · 0%</button>', '<div class="progress-chip" role="status" aria-live="polite">My progress · 0 of 81 complete</div>')
