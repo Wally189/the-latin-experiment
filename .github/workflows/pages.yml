@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Apply approved footer wording
+      - name: Apply approved footer and accessibility standards
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -32,8 +32,15 @@ jobs:
           for path in Path('.').rglob('*'):
               if path.is_file() and path.suffix.lower() in {'.html', '.js', '.css'}:
                   text = path.read_text(encoding='utf-8')
-                  if old in text:
-                      path.write_text(text.replace(old, new), encoding='utf-8')
+                  text = text.replace(old, new)
+                  if path.suffix.lower() == '.html':
+                      text = text.replace('<div class="brand-mark">✠</div>', '<div class="brand-mark" aria-hidden="true">✠</div>')
+                      text = text.replace('<button class="progress-chip">My progress · 0%</button>', '<div class="progress-chip" role="status" aria-live="polite">My progress · 0 of 81 complete</div>')
+                      text = text.replace('<div class="progress-track"><span></span></div>', '<div class="progress-track" role="progressbar" aria-label="Course progress" aria-valuemin="0" aria-valuemax="81" aria-valuenow="0"><span></span></div>')
+                      text = text.replace('</style>', '.global-nav a:focus-visible,.book-card a:focus-visible,.side-card a:focus-visible,.reader-actions button:focus-visible,.quick-action:focus-visible,.path-card:focus-visible,.complete-button:focus-visible,.mobile-catalogue button:focus-visible{outline:3px solid rgba(221,169,55,.55);outline-offset:3px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>', 1)
+                  if path.name == 'course-progress.js':
+                      text = text.replace("track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;", "track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`; track.parentElement?.setAttribute('aria-valuenow', String(count));")
+                  path.write_text(text, encoding='utf-8')
           PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
