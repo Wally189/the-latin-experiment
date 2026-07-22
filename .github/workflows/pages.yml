@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,25 +27,46 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+
           old = 'This website has been built with the assistance of AI tools. Where appropriate this has been cross validated with Magnifica Humanae'
           new = 'This website has been built with the assistance of AI tools. Where appropriate, content has been checked against Magnifica Humanae and relevant authoritative Catholic sources.'
           old_form = '''<form class="card" onsubmit="event.preventDefault();location.href='mailto:contact@example.org?subject='+encodeURIComponent(subject.value)+'&body='+encodeURIComponent(message.value)"><label>Name<input required></label><label>Email<input type="email" required></label><label>Subject<input id="subject" required></label><label>Message<textarea id="message" required></textarea></label><button class="btn">Prepare email →</button></form>'''
           new_form = '''<form class="card" action="https://formspree.io/f/mgvgrgvb" method="POST" accept-charset="UTF-8"><input type="hidden" name="_subject" value="Message from The Latin Experiment"><input type="hidden" name="site" value="The Latin Experiment"><label>Name<input name="name" autocomplete="name" required></label><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Subject<input id="subject" name="subject" required></label><label>Message<textarea id="message" name="message" required></textarea></label><button class="btn" type="submit">Send message →</button></form>'''
+
           for path in Path('.').rglob('*'):
-              if path.is_file() and path.suffix.lower() in {'.html', '.js', '.css'}:
-                  text = path.read_text(encoding='utf-8')
-                  text = text.replace(old, new)
-                  if path.name == 'index.html':
-                      text = text.replace(old_form, new_form)
-                  if path.suffix.lower() == '.html':
-                      text = text.replace('<div class="brand-mark">✠</div>', '<div class="brand-mark" aria-hidden="true">✠</div>')
-                      text = text.replace('<button class="progress-chip">My progress · 0%</button>', '<div class="progress-chip" role="status" aria-live="polite">My progress · 0 of 81 complete</div>')
-                      text = text.replace('<div class="progress-track"><span></span></div>', '<div class="progress-track" role="progressbar" aria-label="Course progress" aria-valuemin="0" aria-valuemax="81" aria-valuenow="0"><span></span></div>')
+              if not path.is_file() or path.suffix.lower() not in {'.html', '.js', '.css'}:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              text = text.replace(old, new)
+              if path.name == 'index.html':
+                  text = text.replace(old_form, new_form)
+              if path.suffix.lower() == '.html':
+                  text = text.replace('<div class="brand-mark">✠</div>', '<div class="brand-mark" aria-hidden="true">✠</div>')
+                  text = text.replace('<button class="progress-chip">My progress · 0%</button>', '<div class="progress-chip" role="status" aria-live="polite">My progress · 0 of 81 complete</div>')
+                  text = text.replace('<div class="progress-track"><span></span></div>', '<div class="progress-track" role="progressbar" aria-label="Course progress" aria-valuemin="0" aria-valuemax="81" aria-valuenow="0"><span></span></div>')
+                  if '@media (prefers-reduced-motion: reduce)' not in text:
                       text = text.replace('</style>', '.global-nav a:focus-visible,.book-card a:focus-visible,.side-card a:focus-visible,.reader-actions button:focus-visible,.quick-action:focus-visible,.path-card:focus-visible,.complete-button:focus-visible,.mobile-catalogue button:focus-visible{outline:3px solid rgba(221,169,55,.55);outline-offset:3px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}</style>', 1)
-                  if path.name == 'course-progress.js':
-                      text = text.replace("track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;", "track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`; track.parentElement?.setAttribute('aria-valuenow', String(count));")
-                  path.write_text(text, encoding='utf-8')
+              if path.name == 'course-progress.js':
+                  text = text.replace("track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`;", "track.style.width = `${Math.max(percentage, count ? 1.25 : 0)}%`; track.parentElement?.setAttribute('aria-valuenow', String(count));")
+              path.write_text(text, encoding='utf-8')
+
+          schedule = Path('schedule.js')
+          text = schedule.read_text(encoding='utf-8')
+          marker = "\n(() => {\n  const form = document.querySelector('[data-v=\"contact\"] form');"
+          start = text.find(marker)
+          if start != -1:
+              text = text[:start].rstrip() + '\n'
+              schedule.write_text(text, encoding='utf-8')
           PY
+      - name: Persist source cleanup
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html schedule.js course-progress.js course-source.html certificates.js . || true
+            git commit -m "Align Latin contact fallback and accessibility source"
+            git push
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
