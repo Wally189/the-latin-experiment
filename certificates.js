@@ -115,3 +115,16 @@
     if (event.key === 'latinExperiment.completedLessons.v1') render();
   });
 })();
+
+(() => {
+  if (document.querySelector('.programme-footer')) return;
+  const main = document.querySelector('main.main');
+  if (!main) return;
+  const footer = document.createElement('footer');
+  footer.className = 'programme-footer';
+  footer.innerHTML = '<span class="footer-copy">The Latin Experiment is an independent learning project. It does not imply ecclesiastical approval.</span><span class="footer-ai">This website has been built with the assistance of AI tools. Where appropriate this has been cross validated with Magnifica Humanae</span><a class="footer-waylight" href="https://www.waylight-atlantic.co.uk/" target="_blank" rel="noopener">Waylight Atlantic →</a>';
+  main.appendChild(footer);
+  const style = document.createElement('style');
+  style.textContent = '.programme-footer{position:relative;padding:24px 38px 34px;border-top:1px solid #e4dcd6;color:var(--muted);text-align:left}.footer-copy,.footer-ai{display:block}.footer-ai{margin-top:10px;font-size:11px;line-height:1.45;opacity:.38}.footer-waylight{position:absolute;right:38px;bottom:28px;color:var(--ink);font-weight:800;text-decoration:none}.footer-waylight:hover,.footer-waylight:focus-visible{text-decoration:underline;outline:none}@media(max-width:800px){.programme-footer{padding:22px;text-align:center}.footer-waylight{position:static;display:block;margin-top:14px}}';
+  document.head.appendChild(style);
+})();
