@@ -7,7 +7,7 @@
 .programme-footer .footer-ai{grid-column:1/-1;margin:0;padding-top:16px;border-top:1px solid var(--line,#dfd5cc);font-size:11px;line-height:1.45;opacity:.55}
 
 .global-nav .nav-links a{font-size:0!important}
-.global-nav .nav-links a::before{display:block;font-size:14px;line-height:1.2;white-space:pre-line}
+.global-nav .nav-links a::before{display:block;font:14px normal Arial,sans-serif;line-height:normal;white-space:pre-line}
 .global-nav .nav-links a:nth-child(1)::before{content:"⌂\A Home"}
 .global-nav .nav-links a:nth-child(2)::before{content:"▤\A Course"}
 .global-nav .nav-links a:nth-child(3)::before{content:"◫\A Schedule"}
@@ -38,7 +38,7 @@
 
   .global-nav{height:80px!important;min-height:80px!important;padding:7px!important;gap:0!important}
   .global-nav .nav-links{display:flex!important;align-items:stretch!important;gap:0!important;min-width:max-content!important}
-  .global-nav .nav-links a{display:flex!important;flex:0 0 90px!important;min-width:90px!important;min-height:0!important;align-items:center!important;justify-content:center!important;margin:3px 0!important;padding:13px 3px!important;border-radius:12px!important;color:#aaa!important;text-align:center!important;line-height:1.2!important;white-space:normal!important}
+  .global-nav .nav-links a{display:flex!important;flex:0 0 90px!important;min-width:90px!important;min-height:0!important;align-items:center!important;justify-content:center!important;margin:3px 0!important;padding:13px 3px!important;border-radius:12px!important;color:#aaa!important;text-align:center!important;line-height:normal!important;white-space:normal!important}
   .global-nav .nav-links a:hover,.global-nav .nav-links a:focus-visible,.global-nav .nav-links a[aria-current="page"]{color:#fff!important;background:#35100e!important;box-shadow:inset 3px 0 var(--gold)!important;outline:none!important}
   .mobile-catalogue{top:80px!important}
   .mobile-list{inset:148px 0 0!important}
