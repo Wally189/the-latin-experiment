@@ -22,29 +22,13 @@
   `;
   document.head.appendChild(style);
 
-  const mark=document.querySelector('.brand-mark');
-  if(mark){mark.textContent='✠';mark.setAttribute('aria-hidden','true')}
-
-  const lede=document.querySelector('.hero .lede');
-  if(lede&&!lede.querySelector('a')){
-    lede.innerHTML=lede.innerHTML.replace('Father William Most’s course','<a href="index.html#materials">Father William Most’s course</a>');
-  }
-
-  const note=document.querySelector('.interpretation-note');
-  if(note&&note.textContent.trim().startsWith('Alan’s note:')){
-    note.textContent=note.textContent.trim().replace(/^Alan’s note:\s*/,'');
-  }
-
   const toggle=document.getElementById('mobileToggle');
   const list=document.getElementById('mobileList');
-  const labelToggle=()=>{if(toggle&&list)toggle.textContent=list.classList.contains('open')?'Hide lesson list':'Show all 81 lessons'};
+  const labelToggle=()=>{
+    if(toggle&&list){
+      toggle.textContent=list.classList.contains('open')?'Hide lesson list':'Show all 81 lessons';
+    }
+  };
   labelToggle();
   toggle?.addEventListener('click',()=>setTimeout(labelToggle,0));
-
-  const observer=new MutationObserver(()=>{
-    const currentLede=document.querySelector('.hero .lede');
-    if(currentLede&&!currentLede.querySelector('a'))currentLede.innerHTML=currentLede.innerHTML.replace('Father William Most’s course','<a href="index.html#materials">Father William Most’s course</a>');
-    const currentMark=document.querySelector('.brand-mark');if(currentMark)currentMark.textContent='✠';
-  });
-  const page=document.getElementById('lessonPage');if(page)observer.observe(page,{childList:true,subtree:true});
 })();
