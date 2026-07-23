@@ -13,7 +13,7 @@
 .hero-visual .spanish{font-size:clamp(44px,5vw,76px)}
 @media (min-width:901px){body{padding:2vw!important;background:var(--ground,#f2e5da)!important}.shell{max-width:none!important;min-height:96vh!important;padding:0!important;margin:0!important}.frame{min-height:96vh!important;border:10px solid var(--ink)!important;border-radius:26px!important;overflow:hidden!important;background:linear-gradient(to right,var(--ink) 0 105px,#fff 105px 100%)!important}.global-nav{width:105px!important;min-width:105px!important;height:calc(96vh - 20px)!important;top:0!important}}
 </style>
-<link rel="stylesheet" href="course-consistency.css?v=20260723-1">
+<link rel="stylesheet" href="course-consistency.css?v=20260723-3">
 </head>
 <body>
 <div class="shell"><div class="frame">
@@ -53,5 +53,5 @@ function render(){const n=current,d=lessons[n];document.querySelectorAll('.lesso
 page.querySelectorAll('.path-card').forEach(c=>c.onclick=()=>c.setAttribute('aria-expanded',String(c.getAttribute('aria-expanded')!=='true')));const complete=document.getElementById('completeButton');complete.onclick=()=>{const next=!isComplete(n);setComplete(n,next);complete.classList.toggle('done',next);complete.textContent=next?'Lesson '+n+' completed ✓':'Mark Lesson '+n+' complete';updateProgress()}}
 toggle.onclick=()=>{const open=mobile.classList.toggle('open');toggle.textContent=open?'Hide lesson list':'Show all 81 lessons';toggle.setAttribute('aria-expanded',String(open))};document.getElementById('mobileLessons').onclick=toggle.onclick;document.addEventListener('click',e=>{if(e.target.closest('.lesson-link.coming')){const t=document.getElementById('lockToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}},true);buildList(desktop);buildList(mobile);render();updateProgress()})();
 </script>
-<script src="course-polish.js?v=20260723-1"></script>
+<script src="course-polish.js?v=20260723-3"></script>
 </body></html>
